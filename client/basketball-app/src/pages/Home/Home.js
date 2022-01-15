@@ -3,7 +3,7 @@ import './Home.css'
 
  export default function Home () {
   return (
-    <div className="Home-text">Welcome To The Home page! (CSS Pending..)</div>
+    <div className="Home-text">Who Will Be The Next King Of The Court?</div>
   ) 
 }
 
