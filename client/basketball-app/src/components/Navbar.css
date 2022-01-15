@@ -64,10 +64,10 @@ h1{
   font-weight: 800;
   font-size: 7vw;
   line-height: 1;
-  color: #f00b0b;
+  color: #ff790a;
   text-align: center;
-  -webkit-text-stroke: 2px #f00b0b;
-  text-stroke: 2px #f00b0b;
+  -webkit-text-stroke: 2px #ff790a;
+  text-stroke: 2px #ff790a;
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
   color: transparent;
@@ -245,7 +245,7 @@ h1{
 }
 .nav ul li a:hover{
   text-decoration: none;
-  color: #ffeba7;
+  color: #ff790a;
 }
 .nav ul li a:after{
   display: block;
@@ -300,6 +300,7 @@ h1{
 	height: 26px;
 	width: auto;
 	display: block;
+  color: orange;
 }
 
 
@@ -327,3 +328,5 @@ h1{
     font-size: 8vh;
   }
 }
+
+ 
