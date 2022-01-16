@@ -1,10 +1,19 @@
 import React from "react";
 import './Home.css'
+import Hero from "../../components/Hero";
+
 
  export default function Home () {
   return (
-    <div className="Home-text">Who Will Be The Next King Of The Court?</div>
-  ) 
+    <>
+    <Hero />
+    <div className="homepage">
+      Hello World
+    </div>
+    </>
+    
+    
+  );
 }
 
  
