@@ -7,6 +7,7 @@ import Profile from './pages/Profile/Profile.js';
 import Navbar from './components/Navbar';
 
 
+
 function App() {
   return (
     <>
