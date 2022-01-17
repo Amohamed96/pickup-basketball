@@ -1,10 +1,9 @@
 const express = require('express');
 const path = require('path');
-const dbHelpers = require('./helpers/dbHelpers')(db);
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const db = require('./db');
-
+const dbHelpers = require('./helpers/dbHelpers')(db);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -22,7 +21,7 @@ app.use('/api/users', usersRouter(dbHelpers));
 
  
 //Get all Users
-app.get("/api/v1/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   res.status(404).json({
     status: "success", 
     data: {
@@ -32,17 +31,17 @@ app.get("/api/v1/users", (req, res) => {
  });
   
  //Get a single user
- app.get("/api/v1/users/:id", (req, res) => {
+ app.get("/api/users/:id", (req, res) => {
   console.log(req.params)
  })
   
  //Create a user
- app.post("api/v1/users", (req, res) => {})
+ app.post("api/users", (req, res) => {})
   
   
- const port = process.env.PORT || 3003;
- app.listen(port, () => {
-  console.log(`server is up and listening on port ${port}`);
- });
+//  const port = process.env.PORT || 3001;
+//  app.listen(port, () => {
+//   console.log(`server is up and listening on port ${port}`);
+//  });
  
 module.exports = app;
