@@ -12,7 +12,9 @@ module.exports = ({
     /* GET users listing. */
     router.get('/', (req, res) => {
         getUsers()
-            .then((users) => res.json(users))
+            .then((users) => {
+              res.json(users)
+            })
             .catch((err) => res.json({
                 error: err.message
             }));
@@ -22,7 +24,6 @@ module.exports = ({
 
         const {
             first_name,
-            last_name,
             email,
             password
         } = req.body;
