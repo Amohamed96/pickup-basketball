@@ -5,19 +5,22 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register.js';
 import Profile from './pages/Profile/Profile.js';
 import Navbar from './components/Navbar';
+import Messages from './pages/messages/Messages';
+import  io  from 'socket.io-client';
 
 
+const socket = io.connect("http://localhost:3001")
 
 function App() {
   return (
     <>
-    <Navbar />
     <Router>
       <Switch>
       <Route path="/" exact render={() => <Home/>}/>
       <Route path="/login" exact render={() => <Login/>}/>
       <Route path="/register" exact render={() => <Register/>}/>
       <Route path="/profile" exact render={() => <Profile/>}/>
+      <Route path="/messages" exact render={() => <Messages/>}/>
       </Switch>
       
     </Router>
