@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
+const dbHelpers = require('./helpers/dbHelpers')(db);
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const db = require('./db');
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -15,6 +18,31 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter(dbHelpers));
 
+ 
+//Get all Users
+app.get("/api/v1/users", (req, res) => {
+  res.status(404).json({
+    status: "success", 
+    data: {
+      users: ["Hawarsa, LB, Tanker, Awab, Eddy, Kobz"]
+    },
+  });
+ });
+  
+ //Get a single user
+ app.get("/api/v1/users/:id", (req, res) => {
+  console.log(req.params)
+ })
+  
+ //Create a user
+ app.post("api/v1/users", (req, res) => {})
+  
+  
+ const port = process.env.PORT || 3003;
+ app.listen(port, () => {
+  console.log(`server is up and listening on port ${port}`);
+ });
+ 
 module.exports = app;
