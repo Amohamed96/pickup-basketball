@@ -1,0 +1,11 @@
+.messages {
+  height: calc(100vh - 90px);
+  display: flex;
+}
+
+.chatbox {
+  flex: 3.5;
+}
+.menu {
+  flex: 3.5;
+}
