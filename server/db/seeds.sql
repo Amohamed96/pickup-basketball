@@ -9,7 +9,7 @@ VALUES
 
 
 INSERT INTO matches (
-  id SERIAL PRIMARY KEY NOT NULL,
+  id,
   date DATE NOT NULL,
   team1_id,
   team2_id,
@@ -19,22 +19,22 @@ INSERT INTO matches (
 );
 
 INSERT INTO teams (
-  id SERIAL PRIMARY KEY NOT NULL,
-  location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
+  id,
+  location_id,
   team_name,
   team_description,
   avatar
 );
 
 INSERT INTO location (
-  id SERIAL PRIMARY KEY NOT NULL,
+  id,
   city,
   province,
   country
 );
 
 INSERT INTO match_stats (
-  id SERIAL PRIMARY KEY NOT NULL,
+  id,
   user_id,
   match_id,
   total_score
