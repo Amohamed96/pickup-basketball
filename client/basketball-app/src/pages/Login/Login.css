@@ -1,0 +1,17 @@
+.login {
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+  background-color: rgb(95, 94, 94);
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.login-page {
+display: flex;
+justify-content: center;
+margin: 100px;
+height: 500px;
+
+}

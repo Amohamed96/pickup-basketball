@@ -1,0 +1,44 @@
+.hero-container{
+  color: #ececee;
+	background-color: #a9aaaf;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 10%;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  
+}
+
+.section-center{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: 6;
+  text-align: center;
+  transform: translateY(-50%);
+}
+h1{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 7vw;
+  line-height: 1;
+  color: #000000;
+  text-align: center;
+  -webkit-text-stroke: 2px #000000;
+  text-stroke: 2px #000000;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  color: transparent;
+}
+
+
+.Home-text {
+  width: 100%;
+  text-align: center;
+}
