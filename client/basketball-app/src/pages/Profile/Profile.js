@@ -15,7 +15,7 @@ console.log('USER>>>>', user)
       return res.data
     })
     .then((results) => {
-      setUser(results[0])
+      setUser(results[7])
     })
   }, [])
 
