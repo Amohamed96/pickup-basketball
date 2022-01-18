@@ -8,7 +8,7 @@ const {
 
 module.exports = ({
     getUsers,
-    getUserByEmail,
+    getUserByName,
     addUser
 }) => {
     /* GET users listing. */

@@ -1,29 +1,72 @@
+import React, {useState, useEffect} from 'react'
 import './Styles/LoginForm.css'
+import axios from 'axios'
 
-import React from 'react'
 
 export default function RegisterForm() {
+  const [user, setUser] = useState({ name: null, password: null, password2: null, email: null });
+	const [error, setError] = useState('')
+
+	const toggleCheckbox = (event) => {
+		console.log('EVENT TARGET',event.target)
+	} 
+
+	const storeUserData = (e) => {
+		console.log('EVENT TARGET +++ ', e.target.value)
+		setUser({ ...user, [e.target.name]: e.target.value })
+	}
+
+	const handleSignup = () => {
+		if (!user.name || !user.password ||!user.email)  {
+			setError("Sorry, You must enter a valid username or password")
+			return
+		}
+		if (user.password.length < 3) {
+			setError("Sorry, You must enter a password longer than 3 characters")
+			return
+		}
+		if (user.password ) {
+			setError("Sorry, You must enter a password longer than 3 characters")
+			return
+		}
+		console.log('USER *********--', user)
+		axios.post('http://localhost:3000/api/user', user)
+    .then((result) => {
+      console.log('RESULTS>>', result)
+      return result.data
+    })
+    .then((results) => {
+      setUser(results[0])
+    })
+
+
+
+
+	} 
+
+
   return (
     <div className="login-wrap">
+		<span>{error}</span>	
 	<div className="login-html">
-		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab"><a href='/login'>Sign In</a></label>
-		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab">Sign Up</label>
+		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
 		<div className="login-form">
 			<div className="sign-in-htm">
 				<div className="group">
 					<label for="user" className="label">Username</label>
-					<input id="user" type="text" className="input" />
+					<input name="name" id="user" type="text" className="input" onChange={storeUserData} />
 				</div>
 				<div className="group">
-					<label for="pass" className="label">Password</label>
-					<input id="pass" type="password" className="input" data-type="password" />
+					<label for="pass" className="label">Password</label> { user.password }
+					<input name="password" id="pass" type="password" className="input" data-type="password" onChange={storeUserData}/>
 				</div>
 				<div className="group">
-					<input id="check" type="checkbox" className="check" checked />
+					<input id="check" type="checkbox" className="check" onChange={toggleCheckbox}  />
 					<label for="check"><span className="icon"></span> Keep me Signed in</label>
 				</div>
 				<div className="group">
-					<input type="submit" className="button" value="Sign In" />
+					<input type="submit" className="button" value="Sign In"  />
 				</div>
 				<div className="hr"></div>
 				<div className="foot-lnk">
@@ -33,22 +76,22 @@ export default function RegisterForm() {
 			<div className="sign-up-htm">
 				<div className="group">
 					<label for="user" className="label">Username</label>
-					<input id="user" type="text" className="input" />
-				</div>
+					<input name="name" id="user" type="text" className="input" onChange={storeUserData} />
+				</div> 
 				<div className="group">
 					<label for="pass" className="label">Password</label>
-					<input id="pass" type="password" className="input" data-type="password" />
+					<input name="password" id="pass" type="password" className="input" data-type="password" onChange={storeUserData} />
 				</div>
 				<div className="group">
 					<label for="pass" className="label">Repeat Password</label>
-					<input id="pass" type="password" className="input" data-type="password" />
+					<input id="pass" name="password2" type="password" className="input" data-type="password"  onChange={storeUserData}/>
 				</div>
 				<div className="group">
 					<label for="pass" className="label">Email Address</label>
-					<input id="pass" type="text" className="input" />
+					<input id="pass" name='email' type="text" className="input" onChange={storeUserData}/>
 				</div>
 				<div className="group">
-					<input type="submit" className="button" value="Sign Up" />
+					<input type="submit" className="button" value="Sign Up" onClick={handleSignup} />
 				</div>
 				<div className="hr"></div>
 				<div className="foot-lnk">

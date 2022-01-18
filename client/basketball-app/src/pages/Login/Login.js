@@ -10,7 +10,7 @@ export default function Login(props) {
  
   const [user, setUser] = useState({name: "", email: ""});
   useEffect(()=> {
-    fetch('http://localhost:3000/api/teams')
+    fetch('http://localhost:3000/api/users')
       .then((res) => {
         return res.json();  
       })
