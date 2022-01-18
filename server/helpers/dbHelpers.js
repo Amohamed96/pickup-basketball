@@ -75,6 +75,46 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  //GET MATCHES
+
+  const getMatches = () => {
+    const query = {
+      text: "SELECT * FROM matches",
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  //Get matches By Id. (Edge case in case id already exists)
+
+  const getMatchById = (id) => {
+    const query = {
+      text: 'SELECT * FROM teams WHERE id = $1',
+      values: [id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
+
+  // Add match to database.
+
+  const addMatch = (location_id, team_name, team_description, avatar) => {
+    const query = {
+      text: 'INSERT INTO teams (match_date, team1_id, team2_id, winner_id, team1_score, team2_score) RETURNING *',
+      values: [match_date, team1_id, team2_id, winner_id, team1_score, team2_score],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
   return {
     getUsers,
     getUserByEmail,
@@ -82,5 +122,8 @@ module.exports = (db) => {
     getTeams,
     getTeamByName,
     addTeam,
+    getMatches,
+    getMatchById,
+    addMatch
   };
 };
