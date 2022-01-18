@@ -39,17 +39,18 @@ import Navbar from "../../components/Navbar";
   <div className="homepage">
       Matches played: 
         {matches.length > 0 ? matches.map((matchList) => {
-        return <li> {matchList.date}{matchList.team1_score}{matchList.team2_score}</li>
+        return <ul> {matchList.date}{matchList.team1_score}{matchList.team2_score}</ul>
       }): ""}
       Teams: 
         {teams.length > 0 ? teams.map((teamList) => {
-        return <li>{teamList.team_name}</li>
+        return <ul><img className="teamLogo" src={teamList.avatar}/>{teamList.team_name}</ul>
       }): ""}
       Leaderboard: 
         {users.length > 0 ? users.map((userList) => {
-        return <li><img className="profilePic" src={userList.avatar}/>{userList.name}</li>
+        return <ul><img className="profilePic" src={userList.avatar}/>{userList.name}</ul>
       }): ""}
     </div>
+    
     </> 
   );
 }

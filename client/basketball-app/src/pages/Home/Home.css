@@ -13,8 +13,14 @@ font-size: 30px;
   height: 700px;
 }
 .profilePic {
-  width: 5rem;
-  height: 5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 10rem;
+}
+.teamLogo {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 10rem;
 }
 /* aksj */
 
