@@ -17,20 +17,20 @@ export default function RegisterForm() {
 	}
 
 	const handleSignup = () => {
-		if (!user.name || !user.password ||!user.email)  {
-			setError("Sorry, You must enter a valid username or password")
-			return
-		}
-		if (user.password.length < 3) {
-			setError("Sorry, You must enter a password longer than 3 characters")
-			return
-		}
-		if (user.password ) {
-			setError("Sorry, You must enter a password longer than 3 characters")
-			return
-		}
+		// if (!user.name || !user.password ||!user.email)  {
+		// 	setError("Sorry, You must enter a valid username or password")
+		// 	return
+		// }
+		// if (user.password.length < 3) {
+		// 	setError("Sorry, You must enter a password longer than 3 characters")
+		// 	return
+		// }
+		// if (user.password !== user.password2) {
+		// 	setError("Sorry, You must enter a password longer than 3 characters")
+		// 	return
+		// }
 		console.log('USER *********--', user)
-		axios.post('http://localhost:3000/api/user', user)
+		axios.post('http://localhost:3001/api/users', user)
     .then((result) => {
       console.log('RESULTS>>', result)
       return result.data
@@ -38,10 +38,9 @@ export default function RegisterForm() {
     .then((results) => {
       setUser(results[0])
     })
-
-
-
-
+		.catch((err) => {
+			console.log('err', err)
+		})
 	} 
 
 

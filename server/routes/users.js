@@ -8,7 +8,7 @@ const {
 
 module.exports = ({
     getUsers,
-    getUserByName,
+    getUserByEmail,
     addUser
 }) => {
     /* GET users listing. */
@@ -25,20 +25,22 @@ module.exports = ({
     router.post('/', (req, res) => {
 
         const {
-            first_name,
+            name,
             email,
             password
         } = req.body;
 
         getUserByEmail(email)
-            .then(user => {
+            .then(email => {
 
-                if (user) {
-                    res.json({
+                if (email) {
+                    res.status(400).json({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, email, password)
+                    const addPlayer = addUser(name, email, password)
+                    console.log('ADD USER FUNCTIOn', addPlayer)
+                    return addPlayer
                 }
 
             })
