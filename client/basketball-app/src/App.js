@@ -6,10 +6,7 @@ import Register from './pages/Register/Register.js';
 import Profile from './pages/Profile/Profile.js';
 import Navbar from './components/Navbar';
 import Messages from './pages/messages/Messages';
-// import  io  from 'socket.io-client';
 
-
-// const socket = io.connect("http://localhost:3001")
 
 function App() {
   return (
