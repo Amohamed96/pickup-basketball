@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import './Styles/LoginForm.css'
 
-export default function LoginForm() {
-  const [creds, setCreds] = useState({ name: "", email: "", password: "" });
+import React from 'react'
 
+export default function RegisterForm() {
   return (
     <div className="login-wrap">
 	<div className="login-html">
-		<input id="tab-1" type="radio" name="tab" className="sign-in" checked /><label for="tab-1" className="tab">Sign In</label>
-		<input id="tab-2" type="radio" name="tab" className="sign-up" /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
+		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab"><a href='/login'>Sign In</a></label>
+		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab">Sign Up</label>
 		<div className="login-form">
 			<div className="sign-in-htm">
 				<div className="group">
@@ -61,6 +58,5 @@ export default function LoginForm() {
 		</div>
 	</div>
 </div>
-    
   );
 }
