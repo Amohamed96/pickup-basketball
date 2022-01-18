@@ -1,3 +1,17 @@
+CREATE TABLE location (
+  id SERIAL PRIMARY KEY NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  province VARCHAR(255) NOT NULL,
+  country VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE teams (
+  id SERIAL PRIMARY KEY NOT NULL,
+  location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
+  team_name VARCHAR(255) NOT NULL,
+  team_description VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -17,21 +31,6 @@ CREATE TABLE matches (
   winner_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
   team1_score VARCHAR(255) NOT NULL,
   team2_score VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE teams (
-  id SERIAL PRIMARY KEY NOT NULL,
-  location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
-  team_name VARCHAR(255) NOT NULL,
-  team_description VARCHAR(255) NOT NULL,
-  avatar VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE location (
-  id SERIAL PRIMARY KEY NOT NULL,
-  city VARCHAR(255) NOT NULL,
-  province VARCHAR(255) NOT NULL,
-  country VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE match_stats (
