@@ -57,7 +57,7 @@ export default function RegisterForm() {
 					<input name="name" id="user" type="text" className="input" onChange={storeUserData} />
 				</div>
 				<div className="group">
-					<label for="pass" className="label">Password</label> { user.password }
+					<label for="pass" className="label">Password</label> 
 					<input name="password" id="pass" type="password" className="input" data-type="password" onChange={storeUserData}/>
 				</div>
 				<div className="group">
@@ -78,16 +78,16 @@ export default function RegisterForm() {
 					<input name="name" id="user" type="text" className="input" onChange={storeUserData} />
 				</div> 
 				<div className="group">
+					<label for="pass" className="label">Email Address</label>
+					<input id="pass" name='email' type="email" className="input" onChange={storeUserData}/>
+				</div>
+				<div className="group">
 					<label for="pass" className="label">Password</label>
 					<input name="password" id="pass" type="password" className="input" data-type="password" onChange={storeUserData} />
 				</div>
 				<div className="group">
 					<label for="pass" className="label">Repeat Password</label>
 					<input id="pass" name="password2" type="password" className="input" data-type="password"  onChange={storeUserData}/>
-				</div>
-				<div className="group">
-					<label for="pass" className="label">Email Address</label>
-					<input id="pass" name='email' type="text" className="input" onChange={storeUserData}/>
 				</div>
 				<div className="group">
 					<input type="submit" className="button" value="Sign Up" onClick={handleSignup} />

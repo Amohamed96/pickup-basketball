@@ -1,3 +1,5 @@
+
+DROP TABLE IF EXISTS  location CASCADE;
 CREATE TABLE location (
   id SERIAL PRIMARY KEY NOT NULL,
   city VARCHAR(255) NOT NULL,
@@ -5,6 +7,7 @@ CREATE TABLE location (
   country VARCHAR(255) NOT NULL
 );
 
+DROP TABLE IF EXISTS teams CASCADE;
 CREATE TABLE teams (
   id SERIAL PRIMARY KEY NOT NULL,
   location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
@@ -13,6 +16,7 @@ CREATE TABLE teams (
   avatar VARCHAR(255) NOT NULL
 );
 
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   team_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
@@ -23,6 +27,7 @@ CREATE TABLE users (
   avatar VARCHAR(255)
 );
 
+DROP TABLE IF EXISTS matches CASCADE; 
 CREATE TABLE matches (
   id SERIAL PRIMARY KEY NOT NULL,
   date DATE NOT NULL,
@@ -33,6 +38,7 @@ CREATE TABLE matches (
   team2_score VARCHAR(255) NOT NULL
 );
 
+DROP TABLE IF EXISTS match_stats CASCADE; 
 CREATE TABLE match_stats (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -41,7 +47,8 @@ CREATE TABLE match_stats (
 );
 
 
-CREATE TABLE challenge_requst (
+DROP TABLE IF EXISTS challenge_request CASCADE;
+CREATE TABLE challenge_request (
   id SERIAL PRIMARY KEY NOT NULL,
   challenger_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -50,7 +57,8 @@ CREATE TABLE challenge_requst (
   status VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE challenge_requst_matches (
+DROP TABLE IF EXISTS challenge_request_matches CASCADE;
+CREATE TABLE challenge_request_matches (
   id SERIAL PRIMARY KEY NOT NULL,
   date DATE NOT NULL,
   player1_id INTEGER REFERENCES users(id) ON DELETE CASCADE,

@@ -31,14 +31,14 @@ module.exports = ({
         } = req.body;
 
         getUserByEmail(email)
-            .then(email => {
+            .then( async user => {
 
-                if (email) {
-                    res.status(400).json({
+                if (user) {
+                    res.status(404).json({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    const addPlayer = addUser(name, email, password)
+                    const addPlayer = await addUser(name, email, password)
                     console.log('ADD USER FUNCTIOn', addPlayer)
                     return addPlayer
                 }

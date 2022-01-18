@@ -18,21 +18,22 @@ module.exports = (db) => {
 
     return db
       .query(query)
-      .then((result) => result.rows[0])
+      .then((result) => result.rows ? result.rows[0] : undefined)
       .catch((err) => err);
   };
   //TODO: ADD OTHER VALUES
-  const addUser = (name, email, password) => {
-    console.log('Heloo')
+  const addUser = async (name, email, password) => {
     const query = {
-      text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`,
+      text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3) returning *`,
       values: [name, email, password],
     };
 
     return db
       .query(query)
-      .then(result)
-      .then((data) => console.log('DATA>', data.json()))
+      .then((result) => {
+        console.log('DB HELPERS RESULT >>>', result)
+        return result.rows[0]
+      })
       .catch((err) => err);
   };
 
