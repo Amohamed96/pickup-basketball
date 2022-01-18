@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+
+//TODO OPTIMIZE FOR TEAMS
 const {
     getPostsByUsers
 } = require('../helpers/dataHelpers');
