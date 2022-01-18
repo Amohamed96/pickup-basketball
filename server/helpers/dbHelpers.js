@@ -22,15 +22,17 @@ module.exports = (db) => {
       .catch((err) => err);
   };
   //TODO: ADD OTHER VALUES
-  const addUser = (firstName, email, password) => {
+  const addUser = (name, email, password) => {
+    console.log('Heloo')
     const query = {
-      text: `INSERT INTO users (first_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *`,
-      values: [firstName, email, password],
+      text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`,
+      values: [name, email, password],
     };
 
     return db
       .query(query)
-      .then((result) => result.rows[0])
+      .then(result)
+      .then((data) => console.log('DATA>', data.json()))
       .catch((err) => err);
   };
 
