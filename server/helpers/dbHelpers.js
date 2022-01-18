@@ -51,7 +51,7 @@ module.exports = (db) => {
 
   const getTeamByName = (team_name) => {
     const query = {
-      text: `SELECT * FROM teams WHERE team_name = $1`,
+      text: 'SELECT * FROM teams WHERE team_name = $1',
       values: [team_name],
     };
 
@@ -65,7 +65,7 @@ module.exports = (db) => {
 
   const addTeam = (location_id, team_name, team_description, avatar) => {
     const query = {
-      text: `INSERT INTO teams (location_id, team_name, team_description, avatar) VALUES ($1, $2, $3, $4) RETURNING *`,
+      text: 'INSERT INTO teams (location_id, team_name, team_description, avatar) VALUES ($1, $2, $3, $4) RETURNING *',
       values: [location_id, team_name, team_description, avatar],
     };
 

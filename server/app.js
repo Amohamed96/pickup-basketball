@@ -7,6 +7,8 @@ const dbHelpers = require('./helpers/dbHelpers')(db);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const teamsRouter = require('./routes/teams');
+const matchesRouter = require('./routes/matches');
+
 const app = express();
 
 app.use(logger('dev'));
@@ -18,6 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/teams', teamsRouter(dbHelpers));
+app.use('/api/matches', matchesRouter(dbHelpers));
+
 
 //Get all Users
 // app.get("/users", (req, res) => {

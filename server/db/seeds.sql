@@ -9,14 +9,15 @@ VALUES
 
 
 INSERT INTO matches (
-  id,
-  date DATE NOT NULL,
+  date,
   team1_id,
   team2_id,
   winner_id,
   team1_score,
   team2_score
-);
+)
+VALUES 
+  ('2019-06-13', 1, 2, 1, '114', '110');
 
 INSERT INTO teams (
   location_id,
@@ -25,7 +26,7 @@ INSERT INTO teams (
   avatar
 )
 VALUES 
-  (1, 'Raptors', 'We The North!', 'R')
+  (2, 'Warriors', 'Dub Nation!', 'W')
 
 INSERT INTO location (
   city,
@@ -33,7 +34,7 @@ INSERT INTO location (
   country
 )
 VALUES  
-  ('Toronto', 'Ontario', 'Canada')
+  ('San Fransisco', 'California', 'USA')
 
 INSERT INTO match_stats (
   id,
