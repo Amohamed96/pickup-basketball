@@ -22,7 +22,7 @@ module.exports = ({
             }));
     });
 
-    router.post('/', (req, res) => {
+    router.post('/signup', (req, res) => {
 
         const {
             name,
@@ -49,7 +49,33 @@ module.exports = ({
                 error: err.message
             }));
 
+    })  
+    router.post('/login', (req, res) => {
+
+        const {
+            email,
+            password
+        } = req.body;
+        console.log('PASSWORD ()####', email, password)
+        getUserByEmail(email)
+            .then( async user => {
+
+                if (!user) {
+                    res.status(404).json({
+                        msg: 'Sorry, please create an account'
+                    });
+                } else {
+                    res.send({user: user})
+                }
+
+            })
+            .catch(err => res.json({
+                error: err.message
+            }));
+
     })
+
+   
 
     return router;
 };

@@ -18,8 +18,8 @@ export default function LoginForm() {
 	}
 
 	const handleLogin = () => {
-		if (!user.name || !user.password) {
-			setError("Sorry, You must enter a valid username or password")
+		if (!user.email || !user.password) {
+			setError("Sorry, You must enter a valid email or password")
 			return
 		}
 		if (user.password.length < 3) {
@@ -27,17 +27,14 @@ export default function LoginForm() {
 			return
 		}
 		console.log('USER *********--', user)
-		axios.post('http://localhost:3000/api/login', user)
+		axios.post('/api/users/login', user)
     .then((result) => {
-      console.log('RESULTS>>', result)
-      return result.data
+      console.log('RESULTS>>', result.data)
+      setUser(result.data.user)
     })
-    .then((results) => {
-      setUser(results[0])
-    })
-
-
-
+    // .then((results) => {
+    //   setUser(results.data.user)
+    // })
 
 	} 
 
@@ -51,11 +48,11 @@ export default function LoginForm() {
 		<div className="login-form">
 			<div className="sign-in-htm">
 				<div className="group">
-					<label for="user" className="label">Username</label>
-					<input name="name" id="user" type="text" className="input" onChange={storeUserData} />
+					<label for="user" className="label">Email:</label>
+					<input name="email" id="user" type="email" className="input" onChange={storeUserData} />
 				</div>
 				<div className="group">
-					<label for="pass" className="label">Password</label> { user.password }
+					<label for="pass" className="label">Password:</label> { user.password }
 					<input name="password" id="pass" type="password" className="input" data-type="password" onChange={storeUserData}/>
 				</div>
 				<div className="group">
@@ -63,7 +60,7 @@ export default function LoginForm() {
 					<label for="check"><span className="icon"></span> Keep me Signed in</label>
 				</div>
 				<div className="group">
-					<input type="submit" className="button" value="Sign In" onClick={handleLogin} />
+				<a href="/"><button type="submit" className="button" onClick={handleLogin}>Sign In</button></a>
 				</div>
 				<div className="hr"></div>
 				<div className="foot-lnk">
