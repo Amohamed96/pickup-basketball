@@ -17,20 +17,20 @@ export default function RegisterForm() {
 	}
 
 	const handleSignup = () => {
-		// if (!user.name || !user.password ||!user.email)  {
-		// 	setError("Sorry, You must enter a valid username or password")
-		// 	return
-		// }
-		// if (user.password.length < 3) {
-		// 	setError("Sorry, You must enter a password longer than 3 characters")
-		// 	return
-		// }
-		// if (user.password !== user.password2) {
-		// 	setError("Sorry, You must enter a password longer than 3 characters")
-		// 	return
-		// }
+		if (!user.name || !user.password ||!user.email)  {
+			setError("Sorry, You must enter a valid username or password")
+			return
+		}
+		if (user.password.length < 3) {
+			setError("Sorry, You must enter a password longer than 3 characters")
+			return
+		}
+		if (user.password !== user.password2) {
+			setError("Both passwords must match")
+			return
+		}
 		console.log('USER *********--', user)
-		axios.post('http://localhost:3001/api/users', user)
+		axios.post('http://localhost:3001/api/users/signup', user)
     .then((result) => {
       console.log('RESULTS>>', result)
       return result.data
@@ -46,7 +46,7 @@ export default function RegisterForm() {
 
   return (
     <div className="login-wrap">
-		<span>{error}</span>	
+		<span className='error'>{error}</span>	
 	<div className="login-html">
 		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
