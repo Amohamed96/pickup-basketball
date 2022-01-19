@@ -9,18 +9,18 @@ import Navbar from "../../components/Navbar";
 export default function Login(props) {
  
   const [user, setUser] = useState({name: "", email: ""});
-  useEffect(()=> {
-    fetch('http://localhost:3000/api/users')
-      .then((res) => {
-        return res.json();  
-      })
-      .then((results) => {
-        console.log(results);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }, [])
+  // useEffect(()=> {
+  //   fetch('http://localhost:3000/api/users')
+  //     .then((res) => {
+  //       return res.json();  
+  //     })
+  //     .then((results) => {
+  //       console.log(results);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     })
+  // }, [])
 
   return (
     <>

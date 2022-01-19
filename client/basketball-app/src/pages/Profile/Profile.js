@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios'
+import './Profile.css'
 
 export default function Profile () {
 
@@ -9,19 +10,19 @@ console.log('USER>>>>', user)
 
 
   useEffect(()=> {
-    axios.get('http://localhost:3000/api/users')
-    .then((res) => {
-      console.log('RESULTS>>', res)
-      return res.data
-    })
-    .then((results) => {
-      setUser(results[7])
-    })
+    const currentUser = localStorage.getItem('user');
+    console.log('CURRENT USER from LOCAL', currentUser)
+    setUser(JSON.parse(currentUser));
   }, [])
 
   return (
     <div className="profile">
-      {user.name} {user.bio}
+      <div className="username">
+      {user.name} 
+      </div>
+      <div className="bio">
+        {user.bio}
+      </div>
       <img 
       src={user.avatar}
       />
