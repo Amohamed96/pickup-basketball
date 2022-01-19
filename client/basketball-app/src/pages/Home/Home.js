@@ -10,33 +10,35 @@ export default function Home () {
   const [users, setUsers] = useState([])
   const [matches, setMatches] = useState([])
   const [teams, setTeams] = useState([])
-
-  useEffect(()=> {
-    axios.get('http://localhost:3000/api/users')
-    .then((res) => {
-      setUsers(res.data)
-    })
-  }, [])
-
-  useEffect(()=> {
-    axios.get('http://localhost:3000/api/matches')
-    .then((res) => {
-      setMatches(res.data)
-    })
-  }, [])
-
-  useEffect(()=> {
-    axios.get('http://localhost:3000/api/teams')
-    .then((res) => {
-      setTeams(res.data)
-    })
-  }, [])
+  const [check, setCheck] = useState(false)
   
+
+  useEffect(()=> {
+    if (check){
+      return
+    }
+    setCheck(true)
+
+    axios.get('http://localhost:3000/api/home')
+    .then((res) => {
+      setUsers(res.data.users) 
+      setTeams(res.data.teams)  
+      setMatches(res.data.matches)  
+      console.log("res.data", res.data);
+
+      console.log("users", users);
+      console.log("teams", teams);
+      console.log("matches", matches);
+    })
+    })
+
+
+
   return (
       <>
         <Navbar />
         <Hero />
-        <Leaderboard/>
+        <Leaderboard users={users} teams={teams}/>
         
       <div className="homepage">
           Matches played: 

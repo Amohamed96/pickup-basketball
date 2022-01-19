@@ -8,6 +8,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const teamsRouter = require('./routes/teams');
 const matchesRouter = require('./routes/matches');
+const homeRouter = require('./routes/home');
+
 
 const app = express();
 const cors = require('cors')
@@ -23,6 +25,8 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/teams', teamsRouter(dbHelpers));
 app.use('/api/matches', matchesRouter(dbHelpers));
+app.use('/api/home', homeRouter(dbHelpers));
+
 
 
 //Get all Users

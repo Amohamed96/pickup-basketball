@@ -1,8 +1,16 @@
 import React from "react";
 import './Styles/Leaderboard.css'
 
-export default function Leaderboard() {
-  
+export default function Leaderboard(props) {
+  const { users, matches, teams } = props;
+  const getTeam = function (teamId) {
+    //filter through array of teams
+    //if the team_id = team id then return team object
+    return teams.find(team => {
+      if (teamId == team.id)
+      return true;
+    }) || {}
+  }
   return (
    <div className='leaderboardContainer'>
       <section class="content-info">
@@ -21,17 +29,20 @@ export default function Leaderboard() {
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <tr>
-                            <td class="text-left number">1 <i class="fa fa-caret-up" aria-hidden="true"></i></td>
-                            <td class="text-left"> <img src="A"alt="Profile Pic"/><span>A</span> </td>
+                      {users.map((player) => (
+                            <tr>
+                            <td class="text-left number">1<i class="fa fa-caret-up" aria-hidden="true"></i></td>
+                            <td class="text-left"> <img src={player.avatar}alt="Profile Pic"/><span>{player.name}</span> </td>
                             <td>38</td>
                             <td>26</td>
                             <td>9</td>
-                            <td>3</td>
+                            <td><img src={getTeam(player.team_id).avatar}/></td>
                         </tr>
+                      ))}
+                        
                         <tr>
                             <td class="text-left number">2 <i class="fa fa-caret-up" aria-hidden="true"></i></td>
-                            <td class="text-left"> <img src="B" alt="Profile Pic"/><span>B</span> </td>
+                            <td class="text-left"> <img alt="Profile Pic"/><span>B</span> </td>
                             <td>38</td>
                             <td>24</td>
                             <td>7</td>

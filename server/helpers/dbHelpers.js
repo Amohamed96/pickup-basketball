@@ -118,6 +118,11 @@ module.exports = (db) => {
       .then((result) => result.rows[0])
       .catch((err) => err);
   };
+
+  // const getDataForHome = () => {
+  //   //qeuries for data
+  // }
+
   return {
     getUsers,
     getUserByEmail,
