@@ -3,17 +3,19 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Styles/LoginForm.css'
 import axios from 'axios'
+import { Redirect } from "react-router-dom";
+
+
 
 export default function LoginForm() {
   const [user, setUser] = useState({ name: null, password: null, email: null });
-	const [error, setError] = useState('')
+	const [error, setError] = useState('');
+	const [redirect, setRedirect] = useState('');
 
 	const toggleCheckbox = (event) => {
-		console.log('EVENT TARGET',event.target)
 	} 
 
 	const storeUserData = (e) => {
-		console.log('EVENT TARGET +++ ', e.target.value)
 		setUser({ ...user, [e.target.name]: e.target.value })
 	}
 
@@ -29,17 +31,15 @@ export default function LoginForm() {
 		console.log('USER *********--', user)
 		axios.post('/api/users/login', user)
     .then((result) => {
-      console.log('RESULTS>>', result.data)
+      console.log('RESULTS>>', result.data.user)
       setUser(result.data.user)
+			localStorage.setItem('user', JSON.stringify(result.data.user))
+			setRedirect('/profile')
     })
-    // .then((results) => {
-    //   setUser(results.data.user)
-    // })
-
 	} 
 
 
-  return (
+  return redirect ? (<Redirect to={redirect}/>) : (
     <div className="login-wrap">
 		<span>{error}</span>	
 	<div className="login-html">
@@ -52,7 +52,7 @@ export default function LoginForm() {
 					<input name="email" id="user" type="email" className="input" onChange={storeUserData} />
 				</div>
 				<div className="group">
-					<label for="pass" className="label">Password:</label> { user.password }
+					<label for="pass" className="label">Password:</label> 
 					<input name="password" id="pass" type="password" className="input" data-type="password" onChange={storeUserData}/>
 				</div>
 				<div className="group">
@@ -60,7 +60,7 @@ export default function LoginForm() {
 					<label for="check"><span className="icon"></span> Keep me Signed in</label>
 				</div>
 				<div className="group">
-				<a href="/"><button type="submit" className="button" onClick={handleLogin}>Sign In</button></a>
+				<button type="submit" className="button" onClick={handleLogin}>Sign In</button>
 				</div>
 				<div className="hr"></div>
 				<div className="foot-lnk">

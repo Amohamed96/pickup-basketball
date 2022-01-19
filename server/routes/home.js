@@ -8,15 +8,16 @@ module.exports = ({
     getTeams,
     getMatches
 }) => {
+  
+// Without promise all (data will load one by one)
 
-  router.get('/sync', async (req, res) => {
-        const users = await getUsers()
-        const teams = await getTeams()
-        const matches = await getMatches()
-          res.json({users: users, teams: teams, matches: matches})
-    });
+  // router.get('/sync', async (req, res) => {
+  //       const users = await getUsers()
+  //       const teams = await getTeams()
+  //       const matches = await getMatches()
+  //         res.json({users: users, teams: teams, matches: matches})
+  //   });
 
-    //TODO: Use Promise All 
     router.get('/', async (req, res) => {
       const usersPromise = getUsers()
       const teamsPromise = getTeams()
