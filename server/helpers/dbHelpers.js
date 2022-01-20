@@ -21,6 +21,21 @@ module.exports = (db) => {
       .then((result) => result.rows ? result.rows[0] : undefined)
       .catch((err) => err);
   };
+
+  //GET USER BY ID 
+
+  const getUserById = (id) => {
+    const query = {
+      text: `SELECT * FROM users WHERE id = $1`,
+      values: [id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows ? result.rows[0] : undefined)
+      .catch((err) => err);
+  };
+
   //TODO: ADD OTHER VALUES
   const addUser = async (name, email, password, bio, avatar, team_id) => {
     const query = {
@@ -126,6 +141,7 @@ module.exports = (db) => {
   return {
     getUsers,
     getUserByEmail,
+    getUserById,
     addUser,
     getTeams,
     getTeamByName,
