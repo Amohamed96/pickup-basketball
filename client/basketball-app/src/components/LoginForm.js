@@ -34,7 +34,7 @@ export default function LoginForm() {
       console.log('RESULTS>>', result.data.user)
       setUser(result.data.user)
 			localStorage.setItem('user', JSON.stringify(result.data.user))
-			setRedirect('/profile')
+			setRedirect(`/profile`)
     })
 	} 
 
