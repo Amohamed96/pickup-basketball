@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 export default function RegisterForm() {
-  const [user, setUser] = useState({ name: null, password: null, password2: null, email: null });
+  const [user, setUser] = useState({ name: null, password: null, password2: null, email: null, bio: null, avatar: null, team_id: null });
 	const [error, setError] = useState('')
 
 	const toggleCheckbox = (event) => {
@@ -17,8 +17,8 @@ export default function RegisterForm() {
 	}
 
 	const handleSignup = () => {
-		if (!user.name || !user.password ||!user.email)  {
-			setError("Sorry, You must enter a valid username or password")
+		if (!user.name || !user.password ||!user.email || !user.bio || !user.avatar || !user.team_id)  {
+			setError("Sorry, You must enter your credentials to continue")
 			return
 		}
 		if (user.password.length < 3) {
@@ -27,6 +27,10 @@ export default function RegisterForm() {
 		}
 		if (user.password !== user.password2) {
 			setError("Both passwords must match")
+			return
+		}
+		if (user.team_id > 4 || user.team_id <1) {
+			setError(`Must pick a team from 1-4... You'll see why `)
 			return
 		}
 		console.log('USER *********--', user)
@@ -89,6 +93,18 @@ export default function RegisterForm() {
 					<label for="pass" className="label">Repeat Password</label>
 					<input id="pass" name="password2" type="password" className="input" data-type="password"  onChange={storeUserData}/>
 				</div>
+				<div className="group">
+					<label for="user" className="label">Add A Bio! Let players know your playstyle!</label>
+					<input name="bio" id="bio" type="text" className="input" onChange={storeUserData} />
+				</div> 
+				<div className="group">
+					<label for="user" className="label">Add Your Profile Pic!</label>
+					<input name="avatar" id="img" type="text" className="input" onChange={storeUserData} />
+				</div> 
+				<div className="group">
+					<label for="user" className="label">Pick Your Team!</label>
+					<input name="team_id" id="team" placeholder='You must pick from teams 1-4 :)' type="text" className="input" onChange={storeUserData} />
+				</div> 
 				<div className="group">
 					<input type="submit" className="button" value="Sign Up" onClick={handleSignup} />
 				</div>
