@@ -13,7 +13,7 @@ a{color:inherit;text-decoration:none}
 .login-wrap{
 	width:100%;
 	margin:auto;
-	max-width:525px;
+	min-width:525px;
 	min-height:670px;
 	position:relative;
 	background:url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg') no-repeat center;
