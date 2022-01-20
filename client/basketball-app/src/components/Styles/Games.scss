@@ -5,7 +5,11 @@ body {
 	height: 100vh;
 	justify-content: center;
 }
-
+// .slide-bar {
+// 	height:100;
+// 	width:250;
+// 	position: fixed;
+// }
 @mixin white-gradient {
 	background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
 }
