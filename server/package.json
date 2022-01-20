@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./app.js",
-    "db:reset": "node ./db/reset"
+    "db:reset": "node ./db/reset.js",
+    "local": "./node_modules/.bin/nodemon -L app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
