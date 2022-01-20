@@ -39,11 +39,11 @@ export default function LoginForm() {
 	} 
 
 
-  return redirect ? (<Redirect to={redirect}/>) : (
+  return redirect ?  (<Redirect to={redirect}/>) : (
     <div className="login-wrap">
 		<span>{error}</span>	
 	<div className="login-html">
-		<input id="tab-1" type="radio" name="tab" className="sign-in" checked /><label for="tab-1" className="tab">Sign In</label>
+		<input id="tab-1" type="radio" name="tab" className="sign-in" checked /><label for="tab-1" href="/login" className="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" className="sign-up" /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
 		<div className="login-form">
 			<div className="sign-in-htm">
@@ -98,3 +98,4 @@ export default function LoginForm() {
     
   );
 }
+
