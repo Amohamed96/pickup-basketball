@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import './Styles/LoginForm.css'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom';
 
 
 export default function RegisterForm() {
   const [user, setUser] = useState({ name: null, password: null, password2: null, email: null });
 	const [error, setError] = useState('')
+	const [redirect, setRedirect] = useState('')
 
 	const toggleCheckbox = (event) => {
 		console.log('EVENT TARGET',event.target)
@@ -32,23 +34,26 @@ export default function RegisterForm() {
 		console.log('USER *********--', user)
 		axios.post('http://localhost:3001/api/users/signup', user)
     .then((result) => {
-      console.log('RESULTS>>', result)
-      return result.data
+      console.log('RESULTS>>', result.data)
+      setUser(result.data)
+			localStorage.setItem('user', JSON.stringify(result.data))
+			setRedirect('/profile')
     })
-    .then((results) => {
-      setUser(results[0])
-    })
+  
 		.catch((err) => {
 			console.log('err', err)
+			setError('Sorry, an account with that email exists, you will be redirected to the login page.')
+			setTimeout(()=> {
+				setRedirect('/login')
+			}, 5000)
 		})
 	} 
 
 
-  return (
-    <div className="login-wrap">
-		<span className='error'>{error}</span>	
+  return redirect? (<Redirect to={redirect}/>) : (
+    <div className="login-wrap">	
 	<div className="login-html">
-		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab">Sign In</label>
+		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" href="/login" className="tab"><a href='/login'>Sign In</a></label>
 		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
 		<div className="login-form">
 			<div className="sign-in-htm">
@@ -91,6 +96,7 @@ export default function RegisterForm() {
 				</div>
 				<div className="group">
 					<input type="submit" className="button" value="Sign Up" onClick={handleSignup} />
+					<span className='error'>{error}</span>
 				</div>
 				<div className="hr"></div>
 				<div className="foot-lnk">
