@@ -7,14 +7,10 @@
   position: relative;
   padding-bottom: 100px
 }
-<<<<<<< HEAD
 .leaderboardContainer {
   display: flex;
   justify-content: end;
 }
-=======
-
->>>>>>> features/login
 table {
   width: 100%;
   background: #fff;
