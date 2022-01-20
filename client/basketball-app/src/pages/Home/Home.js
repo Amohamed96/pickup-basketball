@@ -28,33 +28,13 @@ export default function Home () {
       console.log("res.data", res.data);
     })
     })
-
-
-
-
+    
   return (
       <>
         <Navbar />
         <Hero />
         <Games matches={matches} teams={teams} />
-        <Leaderboard users={users} teams={teams}/>
-        
-      <div className="homepage">
-          Matches played: 
-            {matches.length > 0 ? matches.map((matchList) => {
-            return <ul> {matchList.date}{matchList.team1_score}{matchList.team2_score}</ul>
-          }): ""}
-          Teams: 
-            {teams.length > 0 ? teams.map((teamList) => {
-            return <ul><img className="teamLogo" src={teamList.avatar}/>{teamList.team_name}</ul>
-          }): ""}
-          Leaderboard: 
-            {users.length > 0 ? users.map((userList) => {
-            return <ul><img className="profilePic" src={userList.avatar}/>{userList.name}</ul>
-          }): ""}
-
-      </div>
-                  
+        <Leaderboard users={users} teams={teams}/>              
   </>
   );
 }

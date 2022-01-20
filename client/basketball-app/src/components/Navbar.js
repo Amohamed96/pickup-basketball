@@ -1,6 +1,9 @@
 import React from "react";
 import './Styles/Navbar.css'
 
+const logout = function() {
+  localStorage.clear();
+}
 export default function Navbar() {
 
   return (
@@ -18,6 +21,7 @@ export default function Navbar() {
           <li><a href="/">Home</a></li>
           <li><a href="/profile">Profile</a></li>
           <li><a href="/messages">Messages</a></li>
+          <li><a href="/login" onClick={(logout())}>Logout</a></li>
           <li><a href="/login">Login</a></li>
           <li><a href="/register">Register</a></li>
          
