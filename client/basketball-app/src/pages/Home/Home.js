@@ -3,6 +3,7 @@ import axios from 'axios'
 import './Home.css'
 import Hero from "../../components/Hero";
 import Navbar from "../../components/Navbar";
+import Games from "../../components/Games";
 import Leaderboard from "../../components/Leaderboard";
 
 export default function Home () {
@@ -25,10 +26,6 @@ export default function Home () {
       setTeams(res.data.teams)  
       setMatches(res.data.matches)  
       console.log("res.data", res.data);
-
-      console.log("users", users);
-      console.log("teams", teams);
-      console.log("matches", matches);
     })
     })
 
@@ -38,6 +35,7 @@ export default function Home () {
       <>
         <Navbar />
         <Hero />
+        <Games matches={matches} teams={teams} />
         <Leaderboard users={users} teams={teams}/>
         
       <div className="homepage">
