@@ -27,7 +27,10 @@ module.exports = ({
         const {
             name,
             email,
-            password
+            password,
+            bio, 
+            avatar, 
+            team_id
         } = req.body;
 
         getUserByEmail(email)
@@ -38,7 +41,7 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    const addPlayer = await addUser(name, email, password)
+                    const addPlayer = await addUser(name, email, password, bio, avatar, team_id)
                     console.log('ADD USER FUNCTIOn', addPlayer)
                     return addPlayer
                 }

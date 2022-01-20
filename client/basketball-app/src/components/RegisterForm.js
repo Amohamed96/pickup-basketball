@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 
 export default function RegisterForm() {
-  const [user, setUser] = useState({ name: null, password: null, password2: null, email: null });
+  const [user, setUser] = useState({ name: null, password: null, password2: null, email: null, bio: null, avatar: null, team_id: null });
 	const [error, setError] = useState('')
 	const [redirect, setRedirect] = useState('')
 
@@ -19,8 +19,8 @@ export default function RegisterForm() {
 	}
 
 	const handleSignup = () => {
-		if (!user.name || !user.password ||!user.email)  {
-			setError("Sorry, You must enter a valid username or password")
+		if (!user.name || !user.password ||!user.email || !user.bio || !user.avatar || !user.team_id)  {
+			setError("Sorry, You must enter your credentials to continue")
 			return
 		}
 		if (user.password.length < 3) {
@@ -29,6 +29,10 @@ export default function RegisterForm() {
 		}
 		if (user.password !== user.password2) {
 			setError("Both passwords must match")
+			return
+		}
+		if (user.team_id > 4 || user.team_id <1) {
+			setError(`Must pick a team from 1-4... You'll see why `)
 			return
 		}
 		console.log('USER *********--', user)
@@ -41,19 +45,35 @@ export default function RegisterForm() {
     })
   
 		.catch((err) => {
+<<<<<<< HEAD
 			console.log('err', err)
 			setError('Sorry, an account with that email exists, you will be redirected to the login page.')
 			setTimeout(()=> {
 				setRedirect('/login')
 			}, 5000)
+=======
+			console.log('errrrr', err)
+			setError('Sorry, a user with that email exists, you will be redirected to the login shortly')
+			setTimeout(() => {
+				setRedirect('/login')
+			}, 4000);
+>>>>>>> features/login
 		})
 	} 
 
 
+<<<<<<< HEAD
   return redirect? (<Redirect to={redirect}/>) : (
     <div className="login-wrap">	
 	<div className="login-html">
 		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" href="/login" className="tab"><a href='/login'>Sign In</a></label>
+=======
+  return redirect ? (<Redirect to={redirect}/>) : (
+    <div className="login-wrap">
+		<span className='error'>{error}</span>	
+	<div className="login-html">
+		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab"><a href='/login'>Sign In</a></label>
+>>>>>>> features/login
 		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
 		<div className="login-form">
 			<div className="sign-in-htm">
@@ -94,6 +114,18 @@ export default function RegisterForm() {
 					<label for="pass" className="label">Repeat Password</label>
 					<input id="pass" name="password2" type="password" className="input" data-type="password"  onChange={storeUserData}/>
 				</div>
+				<div className="group">
+					<label for="user" className="label">Add A Bio! Let players know your playstyle!</label>
+					<input name="bio" id="bio" type="text" className="input" onChange={storeUserData} />
+				</div> 
+				<div className="group">
+					<label for="user" className="label">Add Your Profile Pic!</label>
+					<input name="avatar" id="img" type="text" className="input" onChange={storeUserData} />
+				</div> 
+				<div className="group">
+					<label for="user" className="label">Pick Your Team!</label>
+					<input name="team_id" id="team" placeholder='You must pick from teams 1-4 :)' type="text" className="input" onChange={storeUserData} />
+				</div> 
 				<div className="group">
 					<input type="submit" className="button" value="Sign Up" onClick={handleSignup} />
 					<span className='error'>{error}</span>
