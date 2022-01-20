@@ -45,35 +45,20 @@ export default function RegisterForm() {
     })
   
 		.catch((err) => {
-<<<<<<< HEAD
-			console.log('err', err)
-			setError('Sorry, an account with that email exists, you will be redirected to the login page.')
-			setTimeout(()=> {
-				setRedirect('/login')
-			}, 5000)
-=======
 			console.log('errrrr', err)
 			setError('Sorry, a user with that email exists, you will be redirected to the login shortly')
 			setTimeout(() => {
 				setRedirect('/login')
 			}, 4000);
->>>>>>> features/login
 		})
 	} 
 
 
-<<<<<<< HEAD
-  return redirect? (<Redirect to={redirect}/>) : (
-    <div className="login-wrap">	
-	<div className="login-html">
-		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" href="/login" className="tab"><a href='/login'>Sign In</a></label>
-=======
   return redirect ? (<Redirect to={redirect}/>) : (
     <div className="login-wrap">
 		<span className='error'>{error}</span>	
 	<div className="login-html">
 		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab"><a href='/login'>Sign In</a></label>
->>>>>>> features/login
 		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
 		<div className="login-form">
 			<div className="sign-in-htm">
