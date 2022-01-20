@@ -6,6 +6,7 @@ import Register from './pages/Register/Register.js';
 import Profile from './pages/Profile/Profile.js';
 import Navbar from './components/Navbar';
 import Messages from './pages/messages/Messages';
+import Player from './components/Player';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="/register" exact render={() => <Register/>}/>
       <Route path="/login" exact render={() => <Login/>}/>
       <Route path="/profile" exact render={() => <Profile/>}/>
+      <Route path="/player/:id" render={() => <Player/>}/>
       <Route path="/messages" exact render={() => <Messages/>}/>
       </Switch>
       
