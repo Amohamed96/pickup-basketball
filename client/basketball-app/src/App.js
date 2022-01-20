@@ -6,10 +6,8 @@ import Register from './pages/Register/Register.js';
 import Profile from './pages/Profile/Profile.js';
 import Navbar from './components/Navbar';
 import Messages from './pages/messages/Messages';
-import  io  from 'socket.io-client';
+import Player from './components/Player';
 
-
-const socket = io.connect("http://localhost:3001")
 
 function App() {
   return (
@@ -17,9 +15,10 @@ function App() {
     <Router>
       <Switch>
       <Route path="/" exact render={() => <Home/>}/>
-      <Route path="/login" exact render={() => <Login/>}/>
       <Route path="/register" exact render={() => <Register/>}/>
+      <Route path="/login" exact render={() => <Login/>}/>
       <Route path="/profile" exact render={() => <Profile/>}/>
+      <Route path="/player/:id" render={() => <Player/>}/>
       <Route path="/messages" exact render={() => <Messages/>}/>
       </Switch>
       
