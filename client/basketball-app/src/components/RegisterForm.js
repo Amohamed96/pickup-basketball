@@ -38,19 +38,23 @@ export default function RegisterForm() {
 		console.log('USER *********--', user)
 		axios.post('http://localhost:3001/api/users/signup', user)
     .then((result) => {
-      console.log('RESULTS>>', result)
-      return result.data
+      console.log('RESULTS>>', result.data)
+      setUser(result.data)
+			localStorage.setItem('user', JSON.stringify(result.data))
+			setRedirect('/profile')
     })
-    .then((results) => {
-      setUser(results[0])
-    })
+  
 		.catch((err) => {
-			console.log('err', err)
+			console.log('errrrr', err)
+			setError('Sorry, a user with that email exists, you will be redirected to the login shortly')
+			setTimeout(() => {
+				setRedirect('/login')
+			}, 4000);
 		})
 	} 
 
 
-  return (
+  return redirect ? (<Redirect to={redirect}/>) : (
     <div className="login-wrap">
 		<span className='error'>{error}</span>	
 	<div className="login-html">

@@ -24,7 +24,7 @@ module.exports = (db) => {
   //TODO: ADD OTHER VALUES
   const addUser = async (name, email, password, bio, avatar, team_id) => {
     const query = {
-      text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3, $4, $5, $6) returning *`,
+      text: `INSERT INTO users (name, email, password, bio, avatar, team_id) VALUES ($1, $2, $3, $4, $5, $6) returning *`,
       values: [name, email, password, bio, avatar, team_id],
     };
 

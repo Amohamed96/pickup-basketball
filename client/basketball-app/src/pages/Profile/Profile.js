@@ -17,13 +17,32 @@ export default function Profile() {
   return (
     <>
       <Navbar />
-      <div className="profile">
+      {/* <div className="profile">
         <div className="username">{user.name}</div>
         <div className="bio">{user.bio}</div>
         <img src={user.avatar} />
         <div className="profile-user"></div>
         <div className="Icon"><i className="fad fa-plus-square"></i></div>
-      </div>
+      </div> */}
+      <header>
+  <figure class="profile-banner">
+    <img src="https://unsplash.it/975/300" alt="Profile banner" />
+  </figure>
+  <figure class="profile-picture" >
+  </figure>
+  <div class="profile-stats">
+    <ul>
+      <li>13    <span>Projects</span></li>
+      <li>1,354 <span>Commits</span></li>
+      <li>32    <span>Following</span></li>
+      <li>324   <span>Followers</span></li>
+    </ul>
+    <a href="javascript:void(0);" class="follow">
+      Follow Nick
+    </a>
+  </div>
+  <h1>{user.name} <small>{user.bio}</small></h1>
+</header>
       {/* <div class="container">
   <header>
     <i class="fa fa-bars" aria-hidden="true"></i>
