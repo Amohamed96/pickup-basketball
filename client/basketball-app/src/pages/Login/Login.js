@@ -24,7 +24,7 @@ export default function Login(props) {
 
   return (
     <>
-      <Navbar />
+      <Navbar users={user}/>
       <div className="login">
       <LoginForm />
       </div>

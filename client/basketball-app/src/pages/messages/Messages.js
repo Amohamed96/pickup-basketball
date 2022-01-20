@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Messages.css";
+import Navbar from "../../components/Navbar"; 
 
 export default function Messages() {
   const [user, setUser] = useState({})
@@ -11,7 +12,7 @@ export default function Messages() {
 
   return (
     <>
-
+    <Navbar users={user}/>
       <div className="messages">
       <div className="chatbox">Chat</div>
       <div className="menu"> Welcome {user.name}, I bet you're wondering who's online? </div>

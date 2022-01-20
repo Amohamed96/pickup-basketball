@@ -7,16 +7,17 @@ import './Profile.css'
 export default function Profile() {
   const [user, setUser] = useState({});
   console.log("USER>>>>", user);
+  const currentUser = localStorage.getItem("user");
 
   useEffect(() => {
-    const currentUser = localStorage.getItem("user");
     console.log("CURRENT USER from LOCAL", currentUser);
     setUser(JSON.parse(currentUser));
-  }, []);
+  }, [currentUser]);
 
-  return (
+  return ( 
     <>
-      <Navbar />
+      <Navbar users={user}/>
+      {!user ? <h1>PLEASE LOGIN ---</h1> : 
       <div class="padding">
     <div class="col-md-8">
     
@@ -43,6 +44,8 @@ export default function Profile() {
         </div>
     </div>
 </div>
+}
     </>
+      
   );
 }
