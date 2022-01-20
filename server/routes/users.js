@@ -1,84 +1,90 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 //TODO OPTIMIZE FOR TEAMS
-const {
-    getPostsByUsers
-} = require('../helpers/dataHelpers');
+const { getPostsByUsers } = require("../helpers/dataHelpers");
 
-module.exports = ({
-    getUsers,
-    getUserByEmail,
-    addUser
-}) => {
-    /* GET users listing. */
-    router.get('/', (req, res) => {
-        getUsers()
-            .then((users) => {
-              res.json(users)
-            })
-            .catch((err) => res.json({
-                error: err.message
-            }));
-    });
+module.exports = ({ getUsers, getUserByEmail, addUser, getUserById }) => {
+  /* GET users listing. */
+  router.get("/", (req, res) => {
+    getUsers()
+      .then((users) => {
+        res.json(users);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
-    router.post('/signup', (req, res) => {
+  // GET USER BASED ON THEIR ID
 
-        const {
+  router.get(`/profile/:id`, (req, res) => {
+    const { id, users } = req.params;
+    console.log('REQUEST', req.params, id)
+    getUserById(id)
+      .then((users) => {
+        res.json(users);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+    
+    
+  });
+
+
+  router.post("/signup", (req, res) => {
+    const { name, email, password, bio, avatar, team_id } = req.body;
+
+    getUserByEmail(email)
+      .then(async (user) => {
+        if (user) {
+          res.status(404).json({
+            msg: "Sorry, a user account with this email already exists",
+          });
+        } else {
+          const addPlayer = await addUser(
             name,
             email,
             password,
-            bio, 
-            avatar, 
+            bio,
+            avatar,
             team_id
-        } = req.body;
+          );
+          console.log("ADD USER FUNCTIOn", addPlayer);
+          return addPlayer;
+        }
+      })
+      .then((newUser) => res.json(newUser))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+  router.post("/login", (req, res) => {
+    const { email, password } = req.body;
+    console.log("PASSWORD ()####", email, password);
+    getUserByEmail(email)
+      .then(async (user) => {
+        if (!user) {
+          res.status(404).json({
+            msg: "Sorry, please create an account",
+          });
+        } else {
+          res.send({ user: user });
+        }
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
-        getUserByEmail(email)
-            .then( async user => {
-
-                if (user) {
-                    res.status(404).json({
-                        msg: 'Sorry, a user account with this email already exists'
-                    });
-                } else {
-                    const addPlayer = await addUser(name, email, password, bio, avatar, team_id)
-                    console.log('ADD USER FUNCTIOn', addPlayer)
-                    return addPlayer
-                }
-
-            })
-            .then(newUser => res.json(newUser))
-            .catch(err => res.json({
-                error: err.message
-            }));
-
-    })  
-    router.post('/login', (req, res) => {
-
-        const {
-            email,
-            password
-        } = req.body;
-        console.log('PASSWORD ()####', email, password)
-        getUserByEmail(email)
-            .then( async user => {
-
-                if (!user) {
-                    res.status(404).json({
-                        msg: 'Sorry, please create an account'
-                    });
-                } else {
-                    res.send({user: user})
-                }
-
-            })
-            .catch(err => res.json({
-                error: err.message
-            }));
-
-    })
-
-   
-
-    return router;
+  return router;
 };
