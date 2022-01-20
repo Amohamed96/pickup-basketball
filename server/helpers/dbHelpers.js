@@ -22,10 +22,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
   //TODO: ADD OTHER VALUES
-  const addUser = async (name, email, password) => {
+  const addUser = async (name, email, password, bio, avatar, team_id) => {
     const query = {
-      text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3) returning *`,
-      values: [name, email, password],
+      text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3, $4, $5, $6) returning *`,
+      values: [name, email, password, bio, avatar, team_id],
     };
 
     return db

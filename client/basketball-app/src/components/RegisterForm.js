@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import './Styles/LoginForm.css'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom';
 
 
 export default function RegisterForm() {
   const [user, setUser] = useState({ name: null, password: null, password2: null, email: null, bio: null, avatar: null, team_id: null });
 	const [error, setError] = useState('')
+	const [redirect, setRedirect] = useState('')
 
 	const toggleCheckbox = (event) => {
 		console.log('EVENT TARGET',event.target)
@@ -52,7 +54,7 @@ export default function RegisterForm() {
     <div className="login-wrap">
 		<span className='error'>{error}</span>	
 	<div className="login-html">
-		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab">Sign In</label>
+		<input id="tab-1" type="radio" name="tab" className="sign-in"  /><label for="tab-1" className="tab"><a href='/login'>Sign In</a></label>
 		<input id="tab-2" type="radio" name="tab" className="sign-up" checked /><label for="tab-2" className="tab"><a href="/register">Sign Up</a></label>
 		<div className="login-form">
 			<div className="sign-in-htm">
