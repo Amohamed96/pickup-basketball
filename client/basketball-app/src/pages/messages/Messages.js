@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ChatEngine } from "react-chat-engine";
-import "./Messages.css";
-import Navbar from "../../components/Navbar";
-
-function Messages() {
-  // const [user, setUser] = useState({});
-
-  // useEffect(() => {
-  //   const currentUser = localStorage.getItem("user");
-  //   setUser(JSON.parse(currentUser));
-  // }, []);
-
+export default function Messages() {
   return (
     <ChatEngine
       height="100vh"
@@ -20,4 +10,3 @@ function Messages() {
     />
   );
 }
-export default Messages;
