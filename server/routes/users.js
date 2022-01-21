@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getUserById, getChallengesById } = require("../helpers/dbHelpers");
+const {
+  getUserById,
+  getChallengesById,
+  addChallenge,
+} = require("../helpers/dbHelpers");
 //TODO OPTIMIZE FOR TEAMS
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 
@@ -10,6 +14,7 @@ module.exports = ({
   addUser,
   getUserById,
   getChallengesById,
+  addChallenge,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -89,6 +94,43 @@ module.exports = ({
         })
       );
   });
+  router.post("/profile/:id", (req, res) => {
+    const {
+      challenger_id,
+      user_id,
+      location_id,
+      date,
+      challenge_message,
+      requestStatus,
+    } = req.body;
+
+    getUserById(id)
+      .then(async (challe) => {
+        if (user) {
+          res.status(404).json({
+            msg: "Error when creating challenge",
+          });
+        } else {
+          const sendChallenge = await addChallenge(
+            challenger_id,
+            user_id,
+            location_id,
+            date,
+            challenge_message,
+            requestStatus
+          );
+          console.log("ADD USER FUNCTIOn", sendChallenge);
+          return sendChallenge;
+        }
+      })
+      .then((newChallenge) => res.json(newChallenge))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
   //TODO: make route for challenges GET and POST
   // router.get("/Pr", (req, res) => {
   //   getChallengesByID(2)

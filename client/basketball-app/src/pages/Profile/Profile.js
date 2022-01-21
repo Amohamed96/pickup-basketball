@@ -4,6 +4,7 @@ import "./Profile.css";
 import Navbar from "../../components/Navbar";
 import "./Profile.css";
 import ChallengesRecieved from "../../components/ChallengesRecieved";
+import ChallengeForm from "../../components/ChallengeForm";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -52,9 +53,7 @@ export default function Profile() {
                     href="javascript:void(0)"
                     class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
                     data-abc="true"
-                  >
-                    Challenge
-                  </a>
+                  ></a>
                 ) : (
                   <></>
                 )}
