@@ -26,11 +26,14 @@ module.exports = ({
 
   // GET USER BASED ON THEIR ID
 
-  router.get(`/profile`, (req, res) => {
-    const usersPromise = getUserById(1);
-    const challengesPromise = getChallengesById();
+  router.get(`/profile/:id`, (req, res) => {
+    const user_id = req.params.id;
+    console.log("USER ID ROUTE", user_id);
+    const usersPromise = getUserById(user_id);
+    const challengesPromise = getChallengesById(user_id);
     Promise.all([usersPromise, challengesPromise])
       .then((result) => {
+        console.log("RESULT ROUTE", result);
         res.json({ users: result[0], challenges: result[1] });
       })
       .catch((error) => {
@@ -87,17 +90,17 @@ module.exports = ({
       );
   });
   //TODO: make route for challenges GET and POST
-  router.get("/challenges", (req, res) => {
-    getChallengesByID()
-      .then((challenges) => {
-        res.json(challenges);
-      })
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
-  });
+  // router.get("/Pr", (req, res) => {
+  //   getChallengesByID(2)
+  //     .then((challenges) => {
+  //       res.json(challenges);
+  //     })
+  //     .catch((err) =>
+  //       res.json({
+  //         error: err.message,
+  //       })
+  //     );
+  // });
 
   return router;
 };

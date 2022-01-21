@@ -2,11 +2,10 @@ import React from "react";
 
 export default function ChallengesRecieved(props) {
   const { challenges } = props;
-  const []
-  const msg = challenges.map((challenge) => {
+
+  return challenges.map((challenge) => {
     console.log("CHALLENGE MSG----->", challenge.challenge_message);
-    challenge.challenge_message;
-    
+
+    return <div>{challenge.challenge_message}</div>;
   });
-  return { msg };
 }

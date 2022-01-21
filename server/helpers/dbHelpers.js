@@ -141,10 +141,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getChallengesById = () => {
+  const getChallengesById = (user_id) => {
     const query = {
-      text: "SELECT * FROM challenge_request",
-      // values: [user_id],
+      text: "SELECT * FROM challenge_request WHERE user_id = $1",
+      values: [user_id],
     };
 
     return db
