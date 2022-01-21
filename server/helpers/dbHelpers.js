@@ -18,11 +18,11 @@ module.exports = (db) => {
 
     return db
       .query(query)
-      .then((result) => result.rows ? result.rows[0] : undefined)
+      .then((result) => (result.rows ? result.rows[0] : undefined))
       .catch((err) => err);
   };
 
-  //GET USER BY ID 
+  //GET USER BY ID
 
   const getUserById = (id) => {
     const query = {
@@ -32,7 +32,7 @@ module.exports = (db) => {
 
     return db
       .query(query)
-      .then((result) => result.rows ? result.rows[0] : undefined)
+      .then((result) => (result.rows ? result.rows[0] : undefined))
       .catch((err) => err);
   };
 
@@ -46,8 +46,8 @@ module.exports = (db) => {
     return db
       .query(query)
       .then((result) => {
-        console.log('DB HELPERS RESULT >>>', result)
-        return result.rows[0]
+        console.log("DB HELPERS RESULT >>>", result);
+        return result.rows[0];
       })
       .catch((err) => err);
   };
@@ -69,7 +69,7 @@ module.exports = (db) => {
 
   const getTeamByName = (team_name) => {
     const query = {
-      text: 'SELECT * FROM teams WHERE team_name = $1',
+      text: "SELECT * FROM teams WHERE team_name = $1",
       values: [team_name],
     };
 
@@ -83,7 +83,7 @@ module.exports = (db) => {
 
   const addTeam = (location_id, team_name, team_description, avatar) => {
     const query = {
-      text: 'INSERT INTO teams (location_id, team_name, team_description, avatar) VALUES ($1, $2, $3, $4) RETURNING *',
+      text: "INSERT INTO teams (location_id, team_name, team_description, avatar) VALUES ($1, $2, $3, $4) RETURNING *",
       values: [location_id, team_name, team_description, avatar],
     };
 
@@ -110,7 +110,7 @@ module.exports = (db) => {
 
   const getMatchById = (id) => {
     const query = {
-      text: 'SELECT * FROM teams WHERE id = $1',
+      text: "SELECT * FROM teams WHERE id = $1",
       values: [id],
     };
 
@@ -124,8 +124,15 @@ module.exports = (db) => {
 
   const addMatch = (location_id, team_name, team_description, avatar) => {
     const query = {
-      text: 'INSERT INTO teams (match_date, team1_id, team2_id, winner_id, team1_score, team2_score) RETURNING *',
-      values: [match_date, team1_id, team2_id, winner_id, team1_score, team2_score],
+      text: "INSERT INTO teams (match_date, team1_id, team2_id, winner_id, team1_score, team2_score) RETURNING *",
+      values: [
+        match_date,
+        team1_id,
+        team2_id,
+        winner_id,
+        team1_score,
+        team2_score,
+      ],
     };
 
     return db
@@ -134,6 +141,42 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getChallengesById = () => {
+    const query = {
+      text: "SELECT * FROM challenge_request",
+      // values: [user_id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+  const addChallenge = (
+    challenger_id,
+    user_id,
+    location_id,
+    date,
+    challenge_message,
+    requestStatus
+  ) => {
+    const query = {
+      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date,challenge_message, requestStatus) RETURNING *",
+      values: [
+        challenger_id,
+        user_id,
+        location_id,
+        date,
+        challenge_message,
+        requestStatus,
+      ],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
   // const getDataForHome = () => {
   //   //qeuries for data
   // }
@@ -148,6 +191,8 @@ module.exports = (db) => {
     addTeam,
     getMatches,
     getMatchById,
-    addMatch
+    addMatch,
+    getChallengesById,
+    addChallenge,
   };
 };

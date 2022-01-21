@@ -1,10 +1,16 @@
 const express = require("express");
 const router = express.Router();
-
+const { getUserById, getChallengesById } = require("../helpers/dbHelpers");
 //TODO OPTIMIZE FOR TEAMS
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 
-module.exports = ({ getUsers, getUserByEmail, addUser, getUserById }) => {
+module.exports = ({
+  getUsers,
+  getUserByEmail,
+  addUser,
+  getUserById,
+  getChallengesById,
+}) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
     getUsers()
@@ -20,22 +26,17 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUserById }) => {
 
   // GET USER BASED ON THEIR ID
 
-  router.get(`/profile/:id`, (req, res) => {
-    const { id, users } = req.params;
-    console.log('REQUEST', req.params, id)
-    getUserById(id)
-      .then((users) => {
-        res.json(users);
+  router.get(`/profile`, (req, res) => {
+    const usersPromise = getUserById(1);
+    const challengesPromise = getChallengesById();
+    Promise.all([usersPromise, challengesPromise])
+      .then((result) => {
+        res.json({ users: result[0], challenges: result[1] });
       })
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
-    
-    
+      .catch((error) => {
+        console.log(`Error setting up the reset route: ${error}`);
+      });
   });
-
 
   router.post("/signup", (req, res) => {
     const { name, email, password, bio, avatar, team_id } = req.body;
@@ -78,6 +79,18 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUserById }) => {
         } else {
           res.send({ user: user });
         }
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+  //TODO: make route for challenges GET and POST
+  router.get("/challenges", (req, res) => {
+    getChallengesByID()
+      .then((challenges) => {
+        res.json(challenges);
       })
       .catch((err) =>
         res.json({
