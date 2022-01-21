@@ -1,8 +1,13 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import './Styles/Leaderboard.css'
+import { Redirect } from 'react-router-dom';
 
 export default function Leaderboard(props) {
+	const [redirect, setRedirect] = useState('')
+  const [user, setUser] = useState('')
+
   const { users, matches, teams } = props;
+
   const getTeam = function (teamId) {
     //filter through array of teams
     //if the team_id = team id then return team object
@@ -11,7 +16,17 @@ export default function Leaderboard(props) {
       return true;
     }) || {}
   }
-  return (
+  const currentUser = localStorage.getItem("user");
+
+  useEffect(() => {
+    console.log("CURRENT USER from LOCAL", currentUser);
+    setUser(JSON.parse(currentUser));
+  }, [currentUser]);
+
+  const goToPlayer = function() {
+    setRedirect(`/player/${user.id}`)
+  }
+  return redirect ? (<Redirect to={redirect}/>) : (
    <div className='leaderboardContainer'>
       <section class="content-info">
     <div class="container paddings-mini">
@@ -32,7 +47,7 @@ export default function Leaderboard(props) {
                       {users.map((player) => (
                             <tr>
                             <td class="text-left number">1<i class="fa fa-caret-up" aria-hidden="true"></i></td>
-                            <td class="text-left"> <img src={player.avatar}alt="Profile Pic"/><span>{player.name}</span> </td>
+                            <td class="text-left" onClick={goToPlayer}><img src={player.avatar}alt="Profile Pic"/><span>{player.name}</span></td>
                             <td>38</td>
                             <td>26</td>
                             <td>9</td>
