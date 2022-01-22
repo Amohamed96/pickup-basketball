@@ -4,7 +4,6 @@ import "./Profile.css";
 import Navbar from "../../components/Navbar";
 import "./Profile.css";
 import ChallengesRecieved from "../../components/ChallengesRecieved";
-import ChallengeForm from "../../components/ChallengeForm";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -25,7 +24,7 @@ export default function Profile() {
           console.log("PROFILE RES DATA", res.data);
           setChallenges(res.data.challenges);
         });
-    }, 100);
+    }, 500);
   }, []);
   return (
     <>

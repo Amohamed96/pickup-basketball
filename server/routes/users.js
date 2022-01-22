@@ -94,42 +94,37 @@ module.exports = ({
         })
       );
   });
-  router.post("/profile/:id", (req, res) => {
-    const {
-      challenger_id,
-      user_id,
-      location_id,
-      date,
-      challenge_message,
-      requestStatus,
-    } = req.body;
+  // router.post("/player/:id", async (req, res) => {
+  //   const {
+  //     challenger_id,
+  //     user_id,
+  //     location_id,
+  //     date,
+  //     challenge_message,
+  //     requestStatus,
+  //   } = req.body;
 
-    getUserById(id)
-      .then(async (challe) => {
-        if (user) {
-          res.status(404).json({
-            msg: "Error when creating challenge",
-          });
-        } else {
-          const sendChallenge = await addChallenge(
-            challenger_id,
-            user_id,
-            location_id,
-            date,
-            challenge_message,
-            requestStatus
-          );
-          console.log("ADD USER FUNCTIOn", sendChallenge);
-          return sendChallenge;
-        }
-      })
-      .then((newChallenge) => res.json(newChallenge))
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
-  });
+  // getUserById(id)
+  //   .then((newChallenge) => {
+  //     // const sendChallenge = await
+  //     console.log("ADD USER FUNCTION", sendChallenge);
+  //     res.json(newChallenge);
+  //     // return sendChallenge;
+  //   })
+  //   addChallenge(
+  //         challenger_id,
+  //         user_id,
+  //         location_id,
+  //         date,
+  //         challenge_message,
+  //         requestStatus
+  //       );
+  //     .catch((err) =>
+  //       res.json({
+  //         error: err.message,
+  //       })
+  //     );
+  // });
 
   //TODO: make route for challenges GET and POST
   // router.get("/Pr", (req, res) => {
