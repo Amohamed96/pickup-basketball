@@ -54,9 +54,9 @@ CREATE TABLE challenge_request (
   challenger_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
+  date DATE,
   challenge_message VARCHAR(255),
-  request_status VARCHAR(255) NOT NULL 
+  request_status VARCHAR(255) 
   /* accepted_at DATE declined_at DATE */
 );
 

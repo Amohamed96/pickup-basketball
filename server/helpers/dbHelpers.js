@@ -165,17 +165,17 @@ module.exports = (db) => {
     location_id,
     date,
     challenge_message,
-    requestStatus
+    request_status
   ) => {
     const query = {
-      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date, challenge_message, requestStatus) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date, challenge_message, request_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       values: [
         challenger_id,
         user_id,
         location_id,
         date,
         challenge_message,
-        requestStatus,
+        request_status,
       ],
     };
 

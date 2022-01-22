@@ -103,22 +103,22 @@ module.exports = ({
       location_id,
       date,
       challenge_message,
-      requestStatus,
+      request_status,
     } = req.body;
-
-    getUserById(user_id)
-      .then((newChallenge) => {
-        addChallenge(
-          challenger_id,
-          user_id,
-          location_id,
-          date,
-          challenge_message,
-          requestStatus
-        );
+    // console.log("req params  server", req.params);
+    console.log("req body  server====>", req.body);
+    console.log("req body message  server====>", req.body.challenge_message);
+    return addChallenge(
+      req.body.challenger_id,
+      req.body.user_id,
+      req.body.location_id,
+      req.body.date,
+      req.body.challenge_message,
+      req.body.request_status
+    )
+      .then(() => {
         // const sendChallenge = await
-        console.log("POSTING TO CHALLENE REQUESTS.....");
-        res.json(newChallenge);
+        // res.json(newChallenge);
         // return sendChallenge;
       })
 

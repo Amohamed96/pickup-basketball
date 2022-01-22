@@ -10,7 +10,7 @@ export default function ChallengeForm() {
     location_id: null,
     date: null,
     challenge_message: null,
-    requestStatus: null,
+    request_status: null,
   });
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState("");
@@ -43,9 +43,21 @@ export default function ChallengeForm() {
     //   return;
     // }
     console.log("CHALLENGE *********--", challenge);
-
+    const headers = { "Content-Type": "application/json" };
     axios
-      .post(`/api/users/player/${user.id}`, challenge)
+      .post(
+        `/api/users/player/${user.id}`,
+        challenge,
+        // {
+        //   challenger_id: 2,
+        //   user_id: 4,
+        //   location_id: 1,
+        //   date: null,
+        //   challenge_message: "LB TO AWAB",
+        //   request_status: null,
+        // },
+        { headers: headers }
+      )
       .then((result) => {
         console.log("RESULTS DATA CHALLENGE FORM>>", result.data);
         console.log("CHALLENGE FORM----->", challenge);
@@ -95,7 +107,7 @@ export default function ChallengeForm() {
           <input
             type="text"
             name="challenger_id"
-            placeholder="Who tf are you"
+            placeholder="Who are you"
             onChange={storeUserData}
           ></input>
         </div>
