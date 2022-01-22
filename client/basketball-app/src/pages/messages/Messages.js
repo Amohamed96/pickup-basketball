@@ -1,5 +1,7 @@
 import React from "react";
 import { ChatEngine } from "react-chat-engine";
+import "./Messages.css";
+
 export default function Messages() {
   return (
     <ChatEngine

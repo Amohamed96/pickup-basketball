@@ -25,6 +25,7 @@ CHAT STYLES * {
 
 .ce-chat-form-container {
   padding-bottom: 20px !important;
+  width: 80vw;
 }
 
 .ce-text-input {
