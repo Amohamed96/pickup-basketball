@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getUserById, getChallengesById } = require("../helpers/dbHelpers");
+const {
+  getUserById,
+  getChallengesById,
+  addChallenge,
+} = require("../helpers/dbHelpers");
 //TODO OPTIMIZE FOR TEAMS
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 
@@ -10,6 +14,7 @@ module.exports = ({
   addUser,
   getUserById,
   getChallengesById,
+  addChallenge,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -26,11 +31,14 @@ module.exports = ({
 
   // GET USER BASED ON THEIR ID
 
-  router.get(`/profile`, (req, res) => {
-    const usersPromise = getUserById(1);
-    const challengesPromise = getChallengesById();
+  router.get(`/profile/:id`, (req, res) => {
+    const user_id = req.params.id;
+    console.log("USER ID ROUTE", user_id);
+    const usersPromise = getUserById(user_id);
+    const challengesPromise = getChallengesById(user_id);
     Promise.all([usersPromise, challengesPromise])
       .then((result) => {
+        console.log("RESULT ROUTE", result);
         res.json({ users: result[0], challenges: result[1] });
       })
       .catch((error) => {
@@ -86,18 +94,50 @@ module.exports = ({
         })
       );
   });
+  // router.post("/player/:id", async (req, res) => {
+  //   const {
+  //     challenger_id,
+  //     user_id,
+  //     location_id,
+  //     date,
+  //     challenge_message,
+  //     requestStatus,
+  //   } = req.body;
+
+  // getUserById(id)
+  //   .then((newChallenge) => {
+  //     // const sendChallenge = await
+  //     console.log("ADD USER FUNCTION", sendChallenge);
+  //     res.json(newChallenge);
+  //     // return sendChallenge;
+  //   })
+  //   addChallenge(
+  //         challenger_id,
+  //         user_id,
+  //         location_id,
+  //         date,
+  //         challenge_message,
+  //         requestStatus
+  //       );
+  //     .catch((err) =>
+  //       res.json({
+  //         error: err.message,
+  //       })
+  //     );
+  // });
+
   //TODO: make route for challenges GET and POST
-  router.get("/challenges", (req, res) => {
-    getChallengesByID()
-      .then((challenges) => {
-        res.json(challenges);
-      })
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
-  });
+  // router.get("/Pr", (req, res) => {
+  //   getChallengesByID(2)
+  //     .then((challenges) => {
+  //       res.json(challenges);
+  //     })
+  //     .catch((err) =>
+  //       res.json({
+  //         error: err.message,
+  //       })
+  //     );
+  // });
 
   return router;
 };

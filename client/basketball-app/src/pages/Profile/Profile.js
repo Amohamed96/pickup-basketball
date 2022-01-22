@@ -10,17 +10,21 @@ export default function Profile() {
   console.log("USER>>>>", user);
   const currentUser = localStorage.getItem("user");
   const [challenges, setChallenges] = useState([]);
-
+  // Promise with local storage and request
   useEffect(() => {
     console.log("CURRENT USER from LOCAL", currentUser);
     setUser(JSON.parse(currentUser));
   }, [currentUser]);
 
   useEffect(() => {
-    axios.get("/api/users/profile").then((res) => {
-      console.log("PROFILE RES DATA", res.data);
-      setChallenges(res.data.challenges);
-    });
+    setTimeout(() => {
+      axios
+        .get(`/api/users/profile/${JSON.parse(currentUser).id}`)
+        .then((res) => {
+          console.log("PROFILE RES DATA", res.data);
+          setChallenges(res.data.challenges);
+        });
+    }, 500);
   }, []);
   return (
     <>
@@ -48,9 +52,7 @@ export default function Profile() {
                     href="javascript:void(0)"
                     class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
                     data-abc="true"
-                  >
-                    Challenge
-                  </a>
+                  ></a>
                 ) : (
                   <></>
                 )}

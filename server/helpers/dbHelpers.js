@@ -122,9 +122,16 @@ module.exports = (db) => {
 
   // Add match to database.
 
-  const addMatch = (location_id, team_name, team_description, avatar) => {
+  const addMatch = (
+    match_date,
+    team1_id,
+    team2_id,
+    winner_id,
+    team1_score,
+    team2_score
+  ) => {
     const query = {
-      text: "INSERT INTO teams (match_date, team1_id, team2_id, winner_id, team1_score, team2_score) RETURNING *",
+      text: "INSERT INTO matches (match_date, team1_id, team2_id, winner_id, team1_score, team2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
       values: [
         match_date,
         team1_id,
@@ -141,10 +148,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getChallengesById = () => {
+  const getChallengesById = (user_id) => {
     const query = {
-      text: "SELECT * FROM challenge_request",
-      // values: [user_id],
+      text: "SELECT * FROM challenge_request WHERE user_id = $1",
+      values: [user_id],
     };
 
     return db
@@ -161,7 +168,7 @@ module.exports = (db) => {
     requestStatus
   ) => {
     const query = {
-      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date,challenge_message, requestStatus) RETURNING *",
+      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date, challenge_message, requestStatus) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       values: [
         challenger_id,
         user_id,
