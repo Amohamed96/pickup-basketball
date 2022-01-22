@@ -14,10 +14,23 @@ export default function ChallengeForm() {
   });
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState("");
+  const [user, setUser] = useState("");
   const [message, setMessage] = useState("");
   const [location, setLocation] = useState("");
+  const currentUser = localStorage.getItem("user");
+  const storeUserData = (e) => {
+    console.log("e TARGET VALUE", e.target.value);
+    setChallenge({ ...challenge, [e.target.name]: e.target.value });
+  };
 
+  useEffect(() => {
+    console.log("CURRENT USER from LOCAL", currentUser);
+
+    setUser(JSON.parse(currentUser));
+  }, [currentUser]);
   const handleChallenge = () => {
+    // Promise with local storage and request
+
     // if (
     //   !challenger_id ||
     //   !user_id ||
@@ -32,11 +45,11 @@ export default function ChallengeForm() {
     console.log("CHALLENGE *********--", challenge);
 
     axios
-      .post("http://localhost:3001/api/users/profile/2", challenge)
+      .post(`/api/users/player/${user.id}`, challenge)
       .then((result) => {
-        console.log("RESULTS CHALLENGE FORM>>", result.data);
+        console.log("RESULTS DATA CHALLENGE FORM>>", result.data);
         console.log("CHALLENGE FORM----->", challenge);
-        // setChallenge(result.data);
+        setChallenge(result.data);
         // localStorage.setItem("user", JSON.stringify(result.data));
         // setRedirect("/profile");
       })
@@ -55,12 +68,40 @@ export default function ChallengeForm() {
         {/* <a href="/">Challenge</a> */}
         {/* <form> */}
         <div>
-          <input type="text" placeholder="Message"></input>
+          <input
+            type="text"
+            name="challenge_message"
+            placeholder="Message"
+            onChange={storeUserData}
+          ></input>
         </div>
         <div>
-          <input type="text" placeholder="Location"></input>
+          <input
+            type="text"
+            name="location_id"
+            placeholder="Location"
+            onChange={storeUserData}
+          ></input>
         </div>
-        <button onClick={handleChallenge}>SEND CHALLENGE</button>
+        <div>
+          <input
+            type="text"
+            name="user_id"
+            placeholder="Who do you want to Challenge"
+            onChange={storeUserData}
+          ></input>
+        </div>
+        <div>
+          <input
+            type="text"
+            name="challenger_id"
+            placeholder="Who tf are you"
+            onChange={storeUserData}
+          ></input>
+        </div>
+        <button type="submit" onClick={handleChallenge}>
+          SEND CHALLENGE
+        </button>
         {/* </form> */}
       </div>
     </div>

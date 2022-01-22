@@ -31,7 +31,7 @@ export default function Home() {
       <Navbar users={users} />
       <Hero />
       <Games matches={matches} teams={teams} />
-      <Leaderboard users={users} teams={teams} />
+      <Leaderboard users={users} teams={teams} matches={matches} />
     </>
   );
 }
