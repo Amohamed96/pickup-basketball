@@ -25,6 +25,7 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   avatar VARCHAR(255)
+  /* chat-secret */
 );
 
 DROP TABLE IF EXISTS matches CASCADE; 
@@ -54,7 +55,9 @@ CREATE TABLE challenge_request (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
   date DATE NOT NULL,
-  status VARCHAR(255) NOT NULL
+  challenge_message VARCHAR(255),
+  request_status VARCHAR(255) NOT NULL 
+  /* accepted_at DATE declined_at DATE */
 );
 
 DROP TABLE IF EXISTS challenge_request_matches CASCADE;
