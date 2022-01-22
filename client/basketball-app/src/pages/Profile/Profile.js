@@ -13,13 +13,15 @@ export default function Profile() {
   // Promise with local storage and request
   useEffect(() => {
     console.log("CURRENT USER from LOCAL", currentUser);
+    console.log(" USER from LOCAL", user);
+
     setUser(JSON.parse(currentUser));
   }, [currentUser]);
 
   useEffect(() => {
     setTimeout(() => {
       axios
-        .get(`/api/users/profile/${JSON.parse(currentUser).id}`)
+        .get(`/api/users/player/${JSON.parse(currentUser).id}`)
         .then((res) => {
           console.log("PROFILE RES DATA", res.data);
           setChallenges(res.data.challenges);
@@ -81,7 +83,7 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          <ChallengesRecieved challenges={challenges} />
+          <ChallengesRecieved user={user} challenges={challenges} />
         </div>
       )}
     </>

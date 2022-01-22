@@ -9,7 +9,7 @@ export default function Player() {
   const [player, setPlayer] = useState("");
 
   const { id } = useParams();
-  console.log("ID >>>", id);
+  console.log("ID FROM PLAYER >>>", id);
 
   // const grabUser = () => {
 
@@ -17,7 +17,7 @@ export default function Player() {
 
   useEffect(() => {
     axios
-      .get(`/api/users/profile/${id}`)
+      .get(`/api/users/player/${id}`)
       .then((results) => {
         console.log(results.data);
         setPlayer(results.data);

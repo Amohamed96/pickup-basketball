@@ -4,7 +4,7 @@ INSERT INTO challenge_request (
   location_id,
   date,
   challenge_message,
-  requestStatus
+  request_status
 )
 VALUES 
   (1, 2, 1, '2022-01-20', 'Hey I challenge you!', 'true'),
