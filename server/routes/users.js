@@ -1,21 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {
-  getUserById,
-  getChallengesById,
-  addChallenge,
-} = require("../helpers/dbHelpers");
+
 //TODO OPTIMIZE FOR TEAMS
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 
-module.exports = ({
-  getUsers,
-  getUserByEmail,
-  addUser,
-  getUserById,
-  getChallengesById,
-  addChallenge,
-}) => {
+module.exports = ({ getUsers, getUserByEmail, addUser, getUserById }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
     getUsers()
@@ -32,42 +21,41 @@ module.exports = ({
   // GET USER BASED ON THEIR ID
 
   router.get(`/profile/:id`, (req, res) => {
-    const user_id = req.params.id;
-    console.log("USER ID ROUTE", user_id);
-    const usersPromise = getUserById(user_id);
-    const challengesPromise = getChallengesById(user_id);
-    Promise.all([usersPromise, challengesPromise])
-      .then((result) => {
-        console.log("RESULT ROUTE", result);
-        res.json({ users: result[0], challenges: result[1] });
+    const { id, users } = req.params;
+    console.log("REQUEST", req.params, id);
+    getUserById(id)
+      .then((users) => {
+        res.json(users);
       })
-      .catch((error) => {
-        console.log(`Error setting up the reset route: ${error}`);
-      });
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
   });
 
   router.post("/signup", (req, res) => {
     const { name, email, password, bio, avatar, team_id } = req.body;
 
-    getUserByEmail(email)
-      .then(async (user) => {
-        if (user) {
-          res.status(404).json({
-            msg: "Sorry, a user account with this email already exists",
-          });
-        } else {
-          const addPlayer = await addUser(
-            name,
-            email,
-            password,
-            bio,
-            avatar,
-            team_id
-          );
-          console.log("ADD USER FUNCTIOn", addPlayer);
-          return addPlayer;
-        }
-      })
+    getUserByEmail(email).then(async (user) => {
+      if (user) {
+        res.status(404).json({
+          msg: "Sorry, a user account with this email already exists",
+        });
+      } else {
+        const addPlayer = await addUser(
+          name,
+          email,
+          password,
+          bio,
+          avatar,
+          team_id
+        );
+        console.log("ADD USER FUNCTIOn", addPlayer);
+        return addPlayer;
+      }
+    });
+    secretKey = ""
       .then((newUser) => res.json(newUser))
       .catch((err) =>
         res.json({
@@ -94,50 +82,6 @@ module.exports = ({
         })
       );
   });
-  // router.post("/player/:id", async (req, res) => {
-  //   const {
-  //     challenger_id,
-  //     user_id,
-  //     location_id,
-  //     date,
-  //     challenge_message,
-  //     requestStatus,
-  //   } = req.body;
-
-  // getUserById(id)
-  //   .then((newChallenge) => {
-  //     // const sendChallenge = await
-  //     console.log("ADD USER FUNCTION", sendChallenge);
-  //     res.json(newChallenge);
-  //     // return sendChallenge;
-  //   })
-  //   addChallenge(
-  //         challenger_id,
-  //         user_id,
-  //         location_id,
-  //         date,
-  //         challenge_message,
-  //         requestStatus
-  //       );
-  //     .catch((err) =>
-  //       res.json({
-  //         error: err.message,
-  //       })
-  //     );
-  // });
-
-  //TODO: make route for challenges GET and POST
-  // router.get("/Pr", (req, res) => {
-  //   getChallengesByID(2)
-  //     .then((challenges) => {
-  //       res.json(challenges);
-  //     })
-  //     .catch((err) =>
-  //       res.json({
-  //         error: err.message,
-  //       })
-  //     );
-  // });
 
   return router;
 };
