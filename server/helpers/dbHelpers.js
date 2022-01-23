@@ -21,6 +21,31 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const CreateChatUser = () => {
+    const ExistingUsers = axios.get("/api/users", (req, res) => {
+      getUsers()
+        .then((users) => {
+          res.json(users);
+          console.log("CREATE CHAT USER WORKING>", users);
+        })
+        .catch((err) =>
+          res.json({
+            error: err.message,
+          })
+        );
+    });
+    users.map((user) => {
+      axios.put(
+        `https://api.chatengine.io/users/`,
+        {
+          username: user.name,
+          secret: generateRandomString(),
+        },
+        { headers: { "Private-Key": process.env.C_SECRETKEY } }
+      );
+    });
+  };
+
   const getUserByEmail = (email) => {
     const query = {
       text: `SELECT * FROM users WHERE email = $1`,
@@ -65,10 +90,10 @@ module.exports = (db) => {
               username: name,
               secret: generateRandomString(),
             },
-            { headers: { "Private-Key": process.env.CHATENGINE_SECRETKEY } }
+            { headers: { "Private-Key": process.env.C_SECRETKEY } }
           )
           .then((response) => {
-            console.log("RESPONSE FOR CHAT", response);
+            console.log("RESPONSE FOR CHAT", response.data);
           })
           .catch((err) => {
             console.log("CHAT ERROR>>", err);
@@ -227,5 +252,6 @@ module.exports = (db) => {
     addMatch,
     getChallengesById,
     addChallenge,
+    generateRandomString,
   };
 };
