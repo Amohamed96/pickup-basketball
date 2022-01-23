@@ -24,46 +24,14 @@ export default function ChallengeForm() {
   };
 
   useEffect(() => {
-    console.log("CURRENT USER from LOCAL", currentUser);
-
     setUser(JSON.parse(currentUser));
   }, [currentUser]);
   const handleChallenge = () => {
-    // Promise with local storage and request
-
-    // if (
-    //   !challenger_id ||
-    //   !user_id ||
-    //   !location_id ||
-    //   !date ||
-    //   !challenge_message ||
-    //   !requestStatus
-    // ) {
-    //   setError("Sorry, You must enter all data to continue");
-    //   return;
-    // }
-    console.log("CHALLENGE *********--", challenge);
     const headers = { "Content-Type": "application/json" };
     axios
-      .post(
-        `/api/users/player/${user.id}`,
-        challenge,
-        // {
-        //   challenger_id: 2,
-        //   user_id: 4,
-        //   location_id: 1,
-        //   date: null,
-        //   challenge_message: "LB TO AWAB",
-        //   request_status: null,
-        // },
-        { headers: headers }
-      )
+      .post(`/api/users/player/${user.id}`, challenge, { headers: headers })
       .then((result) => {
-        console.log("RESULTS DATA CHALLENGE FORM>>", result.data);
-        console.log("CHALLENGE FORM----->", challenge);
         setChallenge(result.data);
-        // localStorage.setItem("user", JSON.stringify(result.data));
-        // setRedirect("/profile");
       })
 
       .catch((err) => {

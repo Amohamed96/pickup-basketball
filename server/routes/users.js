@@ -4,6 +4,7 @@ const {
   getUserById,
   getChallengesById,
   addChallenge,
+  setChallengeById,
 } = require("../helpers/dbHelpers");
 //TODO OPTIMIZE FOR TEAMS
 const { getPostsByUsers } = require("../helpers/dataHelpers");
@@ -15,6 +16,7 @@ module.exports = ({
   getUserById,
   getChallengesById,
   addChallenge,
+  setChallengeById,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -129,6 +131,22 @@ module.exports = ({
       );
   });
 
+  router.put("/player/:id", async (req, res) => {
+    const { request_status, user_id, challenge_request_id } = req.body;
+    console.log("BODY PUT:", req.body);
+    return setChallengeById(request_status, user_id, challenge_request_id)
+      .then(() => {
+        // const sendChallenge = await
+        // res.json(newChallenge);
+        // return sendChallenge;
+      })
+
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
   //TODO: make route for challenges GET and POST
   // router.get("/Pr", (req, res) => {
   //   getChallengesByID(2)

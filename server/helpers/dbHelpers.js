@@ -159,6 +159,17 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
   };
+  const setChallengeById = (newStatus, user_id, challenge_request_id) => {
+    const query = {
+      text: "UPDATE challenge_request SET request_status=$1 WHERE user_id = $2 AND challenge_request.id = $3",
+      values: [newStatus, user_id, challenge_request_id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
   const addChallenge = (
     challenger_id,
     user_id,
@@ -201,5 +212,6 @@ module.exports = (db) => {
     addMatch,
     getChallengesById,
     addChallenge,
+    setChallengeById,
   };
 };
