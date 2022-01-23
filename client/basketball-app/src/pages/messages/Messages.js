@@ -11,13 +11,13 @@ export default function Messages() {
     console.log("CURRENT USER from LOCAL", currentUser);
     setUser(JSON.parse(currentUser));
     console.log(" USER from LOCAL", user);
-  }, []);
+  }, [currentUser]);
   return (
     <ChatEngine
       height="100vh"
       projectID="3fbd0f91-4a93-4897-8e55-06d72646a735"
-      userName="THEREALGOAT"
-      userSecret="12345"
+      userName={JSON.parse(currentUser).name}
+      userSecret={JSON.parse(currentUser).secret}
       renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
       onNewMessage={(chatId, message) => console.log("DATA>", chatId, message)}
     />

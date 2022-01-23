@@ -16,6 +16,8 @@ module.exports = ({
   getUserById,
   getChallengesById,
   addChallenge,
+  CreateChatUser,
+  generateRandomString,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -23,6 +25,7 @@ module.exports = ({
       .then((users) => {
         res.json(users);
       })
+
       .catch((err) =>
         res.json({
           error: err.message,
@@ -52,6 +55,7 @@ module.exports = ({
   });
 
   router.post("/signup", (req, res) => {
+    const secret = generateRandomString();
     const { name, email, password, bio, avatar, team_id } = req.body;
 
     getUserByEmail(email)
@@ -67,7 +71,8 @@ module.exports = ({
             password,
             bio,
             avatar,
-            team_id
+            team_id,
+            secret
           );
           console.log("ADD USER FUNCTIOn", addPlayer);
           return addPlayer;

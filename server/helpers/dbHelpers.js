@@ -22,28 +22,29 @@ module.exports = (db) => {
   };
 
   const CreateChatUser = () => {
-    const ExistingUsers = axios.get("/api/users", (req, res) => {
-      getUsers()
-        .then((users) => {
-          res.json(users);
-          console.log("CREATE CHAT USER WORKING>", users);
-        })
-        .catch((err) =>
-          res.json({
-            error: err.message,
-          })
-        );
-    });
-    users.map((user) => {
-      axios.put(
-        `https://api.chatengine.io/users/`,
-        {
-          username: user.name,
-          secret: generateRandomString(),
-        },
-        { headers: { "Private-Key": process.env.C_SECRETKEY } }
-      );
-    });
+    getUsers()
+      .then((users) => {
+        console.log("CREATE CHAT USER WORKING>", users);
+        return users;
+      })
+      .then((users) => {
+        users.map((user) => {
+          axios
+            .put(
+              `https://api.chatengine.io/users/`,
+              {
+                username: user.name,
+                secret: user.secret,
+              },
+              { headers: { "Private-Key": process.env.C_SECRETKEY } }
+            )
+            .then((response) => {
+              console.log("RESPONSE FOR CHAT", response.data);
+            });
+        });
+      })
+
+      .catch((err) => console.log("error: >>>>***", err));
   };
 
   const getUserByEmail = (email) => {
@@ -73,10 +74,18 @@ module.exports = (db) => {
   };
 
   //TODO: ADD OTHER VALUES
-  const addUser = async (name, email, password, bio, avatar, team_id) => {
+  const addUser = async (
+    name,
+    email,
+    password,
+    bio,
+    avatar,
+    team_id,
+    secret
+  ) => {
     const query = {
-      text: `INSERT INTO users (name, email, password, bio, avatar, team_id) VALUES ($1, $2, $3, $4, $5, $6) returning *`,
-      values: [name, email, password, bio, avatar, team_id],
+      text: `INSERT INTO users (name, email, password, bio, avatar, team_id, secret) VALUES ($1, $2, $3, $4, $5, $6, $7) returning *`,
+      values: [name, email, password, bio, avatar, team_id, secret],
     };
 
     return db
@@ -253,5 +262,6 @@ module.exports = (db) => {
     getChallengesById,
     addChallenge,
     generateRandomString,
+    CreateChatUser,
   };
 };

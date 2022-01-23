@@ -4,6 +4,10 @@ CHAT STYLES * {
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   letter-spacing: 0.5px;
 }
+.ce-chat-engine {
+  width: 100vw;
+  height: 80vh;
+}
 
 .ce-chat-list {
   background-color: rgb(240, 240, 240) !important;
@@ -25,7 +29,7 @@ CHAT STYLES * {
 
 .ce-chat-form-container {
   padding-bottom: 20px !important;
-  width: 70vw;
+  /* width: 70vw; */
 }
 
 .ce-text-input {
@@ -34,7 +38,7 @@ CHAT STYLES * {
 }
 
 .ce-primary-button {
-  border-radius: 6px !important;
+  border-radius: 6px;
   background-color: #7554a0 !important;
   position: relative;
   bottom: 1px;
