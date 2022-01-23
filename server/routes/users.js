@@ -16,6 +16,7 @@ module.exports = ({
   getUserById,
   getChallengesById,
   addChallenge,
+  generateRandomString
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {

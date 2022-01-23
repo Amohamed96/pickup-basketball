@@ -4,6 +4,7 @@ import "./Profile.css";
 import Navbar from "../../components/Navbar";
 import "./Profile.css";
 import ChallengesRecieved from "../../components/ChallengesRecieved";
+import { Card, Icon } from "semantic-ui-react";
 
 export default function Profile() {
   const [user, setUser] = useState({});
