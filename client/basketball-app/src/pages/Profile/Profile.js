@@ -83,7 +83,7 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          <ChallengesRecieved user={user} challenges={challenges} />
+          <ChallengesRecieved users={user} challenges={challenges} />
         </div>
       )}
     </>
