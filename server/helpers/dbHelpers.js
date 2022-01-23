@@ -1,4 +1,15 @@
+const axios = require("axios");
 module.exports = (db) => {
+  const generateRandomString = function () {
+    let string = "";
+    const chars =
+      "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    for (let i = 0; i <= 6; i++) {
+      string += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return string;
+  };
+
   const getUsers = () => {
     const query = {
       text: "SELECT * FROM users",
@@ -47,6 +58,21 @@ module.exports = (db) => {
       .query(query)
       .then((result) => {
         console.log("DB HELPERS RESULT >>>", result);
+        axios
+          .put(
+            `https://api.chatengine.io/users/`,
+            {
+              username: name,
+              secret: generateRandomString(),
+            },
+            { headers: { "Private-Key": process.env.CHATENGINE_SECRETKEY } }
+          )
+          .then((response) => {
+            console.log("RESPONSE FOR CHAT", response);
+          })
+          .catch((err) => {
+            console.log("CHAT ERROR>>", err);
+          });
         return result.rows[0];
       })
       .catch((err) => err);

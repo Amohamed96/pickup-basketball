@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
 
 //TODO OPTIMIZE FOR TEAMS
 const {
@@ -53,25 +54,25 @@ module.exports = ({
   router.post("/signup", (req, res) => {
     const { name, email, password, bio, avatar, team_id } = req.body;
 
-    getUserByEmail(email).then(async (user) => {
-      if (user) {
-        res.status(404).json({
-          msg: "Sorry, a user account with this email already exists",
-        });
-      } else {
-        const addPlayer = await addUser(
-          name,
-          email,
-          password,
-          bio,
-          avatar,
-          team_id
-        );
-        console.log("ADD USER FUNCTIOn", addPlayer);
-        return addPlayer;
-      }
-    });
-    secretKey = ""
+    getUserByEmail(email)
+      .then(async (user) => {
+        if (user) {
+          res.status(404).json({
+            msg: "Sorry, a user account with this email already exists",
+          });
+        } else {
+          const addPlayer = await addUser(
+            name,
+            email,
+            password,
+            bio,
+            avatar,
+            team_id
+          );
+          console.log("ADD USER FUNCTIOn", addPlayer);
+          return addPlayer;
+        }
+      })
       .then((newUser) => res.json(newUser))
       .catch((err) =>
         res.json({
