@@ -155,9 +155,19 @@ module.exports = (db) => {
 
   //GET MATCHES
 
-  const getMatches = () => {
+  const getMatchesTeam = () => {
     const query = {
-      text: "SELECT * FROM matches",
+      text: "SELECT * FROM team_matches",
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+  const getMatchesPlayer = () => {
+    const query = {
+      text: "SELECT * FROM player_matches",
     };
 
     return db
@@ -286,7 +296,8 @@ module.exports = (db) => {
     getTeams,
     getTeamByName,
     addTeam,
-    getMatches,
+    getMatchesTeam,
+    getMatchesPlayer,
     getMatchById,
     addMatchTeam,
     addMatchPlayer,

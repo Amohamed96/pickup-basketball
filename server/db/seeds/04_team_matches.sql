@@ -1,4 +1,4 @@
-INSERT INTO matches (
+INSERT INTO team_matches(
   date,
   team1_id,
   team2_id,

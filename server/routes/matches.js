@@ -9,15 +9,27 @@ const {
 ////
 
 module.exports = ({
-  getMatches,
+  getMatchesTeam,
+  getMatchesPlayer,
   getMatchById,
   addMatch,
   addMatchPlayer,
   addMatchTeam,
 }) => {
   /* GET matches listing. */
-  router.get("/", (req, res) => {
-    getMatches()
+  router.get("/team", (req, res) => {
+    getMatchesTeam()
+      .then((matches) => {
+        res.json(matches);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+  router.get("/player", (req, res) => {
+    getMatchesPlayer()
       .then((matches) => {
         res.json(matches);
       })
