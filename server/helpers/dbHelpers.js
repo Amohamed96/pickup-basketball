@@ -182,8 +182,8 @@ module.exports = (db) => {
 
   // Add match to database.
 
-  const addMatch = (
-    match_date,
+  const addMatchTeam = (
+    date,
     team1_id,
     team2_id,
     winner_id,
@@ -191,14 +191,33 @@ module.exports = (db) => {
     team2_score
   ) => {
     const query = {
-      text: "INSERT INTO matches (match_date, team1_id, team2_id, winner_id, team1_score, team2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
+      text: "INSERT INTO team_matches (date, team1_id, team2_id, winner_id, team1_score, team2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
+      values: [date, team1_id, team2_id, winner_id, team1_score, team2_score],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
+
+  const addMatchPlayer = (
+    date,
+    player1_id,
+    player2_id,
+    winner_id,
+    player1_score,
+    player2_score
+  ) => {
+    const query = {
+      text: "INSERT INTO player_matches (date, player1_id, player2_id, winner_id, player1_score, player2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
       values: [
-        match_date,
-        team1_id,
-        team2_id,
+        date,
+        player1_id,
+        player2_id,
         winner_id,
-        team1_score,
-        team2_score,
+        player1_score,
+        player2_score,
       ],
     };
 
@@ -269,7 +288,8 @@ module.exports = (db) => {
     addTeam,
     getMatches,
     getMatchById,
-    addMatch,
+    addMatchTeam,
+    addMatchPlayer,
     getChallengesById,
     addChallenge,
     setChallengeById,

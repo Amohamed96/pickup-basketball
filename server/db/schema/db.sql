@@ -28,8 +28,8 @@ CREATE TABLE users (
   secret VARCHAR(255)
 );
 
-DROP TABLE IF EXISTS matches CASCADE; 
-CREATE TABLE matches (
+DROP TABLE IF EXISTS team_matches CASCADE; 
+CREATE TABLE team_matches (
   id SERIAL PRIMARY KEY NOT NULL,
   date DATE NOT NULL,
   team1_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
@@ -37,6 +37,17 @@ CREATE TABLE matches (
   winner_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
   team1_score VARCHAR(255) NOT NULL,
   team2_score VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS player_matches CASCADE; 
+CREATE TABLE player_matches (
+  id SERIAL PRIMARY KEY NOT NULL,
+  date DATE NOT NULL,
+  player1_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
+  player2_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
+  winner_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
+  player1_score VARCHAR(255) NOT NULL,
+  player2_score VARCHAR(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS match_stats CASCADE; 
