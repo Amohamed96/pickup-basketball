@@ -6,7 +6,7 @@ export default function Leaderboard(props) {
   const [redirect, setRedirect] = useState("");
   const [user, setUser] = useState("");
 
-  const { users, matches, teams } = props;
+  const { users, matchesPlayer, teams } = props;
 
   const getTeam = function (teamId) {
     //filter through array of teams
@@ -20,7 +20,7 @@ export default function Leaderboard(props) {
   const currentUser = localStorage.getItem("user");
   console.log(" USERS from LB", users);
   console.log("TEAMS  from LB", teams);
-  console.log("MATCHES  from LB", matches);
+  console.log("MATCHES PLAYER from LB", matchesPlayer);
 
   useEffect(() => {
     setUser(JSON.parse(currentUser));
@@ -29,18 +29,31 @@ export default function Leaderboard(props) {
   const goToPlayer = function () {
     setRedirect(`/player/${user.id}`);
   };
+
   const totalUserWins = function (player) {
     let userWins = 0;
-    let userLosses = 0;
-    setTimeout(() => {
-      matches.map((matchMap) => (matches = matchMap));
-      if (player.team_id === matches.winner_id) {
+    matchesPlayer.map((match) => {
+      if (player.id === match.winner_id) {
         userWins++;
-        console.log("USER WINS!!!!", userWins);
+        console.log("player winner ID", player.id);
+        console.log("match winner ID", match.winner_id);
+        console.log("user wins", userWins);
       }
-      userLosses++;
-      console.log("USER WINS!!!!", userLosses);
-    }, 100);
+    });
+    return userWins;
+  };
+
+  const totalUserLosses = function (player) {
+    let userLosses = 0;
+    matchesPlayer.map((match) => {
+      if (
+        (player.id !== match.winner_id && player.id === match.player1_id) ||
+        player.id === match.player2_id
+      ) {
+        userLosses++;
+      }
+    });
+    return userLosses;
   };
 
   return redirect ? (
@@ -74,7 +87,7 @@ export default function Leaderboard(props) {
                       </td>
                       <td>38</td>
                       <td>{totalUserWins(player)}</td>
-                      <td>9</td>
+                      <td>{totalUserLosses(player)}</td>
                       <td>
                         <img src={getTeam(player.team_id).avatar} />
                       </td>
