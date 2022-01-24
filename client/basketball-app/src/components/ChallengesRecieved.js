@@ -30,7 +30,7 @@ export default function ChallengesRecieved(props) {
   const { challenges } = props;
   const [error, setError] = useState("");
   const [users, setUsers] = useState("");
-  const [response, setResponse] = useState(false);
+  const [response, setResponse] = useState("pending");
   let response_message = "";
 
   // useEffect(() => {
@@ -49,7 +49,7 @@ export default function ChallengesRecieved(props) {
   }, []);
   console.log("ALL USERS *********--", users);
   console.log("Challenges challenges *********--", challenges);
-  const handleStatus = (challenge, newStatus) => {
+  const handleStatus = (challenge, newStatus = "pending") => {
     console.log("CHALLENGE *********--", challenge);
     const headers = { "Content-Type": "application/json" };
     axios
@@ -67,12 +67,10 @@ export default function ChallengesRecieved(props) {
       .then((result) => {
         // localStorage.setItem("user", JSON.stringify(result.data));
         // setRedirect("/profile");
-        setResponse(true);
-
-        if (newStatus) {
-          response_message = "You have accepted";
-        } else {
+        if (!newStatus) {
           response_message = "You have declined";
+        } else {
+          response_message = "You have accepted";
         }
       })
 
