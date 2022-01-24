@@ -26,7 +26,7 @@ export default function Profile() {
           console.log("PROFILE RES DATA", res.data);
           setChallenges(res.data.challenges);
         });
-    }, 500);
+    }, 100);
   }, []);
   return (
     <>

@@ -27,22 +27,28 @@ const ButtonActions = (props) => {
 };
 
 export default function ChallengesRecieved(props) {
-  const { users, challenges } = props;
+  const { challenges } = props;
   const [error, setError] = useState("");
-  const [user, setUser] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
+  const [users, setUsers] = useState("");
   const [response, setResponse] = useState(false);
-  const currentUser = localStorage.getItem("user");
   let response_message = "";
-  console.log("USERS *********--", users);
 
+  // useEffect(() => {
+  //   // setTimeout(() => {
+  //   axios.get("http://localhost:3000/api/home").then((res) => {
+  //     setUser(res.data);
+  //     console.log("HOME RES DATA----->", res.data);
+  //   });
+  //   // }, 100);
+  // });
   useEffect(() => {
     axios.get("http://localhost:3000/api/users").then((res) => {
-      setAllUsers(res.data);
-      console.log("HOME RES DATA----->", res.data);
+      setUsers(res.data);
+      console.log("RES DATA CH", res.data);
     });
-  });
-
+  }, []);
+  console.log("ALL USERS *********--", users);
+  console.log("Challenges challenges *********--", challenges);
   const handleStatus = (challenge, newStatus) => {
     console.log("CHALLENGE *********--", challenge);
     const headers = { "Content-Type": "application/json" };
@@ -74,8 +80,6 @@ export default function ChallengesRecieved(props) {
         setError("ERROR");
       });
   };
-
-  console.log("USERS CH===>", users);
   console.log("USERS CHALLENGES!===>", challenges);
 
   return (
@@ -88,9 +92,11 @@ export default function ChallengesRecieved(props) {
                 <Image
                   floated="right"
                   size="mini"
-                  src={allUsers[challenge.challenger_id].avatar}
+                  src={users[challenge.challenger_id].avatar}
                 />
-                <Card.Header>Name goes here</Card.Header>
+                <Card.Header>
+                  CHALLENGE FROM:{users[challenge.challenger_id].name}
+                </Card.Header>
                 <Card.Meta>Location goes here</Card.Meta>
                 <Card.Description>
                   <strong>{challenge.challenge_message}</strong>
