@@ -21,7 +21,7 @@ export default function Home() {
     axios.get("http://localhost:3000/api/home").then((res) => {
       setUsers(res.data.users);
       setTeams(res.data.teams);
-      setMatches(res.data.matches);
+      setMatches(res.data.matchesTeam);
       console.log("HOME RES DATA----->", res.data);
     });
   });

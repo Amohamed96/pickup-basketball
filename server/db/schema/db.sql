@@ -67,8 +67,9 @@ CREATE TABLE challenge_request (
   location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
   date DATE,
   challenge_message VARCHAR(255),
-  request_status VARCHAR(255) 
-  /* accepted_at DATE declined_at DATE */
+  request_status VARCHAR(255)
+  accepted_at DATE,
+  declined_at DATE 
 );
 
 DROP TABLE IF EXISTS challenge_request_matches CASCADE;

@@ -68,6 +68,7 @@ export default function ChallengesRecieved(props) {
         // localStorage.setItem("user", JSON.stringify(result.data));
         // setRedirect("/profile");
         setResponse(true);
+
         if (newStatus) {
           response_message = "You have accepted";
         } else {
@@ -92,10 +93,10 @@ export default function ChallengesRecieved(props) {
                 <Image
                   floated="right"
                   size="mini"
-                  src={users[challenge.challenger_id].avatar}
+                  src={users[challenge.challenger_id - 1].avatar}
                 />
                 <Card.Header>
-                  CHALLENGE FROM:{users[challenge.challenger_id].name}
+                  CHALLENGE FROM:{users[challenge.challenger_id - 1].name}
                 </Card.Header>
                 <Card.Meta>Location goes here</Card.Meta>
                 <Card.Description>
