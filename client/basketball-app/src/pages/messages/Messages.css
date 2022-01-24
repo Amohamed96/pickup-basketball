@@ -6,7 +6,8 @@ CHAT STYLES * {
 }
 .ce-chat-engine {
   width: 100vw;
-  height: 80vh;
+  height: 90vh;
+  margin-top: 0px;
 }
 
 .ce-chat-list {
