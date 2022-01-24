@@ -1,4 +1,15 @@
+const axios = require("axios");
 module.exports = (db) => {
+  const generateRandomString = function () {
+    let string = "";
+    const chars =
+      "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    for (let i = 0; i <= 6; i++) {
+      string += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return string;
+  };
+
   const getUsers = () => {
     const query = {
       text: "SELECT * FROM users",
@@ -8,6 +19,32 @@ module.exports = (db) => {
       .query(query)
       .then((result) => result.rows)
       .catch((err) => err);
+  };
+
+  const CreateChatUser = () => {
+    getUsers()
+      .then((users) => {
+        console.log("CREATE CHAT USER WORKING>", users);
+        return users;
+      })
+      .then((users) => {
+        users.map((user) => {
+          axios
+            .put(
+              `https://api.chatengine.io/users/`,
+              {
+                username: user.name,
+                secret: user.secret,
+              },
+              { headers: { "Private-Key": process.env.C_SECRETKEY } }
+            )
+            .then((response) => {
+              console.log("RESPONSE FOR CHAT", response.data);
+            });
+        });
+      })
+
+      .catch((err) => console.log("error: >>>>***", err));
   };
 
   const getUserByEmail = (email) => {
@@ -37,16 +74,39 @@ module.exports = (db) => {
   };
 
   //TODO: ADD OTHER VALUES
-  const addUser = async (name, email, password, bio, avatar, team_id) => {
+  const addUser = async (
+    name,
+    email,
+    password,
+    bio,
+    avatar,
+    team_id,
+    secret
+  ) => {
     const query = {
-      text: `INSERT INTO users (name, email, password, bio, avatar, team_id) VALUES ($1, $2, $3, $4, $5, $6) returning *`,
-      values: [name, email, password, bio, avatar, team_id],
+      text: `INSERT INTO users (name, email, password, bio, avatar, team_id, secret) VALUES ($1, $2, $3, $4, $5, $6, $7) returning *`,
+      values: [name, email, password, bio, avatar, team_id, secret],
     };
 
     return db
       .query(query)
       .then((result) => {
         console.log("DB HELPERS RESULT >>>", result);
+        axios
+          .put(
+            `https://api.chatengine.io/users/`,
+            {
+              username: name,
+              secret: generateRandomString(),
+            },
+            { headers: { "Private-Key": process.env.C_SECRETKEY } }
+          )
+          .then((response) => {
+            console.log("RESPONSE FOR CHAT", response.data);
+          })
+          .catch((err) => {
+            console.log("CHAT ERROR>>", err);
+          });
         return result.rows[0];
       })
       .catch((err) => err);
@@ -213,5 +273,7 @@ module.exports = (db) => {
     getChallengesById,
     addChallenge,
     setChallengeById,
+    generateRandomString,
+    CreateChatUser,
   };
 };

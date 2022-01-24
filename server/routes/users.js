@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
+
+//TODO OPTIMIZE FOR TEAMS
 const {
-  getUserById,
   getChallengesById,
+  getUserById,
   addChallenge,
   setChallengeById,
 } = require("../helpers/dbHelpers");
-//TODO OPTIMIZE FOR TEAMS
-const { getPostsByUsers } = require("../helpers/dataHelpers");
 
 module.exports = ({
   getUsers,
@@ -17,6 +18,8 @@ module.exports = ({
   getChallengesById,
   addChallenge,
   setChallengeById,
+  CreateChatUser,
+  generateRandomString,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -24,6 +27,7 @@ module.exports = ({
       .then((users) => {
         res.json(users);
       })
+
       .catch((err) =>
         res.json({
           error: err.message,
@@ -45,12 +49,15 @@ module.exports = ({
 
         res.json({ users: result[0], challenges: result[1] });
       })
-      .catch((error) => {
-        console.log(`Error setting up the reset route: ${error}`);
-      });
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
   });
 
   router.post("/signup", (req, res) => {
+    const secret = generateRandomString();
     const { name, email, password, bio, avatar, team_id } = req.body;
 
     getUserByEmail(email)
@@ -66,7 +73,8 @@ module.exports = ({
             password,
             bio,
             avatar,
-            team_id
+            team_id,
+            secret
           );
           console.log("ADD USER FUNCTIOn", addPlayer);
           return addPlayer;

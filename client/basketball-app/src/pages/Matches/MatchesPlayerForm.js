@@ -124,6 +124,7 @@ export default function MatchesPlayerForm() {
               <label for="tab-1">Already Member?</label>
             </div>
           </div>
+          ADD MATCH (o..)
         </div>
       </div>
     </div>

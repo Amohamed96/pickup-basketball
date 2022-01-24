@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Styles/Navbar.css";
 
 const logout = function () {
   localStorage.clear();
 };
-export default function Navbar(props) {
-  const user = props.user;
+
+export default function Navbar() {
+  const currentUser = localStorage.getItem("user");
+  const [user, setUser] = useState({});
+  console.log("NAV USER", user);
+
+  useEffect(() => {
+    console.log("CURRENT USER from LOCAL", currentUser);
+    console.log(" USER from LOCAL", user);
+
+    setUser(JSON.parse(currentUser));
+  }, [currentUser]);
+
   return (
     <>
       <a href="/" class="logo" target="_blank">
@@ -24,7 +35,7 @@ export default function Navbar(props) {
           <li>
             <a href="/">Home</a>
           </li>
-          {!user ? (
+          {user ? (
             <>
               <li>
                 <a href="/profile">Profile</a>
@@ -36,6 +47,9 @@ export default function Navbar(props) {
                 <a href="/login" onClick={() => logout()}>
                   Logout
                 </a>
+              </li>
+              <li>
+                <a href="/matches-player">Create Match</a>
               </li>
             </>
           ) : (

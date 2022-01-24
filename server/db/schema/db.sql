@@ -24,8 +24,8 @@ CREATE TABLE users (
   bio VARCHAR(255),
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  avatar VARCHAR(255)
-  /* chat-secret */
+  avatar VARCHAR(255),
+  secret VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS matches CASCADE; 

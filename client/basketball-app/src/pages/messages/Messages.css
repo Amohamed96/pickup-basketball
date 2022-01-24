@@ -1,9 +1,12 @@
-/* CHAT STYLES */
-* {
+CHAT STYLES * {
   font-family: Avenir, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   letter-spacing: 0.5px;
+}
+.ce-chat-engine {
+  width: 100vw;
+  height: 80vh;
 }
 
 .ce-chat-list {
@@ -26,6 +29,7 @@
 
 .ce-chat-form-container {
   padding-bottom: 20px !important;
+  /* width: 70vw; */
 }
 
 .ce-text-input {
@@ -34,7 +38,7 @@
 }
 
 .ce-primary-button {
-  border-radius: 6px !important;
+  border-radius: 6px;
   background-color: #7554a0 !important;
   position: relative;
   bottom: 1px;
