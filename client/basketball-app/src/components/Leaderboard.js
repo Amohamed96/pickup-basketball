@@ -26,8 +26,8 @@ export default function Leaderboard(props) {
     setUser(JSON.parse(currentUser));
   }, [currentUser]);
 
-  const goToPlayer = function () {
-    setRedirect(`/player/${user.id}`);
+  const goToPlayer = function (playerId) {
+    return setRedirect(`/player/${playerId}`);
   };
 
   const totalUserWins = function (player) {
@@ -56,6 +56,10 @@ export default function Leaderboard(props) {
     return userLosses;
   };
 
+  // const playerRating = function (player) {
+  //   const rating = userWins / userWins;
+  // };
+
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
@@ -81,7 +85,12 @@ export default function Leaderboard(props) {
                       <td class="text-left number">
                         1<i class="fa fa-caret-up" aria-hidden="true"></i>
                       </td>
-                      <td class="text-left" onClick={goToPlayer}>
+                      <td
+                        class="text-left"
+                        onClick={() => {
+                          goToPlayer(player.id);
+                        }}
+                      >
                         <img src={player.avatar} alt="Profile Pic" />
                         <span>{player.name}</span>
                       </td>

@@ -3,7 +3,8 @@ import "./Styles/LoginForm.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-export default function ChallengeForm() {
+export default function ChallengeForm(props) {
+  const { player } = props;
   const [challenge, setChallenge] = useState({
     challenger_id: null,
     user_id: null,
@@ -17,17 +18,25 @@ export default function ChallengeForm() {
   const [user, setUser] = useState("");
   const [message, setMessage] = useState("");
   const [location, setLocation] = useState("");
-  const currentUser = localStorage.getItem("user");
   const storeUserData = (e) => {
     console.log("e TARGET VALUE", e.target.value);
     setChallenge({ ...challenge, [e.target.name]: e.target.value });
   };
-
   useEffect(() => {
-    setUser(JSON.parse(currentUser));
-  }, [currentUser]);
+    const currentUser = localStorage.getItem("user");
+    const parsedUser = JSON.parse(currentUser);
+    setUser(parsedUser);
+    console.log("P ID", player.id);
+    setChallenge({
+      ...challenge,
+      challenger_id: parsedUser.id,
+      user_id: player.id,
+      date: new Date().toLocaleDateString("en-CA"),
+    });
+  }, [player]);
   const handleChallenge = () => {
     const headers = { "Content-Type": "application/json" };
+    console.log("challenge form!!!!", challenge);
     axios
       .post(`/api/users/player/${user.id}`, challenge, { headers: headers })
       .then((result) => {
@@ -63,7 +72,7 @@ export default function ChallengeForm() {
             onChange={storeUserData}
           ></input>
         </div>
-        <div>
+        {/* <div>
           <input
             type="text"
             name="user_id"
@@ -73,12 +82,12 @@ export default function ChallengeForm() {
         </div>
         <div>
           <input
-            type="text"
+            type="hidden"
             name="challenger_id"
             placeholder="Who are you"
-            onChange={storeUserData}
+            value={user.id}
           ></input>
-        </div>
+        </div> */}
         <button type="submit" onClick={handleChallenge}>
           SEND CHALLENGE
         </button>

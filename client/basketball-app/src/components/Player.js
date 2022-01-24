@@ -19,8 +19,8 @@ export default function Player() {
     axios
       .get(`/api/users/player/${id}`)
       .then((results) => {
-        console.log(results.data);
-        setPlayer(results.data);
+        console.log("RES PLAYER!", results.data.users);
+        setPlayer(results.data.users);
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +63,7 @@ export default function Player() {
                   <h3 class="m-b-0 font-light">23</h3>
                   <small> Losses</small>
                 </div>
-                <ChallengeForm />
+                <ChallengeForm player={player} />
 
                 <div className="vid">
                   <iframe

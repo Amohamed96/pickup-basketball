@@ -67,11 +67,6 @@ export default function ChallengesRecieved(props) {
       .then((result) => {
         // localStorage.setItem("user", JSON.stringify(result.data));
         // setRedirect("/profile");
-        if (!newStatus) {
-          response_message = "You have declined";
-        } else {
-          response_message = "You have accepted";
-        }
       })
 
       .catch((err) => {
@@ -101,11 +96,17 @@ export default function ChallengesRecieved(props) {
                   <strong>{challenge.challenge_message}</strong>
                 </Card.Description>
               </Card.Content>
-              {challenge.request_status && (
+              {challenge.request_status === null && (
                 <ButtonActions
                   challenge={challenge}
                   handleStatus={handleStatus}
                 />
+              )}
+              {challenge.request_status === "true" && (
+                <span>You accepted this challenge</span>
+              )}
+              {challenge.request_status === "false" && (
+                <span>You declined this challenge</span>
               )}
             </Card>
           </Card.Group>
