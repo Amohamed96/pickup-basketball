@@ -33,10 +33,10 @@ export default function Leaderboard(props) {
   const totalUserWins = function (player) {
     let userWins = 0;
     matchesPlayer.map((match) => {
-      if (player.id === match.winner_id) {
+      if (player.name === match.winner_name) {
         userWins++;
-        console.log("player winner ID", player.id);
-        console.log("match winner ID", match.winner_id);
+        console.log("player winner name", player.name);
+        console.log("match winner name", match.winner_name);
         console.log("user wins", userWins);
       }
     });
@@ -47,8 +47,9 @@ export default function Leaderboard(props) {
     let userLosses = 0;
     matchesPlayer.map((match) => {
       if (
-        (player.id !== match.winner_id && player.id === match.player1_id) ||
-        player.id === match.player2_id
+        (player.name !== match.winner_name &&
+          player.name === match.player1_name) ||
+        player.name === match.player2_id
       ) {
         userLosses++;
       }
@@ -59,7 +60,7 @@ export default function Leaderboard(props) {
   const totalTeamWins = function (team) {
     let teamWins = 0;
     matchesTeam.map((match) => {
-      if (team.id === match.winner_id) {
+      if (team.team_name === match.winner_name) {
         teamWins++;
       }
     });
@@ -70,7 +71,8 @@ export default function Leaderboard(props) {
     let teamLosses = 0;
     matchesTeam.map((match) => {
       if (
-        (team.id !== match.winner_id && team.id === match.team1_id) ||
+        (team.team_name !== match.winner_name &&
+          team.team_name === match.team1_name) ||
         team.id === match.team2_id
       ) {
         teamLosses++;
@@ -90,6 +92,7 @@ export default function Leaderboard(props) {
     );
     return rating;
   };
+
   const mappedUsers = users
     .map((player) => {
       const mapPD = { ...player };

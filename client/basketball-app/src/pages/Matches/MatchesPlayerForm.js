@@ -7,11 +7,11 @@ import { Redirect } from "react-router-dom";
 
 export default function MatchesPlayerForm() {
   const [matches, setMatches] = useState({
-    player1_id: null,
-    player2_id: null,
+    player1_name: null,
+    player2_name: null,
     player1_score: null,
     player2_score: null,
-    winner_id: null,
+    winner_name: null,
   });
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState("");
@@ -47,12 +47,12 @@ export default function MatchesPlayerForm() {
           <div className="sign-in-htm">
             <div className="group">
               <label for="user" className="label">
-                challenger_id:
+                Challenger:
               </label>
               <input
-                name="player1_id"
+                name="player1_name"
                 id="user"
-                type="challenger_id"
+                type="challenger"
                 className="input"
                 placeholder="Challenger"
                 onChange={storeUserData}
@@ -60,10 +60,10 @@ export default function MatchesPlayerForm() {
             </div>
             <div className="group">
               <label for="pass" className="label">
-                user_id:
+                Opponent
               </label>
               <input
-                name="player2_id"
+                name="player2_name"
                 id="pass"
                 type="user_id"
                 className="input"
@@ -90,7 +90,7 @@ export default function MatchesPlayerForm() {
                 onChange={storeUserData}
               />
               <input
-                name="winner_id"
+                name="winner_name"
                 id="pass"
                 type="user_id"
                 className="input"

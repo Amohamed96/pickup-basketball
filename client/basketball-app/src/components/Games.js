@@ -5,32 +5,28 @@ export default function Games(props) {
   const { matchesTeam, teams } = props;
 
   const arrayMatchesTeam = Object.keys(matchesTeam).map((match) => {
-    const teamOneID = matchesTeam[match].team1_id;
-    const teamTwoID = matchesTeam[match].team2_id;
+    const teamOneName = matchesTeam[match].team1_name;
+    const teamTwoName = matchesTeam[match].team2_name;
     console.log("MATCHES Team.DATE------>", matchesTeam[0].date);
     const winnerBanner = "--";
-    if (teams[teamOneID - 1].id === matchesTeam[0].winner_id) {
+    if (teamOneName === matchesTeam[0].winner_name) {
     } else {
     }
     return (
       <div class="slide">
-        {/* {matchesTeam[teamOneID].date} */}
-        <img
-          className="logo-team-bar"
-          src={teams[teamOneID - 1].avatar}
-          alt=""
-        />
+        {/* {matchesTeam[teamOneName].date} */}
+        <img className="logo-team-bar" src={teamOneName.avatar} alt="" />
         <div class="slide">
-          {teams[teamOneID - 1].team_name}--
+          {teamOneName}--
           {matchesTeam[match].team1_score}
         </div>
         <img
           className="logo-team-bar"
-          src={teams[teamTwoID - 1].avatar}
+          src={teams[teamTwoName - 1].avatar}
           alt=""
         />
         <div class="slide">
-          {teams[teamTwoID - 1].team_name}--
+          {teams[teamTwoName - 1].team_name}--
           {matchesTeam[match].team2_score}
         </div>
       </div>

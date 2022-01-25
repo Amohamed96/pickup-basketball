@@ -41,14 +41,14 @@ module.exports = ({
   });
 
   router.post("/team", (req, res) => {
-    const { team1_id, team2_id, winner_id, team1_score, team2_score } =
+    const { team1_name, team2_name, winner_name, team1_score, team2_score } =
       req.body;
     const matchDateT = new Date();
     addMatchTeam(
       matchDateT,
-      team1_id,
-      team2_id,
-      winner_id,
+      team1_name,
+      team2_name,
+      winner_name,
       team1_score,
       team2_score
     )
@@ -64,14 +64,19 @@ module.exports = ({
   });
 
   router.post("/player", (req, res) => {
-    const { player1_id, player2_id, winner_id, player1_score, player2_score } =
-      req.body;
+    const {
+      player1_name,
+      player2_name,
+      winner_name,
+      player1_score,
+      player2_score,
+    } = req.body;
     const matchDateP = new Date();
     addMatchPlayer(
       matchDateP,
-      player1_id,
-      player2_id,
-      winner_id,
+      player1_name,
+      player2_name,
+      winner_name,
       player1_score,
       player2_score
     )
