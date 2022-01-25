@@ -40,7 +40,7 @@ export default function MatchesPlayerForm() {
           1 v 1
         </label>
         <input id="tab-2" type="radio" name="tab" className="sign-up" />
-        <label for="tab-2" className="tab">
+        <label for="tab-2" href="/matches-teams" className="tab">
           <a href="/matches-team">Teams</a>
         </label>
         <div className="login-form">

@@ -10,7 +10,6 @@ export default function MatchesPlayer() {
       <div className="register">
         <MatchesPlayerForm />
       </div>
-      <a href="/matches-team">Teams</a>
     </div>
   );
 }

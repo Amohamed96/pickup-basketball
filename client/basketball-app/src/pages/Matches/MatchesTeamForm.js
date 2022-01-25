@@ -35,16 +35,16 @@ export default function MatchesPlayerForm() {
     <div className="login-wrap">
       <span>{error}</span>
       <div className="login-html">
-        <input id="tab-1" type="radio" name="tab" className="sign-in" checked />
-        <label for="tab-1" href="/login" className="tab">
-          1 v 1
+        <input id="tab-1" type="radio" name="tab" className="sign-in" />
+        <label for="tab-1" href="/matches-player" className="tab">
+          <a href="/matches-player">1 V 1</a>
         </label>
-        <input id="tab-2" type="radio" name="tab" className="sign-up" />
-        <label for="tab-2" className="tab">
-          <a href="/matches-team">Teams</a>
+        <input id="tab-2" type="radio" name="tab" className="sign-up" checked />
+        <label for="tab-2" href="/matches-teams" className="tab">
+          Teams
         </label>
         <div className="login-form">
-          <div className="sign-in-htm">
+          <div className="sign-up-htm">
             <div className="group">
               <label for="user" className="label">
                 Team 1
