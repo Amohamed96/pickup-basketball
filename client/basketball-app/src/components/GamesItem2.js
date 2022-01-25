@@ -1,19 +1,22 @@
-import React from "react";
-
-export default function GamesItem(props) {
-  const arrayMatches = Object.keys(matches).map((match) => {
-    const { matches, teams } = props;
-    const teamTwoID = matches[match].team2_id;
-    return (
-      <div>
-        <img
-          src={teams[teamTwoID - 1].avatar}
-          height="100"
-          width="250"
-          alt=""
-        />
-        TEAM 2
-      </div>
-    );
+const totalTeamWins = function (team) {
+  let teamWins = 0;
+  matchesteam.map((match) => {
+    if (team.id === match.winner_id) {
+      teamWins++;
+    }
   });
-}
+  return teamWins;
+};
+
+const totalTeamLosses = function (team) {
+  let teamLosses = 0;
+  matchesteam.map((match) => {
+    if (
+      (team.id !== match.winner_id && team.id === match.team1_id) ||
+      team.id === match.team2_id
+    ) {
+      teamLosses++;
+    }
+  });
+  return teamLosses;
+};

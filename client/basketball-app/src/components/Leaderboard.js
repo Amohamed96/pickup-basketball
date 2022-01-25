@@ -6,7 +6,7 @@ export default function Leaderboard(props) {
   const [redirect, setRedirect] = useState("");
   const [user, setUser] = useState("");
 
-  const { users, matchesPlayer, teams } = props;
+  const { users, matchesPlayer, matchesTeam, teams } = props;
 
   const getTeam = function (teamId) {
     //filter through array of teams
@@ -56,9 +56,40 @@ export default function Leaderboard(props) {
     return userLosses;
   };
 
-  // const playerRating = function (player) {
-  //   const rating = userWins / userWins;
-  // };
+  const totalTeamWins = function (team) {
+    let teamWins = 0;
+    matchesTeam.map((match) => {
+      if (team.id === match.winner_id) {
+        teamWins++;
+      }
+    });
+    return teamWins;
+  };
+
+  const totalTeamLosses = function (team) {
+    let teamLosses = 0;
+    matchesTeam.map((match) => {
+      if (
+        (team.id !== match.winner_id && team.id === match.team1_id) ||
+        team.id === match.team2_id
+      ) {
+        teamLosses++;
+      }
+    });
+    return teamLosses;
+  };
+  let rating = 0;
+  const playerRating = function (player) {
+    teams.map(
+      (team) =>
+        (rating =
+          50 +
+          (totalUserWins(player) / totalUserWins(player) +
+            totalUserLosses(player)) *
+            (totalTeamWins(team) / totalTeamWins(team) + totalTeamLosses(team)))
+    );
+    return rating;
+  };
 
   return redirect ? (
     <Redirect to={redirect} />
@@ -94,11 +125,53 @@ export default function Leaderboard(props) {
                         <img src={player.avatar} alt="Profile Pic" />
                         <span>{player.name}</span>
                       </td>
-                      <td>38</td>
+                      <td>{playerRating(player)}</td>
                       <td>{totalUserWins(player)}</td>
                       <td>{totalUserLosses(player)}</td>
                       <td>
                         <img src={getTeam(player.team_id).avatar} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="content-info">
+        <div class="container paddings-mini">
+          <div class="row">
+            <div class="col-lg-12">
+              <table class="table-striped table-responsive table-hover result-point">
+                <thead class="point-table-head">
+                  <tr>
+                    <th class="text-left">??</th>
+                    <th class="text-center">Team</th>
+                    <th class="text-center">W</th>
+                    <th class="text-center">L</th>
+                    <th class="text-center">Team</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  {teams.map((team) => (
+                    <tr>
+                      <td class="text-left number">
+                        1<i class="fa fa-caret-up" aria-hidden="true"></i>
+                      </td>
+                      <td
+                        class="text-left"
+                        // onClick={() => {
+                        //   goToPlayer(player.id);
+                        // }}
+                      >
+                        <img src={team.avatar} alt="Profile Pic" />
+                        <span>{team.team_name}</span>
+                      </td>
+                      <td>{totalTeamWins(team)}</td>
+                      <td>{totalTeamLosses(team)}</td>
+                      <td>
+                        <img src={team.avatar} />
                       </td>
                     </tr>
                   ))}
