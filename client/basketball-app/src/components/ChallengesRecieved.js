@@ -59,6 +59,8 @@ export default function ChallengesRecieved(props) {
           request_status: newStatus,
           user_id: challenge.user_id,
           challenge_request_id: challenge.id,
+          // accepted_at: new Date.toLocaleDateString(),
+          // declined_at: new Date.toLocaleDateString(),
         },
         {
           headers: headers,
