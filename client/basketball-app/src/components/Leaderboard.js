@@ -90,7 +90,14 @@ export default function Leaderboard(props) {
     );
     return rating;
   };
+  users.map((player) => {
+    player.rating = playerRating(player);
+    player.totalWins = totalUserWins(player);
+    player.totalLosses = totalUserLosses(player);
+    player.avatar = getTeam(player.team_id).avatar;
 
+    return player;
+  });
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
@@ -111,7 +118,7 @@ export default function Leaderboard(props) {
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  {users.map((player) => (
+                  {users.map((player) => {
                     <tr>
                       <td class="text-left number">
                         1<i class="fa fa-caret-up" aria-hidden="true"></i>
@@ -119,20 +126,21 @@ export default function Leaderboard(props) {
                       <td
                         class="text-left"
                         onClick={() => {
-                          goToPlayer(player.id);
+                          goToPlayer(player);
                         }}
                       >
                         <img src={player.avatar} alt="Profile Pic" />
                         <span>{player.name}</span>
                       </td>
-                      <td>{playerRating(player)}</td>
-                      <td>{totalUserWins(player)}</td>
-                      <td>{totalUserLosses(player)}</td>
+                      <td>{player.rating}</td>
+                      <td>{player.totalWins}</td>
+                      <td>{player.totalLosses}</td>
                       <td>
-                        <img src={getTeam(player.team_id).avatar} />
+                        <img src={player.avatar} />
                       </td>
-                    </tr>
-                  ))}
+                    </tr>;
+                  })}
+                  ;
                 </tbody>
               </table>
             </div>
