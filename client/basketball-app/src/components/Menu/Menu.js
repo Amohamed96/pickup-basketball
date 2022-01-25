@@ -1,5 +1,5 @@
-import React, { useState, Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, Component, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, Segment } from "semantic-ui-react";
 import "./Menu.css";
 import Navbar from "../Navbar";
@@ -11,25 +11,38 @@ export default class MenuExampleInvertedSegment extends Component {
   render() {
     const { activeItem } = this.state;
 
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("MENU USER>", user);
+
+    const logout = function () {
+      localStorage.clear();
+    };
+
     return (
       <>
         <Segment inverted className="Menu-Segment">
           <Menu inverted secondary>
-            <Menu.Item
-              name="home"
-              active={activeItem === "home"}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="profile"
-              active={activeItem === "profile"}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="messages"
-              active={activeItem === "messages"}
-              onClick={this.handleItemClick}
-            />
+            <Link to="/">
+              <Menu.Item name="home" active={activeItem === "home"} />{" "}
+            </Link>
+            <Link to="/profile">
+              <Menu.Item name="profile" active={activeItem === "profile"} />
+            </Link>
+            {/* <Link to="/matches-player">
+              <Menu.Item
+                name="create-match"
+                active={activeItem === "create-match"}
+              />
+            </Link> */}
+
+            <Link to="/login">
+              <Menu.Item
+                position="right"
+                name="logout"
+                active={activeItem === "logout"}
+                onClick={logout}
+              />
+            </Link>
           </Menu>
         </Segment>
       </>

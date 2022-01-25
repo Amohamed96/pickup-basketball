@@ -4,9 +4,9 @@
   background-image: url("https://i.pinimg.com/originals/b0/5b/f5/b05bf50f6384f7321913f36da899d192.jpg");
   background-position: center;
   background-repeat: repeat;
-  background-size: inherit;
+  background-size: 100%;
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
   max-width: 100%;
 }
 

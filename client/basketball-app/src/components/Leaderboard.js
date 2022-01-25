@@ -91,6 +91,20 @@ export default function Leaderboard(props) {
     return rating;
   };
 
+  const mappedUsers = users
+    .map((player) => {
+      const mapPD = { ...player };
+      mapPD.rating = playerRating(player);
+      mapPD.totalWins = totalUserWins(player);
+      mapPD.totalLosses = totalUserLosses(player);
+      mapPD.avatar = getTeam(player.team_id).avatar;
+
+      return mapPD;
+    })
+    .sort((prev, next) => {
+      return next.rating - prev.rating;
+    });
+
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
@@ -111,10 +125,11 @@ export default function Leaderboard(props) {
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  {users.map((player) => (
+                  {mappedUsers.map((player, i) => (
                     <tr>
                       <td class="text-left number">
-                        1<i class="fa fa-caret-up" aria-hidden="true"></i>
+                        {i + 1}
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
                       </td>
                       <td
                         class="text-left"
@@ -125,9 +140,9 @@ export default function Leaderboard(props) {
                         <img src={player.avatar} alt="Profile Pic" />
                         <span>{player.name}</span>
                       </td>
-                      <td>{playerRating(player)}</td>
-                      <td>{totalUserWins(player)}</td>
-                      <td>{totalUserLosses(player)}</td>
+                      <td>{player.rating}</td>
+                      <td>{player.totalWins}</td>
+                      <td>{player.totalLosses}</td>
                       <td>
                         <img src={getTeam(player.team_id).avatar} />
                       </td>
@@ -160,10 +175,10 @@ export default function Leaderboard(props) {
                         1<i class="fa fa-caret-up" aria-hidden="true"></i>
                       </td>
                       <td
-                        class="text-left"
-                        // onClick={() => {
-                        //   goToPlayer(player.id);
-                        // }}
+                      // class="text-left"
+                      // onClick={() => {
+                      //   goToPlayer(player.id);
+                      // }}
                       >
                         <img src={team.avatar} alt="Profile Pic" />
                         <span>{team.team_name}</span>
