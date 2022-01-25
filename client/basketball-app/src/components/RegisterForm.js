@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Styles/LoginForm.css";
+import "./Styles/Register.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
@@ -73,7 +73,7 @@ export default function RegisterForm() {
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
-    <div className="login-wrap">
+    <div className="register-wrap">
       <span className="error">{error}</span>
       <div className="login-html">
         <input id="tab-1" type="radio" name="tab" className="sign-in" />
@@ -183,7 +183,7 @@ export default function RegisterForm() {
             </div>
             <div className="group">
               <label for="user" className="label">
-                .....
+                Bio, Tell us a little bit about yourself!
               </label>
               <input
                 name="bio"
@@ -195,7 +195,7 @@ export default function RegisterForm() {
             </div>
             <div className="group">
               <label for="user" className="label">
-                ....
+                Paste a link for your avatar! (We'll be accepting files soon)
               </label>
               <input
                 name="avatar"
@@ -207,7 +207,7 @@ export default function RegisterForm() {
             </div>
             <div className="group">
               <label for="user" className="label">
-                ...
+                Pick your team!
               </label>
               <input
                 name="team_id"
