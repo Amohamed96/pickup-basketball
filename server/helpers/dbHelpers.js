@@ -73,18 +73,6 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getUserByName = (name) => {
-    const query = {
-      text: `SELECT * FROM users WHERE name = $1`,
-      values: [name],
-    };
-
-    return db
-      .query(query)
-      .then((result) => (result.rows ? result.rows[0] : undefined))
-      .catch((err) => err);
-  };
-
   //TODO: ADD OTHER VALUES
   const addUser = async (
     name,
@@ -206,22 +194,15 @@ module.exports = (db) => {
 
   const addMatchTeam = (
     date,
-    team1_name,
-    team2_name,
-    winner_name,
+    team1_id,
+    team2_id,
+    winner_id,
     team1_score,
     team2_score
   ) => {
     const query = {
-      text: "INSERT INTO team_matches (date, team1_name, team2_name, winner_name, team1_score, team2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
-      values: [
-        date,
-        team1_name,
-        team2_name,
-        winner_name,
-        team1_score,
-        team2_score,
-      ],
+      text: "INSERT INTO team_matches (date, team1_id, team2_id, winner_id, team1_score, team2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
+      values: [date, team1_id, team2_id, winner_id, team1_score, team2_score],
     };
 
     return db
@@ -232,19 +213,19 @@ module.exports = (db) => {
 
   const addMatchPlayer = (
     date,
-    player1_name,
-    player2_name,
-    winner_name,
+    player1_id,
+    player2_id,
+    winner_id,
     player1_score,
     player2_score
   ) => {
     const query = {
-      text: "INSERT INTO player_matches (date, player1_name, player2_name, winner_name, player1_score, player2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
+      text: "INSERT INTO player_matches (date, player1_id, player2_id, winner_id, player1_score, player2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
       values: [
         date,
-        player1_name,
-        player2_name,
-        winner_name,
+        player1_id,
+        player2_id,
+        winner_id,
         player1_score,
         player2_score,
       ],
@@ -256,10 +237,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getChallengesByName = (name) => {
+  const getChallengesById = (user_id) => {
     const query = {
-      text: "SELECT * FROM challenge_request WHERE opponent = $1",
-      values: [opponent],
+      text: "SELECT * FROM challenge_request WHERE user_id = $1",
+      values: [user_id],
     };
 
     return db
@@ -267,14 +248,10 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
   };
-  const setChallengeByOpponent = (
-    newStatus,
-    opponent,
-    challenge_request_id
-  ) => {
+  const setChallengeById = (newStatus, user_id, challenge_request_id) => {
     const query = {
-      text: "UPDATE challenge_request SET request_status=$1 WHERE opponent = $2 AND challenge_request.id = $3",
-      values: [newStatus, opponent, challenge_request_id],
+      text: "UPDATE challenge_request SET request_status=$1 WHERE user_id = $2 AND challenge_request.id = $3",
+      values: [newStatus, user_id, challenge_request_id],
     };
 
     return db
@@ -283,24 +260,22 @@ module.exports = (db) => {
       .catch((err) => err);
   };
   const addChallenge = (
-    challenger,
-    opponent,
-    location_,
+    challenger_id,
+    user_id,
+    location_id,
     date,
     challenge_message,
     request_status
   ) => {
     const query = {
-      text: "INSERT INTO challenge_request (challenger, opponent, location, date, challenge_message, request_status, accepted_at, declined_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date, challenge_message, request_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       values: [
-        challenger,
-        opponent,
-        location,
+        challenger_id,
+        user_id,
+        location_id,
         date,
         challenge_message,
         request_status,
-        accepted_at,
-        declined_at,
       ],
     };
 
@@ -317,7 +292,6 @@ module.exports = (db) => {
     getUsers,
     getUserByEmail,
     getUserById,
-    getUserByName,
     addUser,
     getTeams,
     getTeamByName,
@@ -327,9 +301,9 @@ module.exports = (db) => {
     getMatchById,
     addMatchTeam,
     addMatchPlayer,
-    getChallengesByName,
+    getChallengesById,
     addChallenge,
-    setChallengeByOpponent,
+    setChallengeById,
     generateRandomString,
     CreateChatUser,
   };

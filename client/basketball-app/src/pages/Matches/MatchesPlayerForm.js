@@ -4,14 +4,16 @@ import Button from "react-bootstrap/Button";
 import "./Matches.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import DropdownPlayers from "../../components/DropdownPlayers";
 
-export default function MatchesPlayerForm() {
+export default function MatchesPlayerForm(props) {
+  const { users, matchesPlayer, matchesTeam, teams } = props;
   const [matches, setMatches] = useState({
-    player1_name: null,
-    player2_name: null,
+    player1_id: null,
+    player2_id: null,
     player1_score: null,
     player2_score: null,
-    winner_name: null,
+    winner_id: null,
   });
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState("");
@@ -47,12 +49,13 @@ export default function MatchesPlayerForm() {
           <div className="sign-in-htm">
             <div className="group">
               <label for="user" className="label">
-                Challenger:
+                challenger_id:
               </label>
+              <DropdownPlayers users={users} />
               <input
-                name="player1_name"
+                name="player1_id"
                 id="user"
-                type="challenger"
+                type="challenger_id"
                 className="input"
                 placeholder="Challenger"
                 onChange={storeUserData}
@@ -60,10 +63,11 @@ export default function MatchesPlayerForm() {
             </div>
             <div className="group">
               <label for="pass" className="label">
-                Opponent
+                user_id:
               </label>
+              <DropdownPlayers users={users} />
               <input
-                name="player2_name"
+                name="player2_id"
                 id="pass"
                 type="user_id"
                 className="input"
@@ -90,7 +94,7 @@ export default function MatchesPlayerForm() {
                 onChange={storeUserData}
               />
               <input
-                name="winner_name"
+                name="winner_id"
                 id="pass"
                 type="user_id"
                 className="input"

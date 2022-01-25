@@ -9,7 +9,3 @@ VALUES
   (2, 'Warriors', 'Dub Nation!', 'https://icon2.cleanpng.com/20180603/kzt/kisspng-golden-state-warriors-201718-nba-season-houston-5b14a547e0dcc4.0542029415280796879211.jpg'),
   (3, 'Nets', 'Were moving the Nets to BK', 'https://icon2.cleanpng.com/20180816/pxz/kisspng-brooklyn-nets-nba-boston-celtics-cleveland-cavalie-brooklyn-nets-5b75d4d4e181e1.9444765415344488529237.jpg'),
   (4, 'Lakers', 'Showtime!', 'https://icon2.cleanpng.com/20180128/wuw/kisspng-los-angeles-lakers-2009%E2%80%9310-nba-season-new-york-k-nba-basketball-5a6dce273fc0f6.6939991215171456392611.jpg');
-  (5, 'Humans', 'Literally just people', 'https://www.kindpng.com/picc/m/377-3774909_logo-sign-icon-human-running-template-shape-human.png'),
-  (6, 'Pigeons', 'Chirp? or...what?', 'https://www.pngkey.com/png/detail/443-4435046_staple-pigeon-staple-pigeon-logo.png'),
-  (7, 'Canadians', 'Sorry Eh', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Maple_Leaf.svg/1024px-Maple_Leaf.svg.png'),
-

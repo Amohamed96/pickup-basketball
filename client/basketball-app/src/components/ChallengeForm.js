@@ -6,9 +6,9 @@ import { Redirect } from "react-router-dom";
 export default function ChallengeForm(props) {
   const { player } = props;
   const [challenge, setChallenge] = useState({
-    challenger: null,
-    opponent: null,
-    courtName: null,
+    challenger_id: null,
+    user_id: null,
+    location_id: null,
     date: null,
     challenge_message: null,
     request_status: null,
@@ -29,8 +29,8 @@ export default function ChallengeForm(props) {
     console.log("P ID", player.id);
     setChallenge({
       ...challenge,
-      challenger: parsedUser.name,
-      opponent: player.name,
+      challenger_id: parsedUser.id,
+      user_id: player.id,
       date: new Date().toLocaleDateString("en-CA"),
     });
   }, [player]);
@@ -67,7 +67,7 @@ export default function ChallengeForm(props) {
         <div>
           <input
             type="text"
-            name="courtName"
+            name="location_id"
             placeholder="Location"
             onChange={storeUserData}
           ></input>

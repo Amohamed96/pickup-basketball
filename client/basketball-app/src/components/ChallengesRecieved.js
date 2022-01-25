@@ -54,10 +54,10 @@ export default function ChallengesRecieved(props) {
     const headers = { "Content-Type": "application/json" };
     axios
       .put(
-        `/api/users/player/${challenge.opponent}`,
+        `/api/users/player/${challenge.user_id}`,
         {
           request_status: newStatus,
-          opponent: challenge.opponent,
+          user_id: challenge.user_id,
           challenge_request_id: challenge.id,
           // accepted_at: new Date.toLocaleDateString(),
           // declined_at: new Date.toLocaleDateString(),
@@ -88,10 +88,10 @@ export default function ChallengesRecieved(props) {
                 <Image
                   floated="right"
                   size="mini"
-                  src={users[challenge.challenger - 1].avatar}
+                  src={users[challenge.challenger_id - 1].avatar}
                 />
                 <Card.Header>
-                  CHALLENGE FROM:{users[challenge.challenger - 1].name}
+                  CHALLENGE FROM:{users[challenge.challenger_id - 1].name}
                 </Card.Header>
                 <Card.Meta>Location goes here</Card.Meta>
                 <Card.Description>

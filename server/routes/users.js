@@ -4,11 +4,10 @@ const axios = require("axios");
 
 //TODO OPTIMIZE FOR TEAMS
 const {
-  getChallengesByName,
+  getChallengesById,
   getUserById,
-  getUserByName,
   addChallenge,
-  setChallengeByOpponent,
+  setChallengeById,
 } = require("../helpers/dbHelpers");
 
 module.exports = ({
@@ -16,10 +15,9 @@ module.exports = ({
   getUserByEmail,
   addUser,
   getUserById,
-  getUserByName,
-  getChallengesByName,
+  getChallengesById,
   addChallenge,
-  setChallengeByOpponent,
+  setChallengeById,
   CreateChatUser,
   generateRandomString,
 }) => {
@@ -39,11 +37,11 @@ module.exports = ({
 
   // GET USER BASED ON THEIR ID
 
-  router.get(`/player/:opponent`, (req, res) => {
-    console.log("REQ PARAMS !!!!!!!!!!!!!!!", req.params);
-    const name = req.params;
-    const usersPromise = getUserByName(name);
-    const challengesPromise = getChallengesByName(name);
+  router.get(`/player/:id`, (req, res) => {
+    const user_id = req.params.id;
+    console.log("USER ID ROUTE", user_id);
+    const usersPromise = getUserById(user_id);
+    const challengesPromise = getChallengesById(user_id);
     Promise.all([usersPromise, challengesPromise])
       .then((result) => {
         console.log("RESULT ROUTE", result);
@@ -110,9 +108,9 @@ module.exports = ({
   });
   router.post("/player/:id", async (req, res) => {
     const {
-      challenger,
-      opponent,
-      courtName,
+      challenger_id,
+      user_id,
+      location_id,
       date,
       challenge_message,
       request_status,
@@ -121,9 +119,9 @@ module.exports = ({
     console.log("req body  server====>", req.body);
     console.log("req body message  server====>", req.body.challenge_message);
     return addChallenge(
-      req.body.challenger,
-      req.body.opponent,
-      req.body.courtName,
+      req.body.challenger_id,
+      req.body.user_id,
+      req.body.location_id,
       req.body.date,
       req.body.challenge_message,
       req.body.request_status
@@ -142,13 +140,9 @@ module.exports = ({
   });
 
   router.put("/player/:id", async (req, res) => {
-    const { request_status, opponent, challenge_request_id } = req.body;
+    const { request_status, user_id, challenge_request_id } = req.body;
     console.log("BODY PUT:", req.body);
-    return setChallengeByOpponent(
-      request_status,
-      opponent,
-      challenge_request_id
-    )
+    return setChallengeById(request_status, user_id, challenge_request_id)
       .then(() => {
         // const sendChallenge = await
         // res.json(newChallenge);
