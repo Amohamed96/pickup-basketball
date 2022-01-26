@@ -40,13 +40,15 @@ export default function Menu() {
               onClick={handleItemClick}
             />
           </Link>
-          {/* <Link to="/messages">
-            <SemanticMenu.item
+          <Link to="/messages">
+            <SemanticMenu.Item
               name="messages"
               active={activeItem === "messages"}
               onClick={handleItemClick}
             />
-          </Link> */}
+          </Link>
+        </SemanticMenu>
+        <SemanticMenu>
           <Link to="/login" position="right">
             <SemanticMenu.Item
               position="right"
