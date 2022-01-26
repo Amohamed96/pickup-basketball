@@ -38,14 +38,14 @@ h1 {
 
 .Home-text {
   color: #263d5f;
-  font-size: 120px;
+  /* font-size: 120px; */
   font-family: monospace;
   position: relative;
-  top: 300px;
+  top: 200px;
 }
 
 .home-title {
-  font-size: 110px;
+  font-size: 400px;
   font-family: monospace;
   color: #2b3e68bd;
 }
