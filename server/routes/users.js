@@ -7,7 +7,8 @@ const {
   getChallengesById,
   getUserById,
   addChallenge,
-} = require("../helpers/dataHelpers");
+  setChallengeById,
+} = require("../helpers/dbHelpers");
 
 module.exports = ({
   getUsers,
@@ -16,7 +17,9 @@ module.exports = ({
   getUserById,
   getChallengesById,
   addChallenge,
-  generateRandomString
+  setChallengeById,
+  CreateChatUser,
+  generateRandomString,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -24,6 +27,7 @@ module.exports = ({
       .then((users) => {
         res.json(users);
       })
+
       .catch((err) =>
         res.json({
           error: err.message,
@@ -53,6 +57,7 @@ module.exports = ({
   });
 
   router.post("/signup", (req, res) => {
+    const secret = generateRandomString();
     const { name, email, password, bio, avatar, team_id } = req.body;
 
     getUserByEmail(email)
@@ -68,7 +73,8 @@ module.exports = ({
             password,
             bio,
             avatar,
-            team_id
+            team_id,
+            secret
           );
           console.log("ADD USER FUNCTIOn", addPlayer);
           return addPlayer;
@@ -107,22 +113,22 @@ module.exports = ({
       location_id,
       date,
       challenge_message,
-      requestStatus,
+      request_status,
     } = req.body;
-
-    getUserById(user_id)
-      .then((newChallenge) => {
-        addChallenge(
-          challenger_id,
-          user_id,
-          location_id,
-          date,
-          challenge_message,
-          requestStatus
-        );
+    // console.log("req params  server", req.params);
+    console.log("req body  server====>", req.body);
+    console.log("req body message  server====>", req.body.challenge_message);
+    return addChallenge(
+      req.body.challenger_id,
+      req.body.user_id,
+      req.body.location_id,
+      req.body.date,
+      req.body.challenge_message,
+      req.body.request_status
+    )
+      .then(() => {
         // const sendChallenge = await
-        console.log("POSTING TO CHALLENE REQUESTS.....");
-        res.json(newChallenge);
+        // res.json(newChallenge);
         // return sendChallenge;
       })
 
@@ -133,6 +139,22 @@ module.exports = ({
       );
   });
 
+  router.put("/player/:id", async (req, res) => {
+    const { request_status, user_id, challenge_request_id } = req.body;
+    console.log("BODY PUT:", req.body);
+    return setChallengeById(request_status, user_id, challenge_request_id)
+      .then(() => {
+        // const sendChallenge = await
+        // res.json(newChallenge);
+        // return sendChallenge;
+      })
+
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
   //TODO: make route for challenges GET and POST
   // router.get("/Pr", (req, res) => {
   //   getChallengesByID(2)

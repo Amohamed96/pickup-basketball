@@ -3,55 +3,44 @@ import "./Styles/LoginForm.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-export default function ChallengeForm() {
+export default function ChallengeForm(props) {
+  const { player } = props;
   const [challenge, setChallenge] = useState({
     challenger_id: null,
     user_id: null,
     location_id: null,
     date: null,
     challenge_message: null,
-    requestStatus: null,
+    request_status: null,
   });
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState("");
   const [user, setUser] = useState("");
   const [message, setMessage] = useState("");
   const [location, setLocation] = useState("");
-  const currentUser = localStorage.getItem("user");
   const storeUserData = (e) => {
     console.log("e TARGET VALUE", e.target.value);
     setChallenge({ ...challenge, [e.target.name]: e.target.value });
   };
-
   useEffect(() => {
-    console.log("CURRENT USER from LOCAL", currentUser);
-
-    setUser(JSON.parse(currentUser));
-  }, [currentUser]);
+    const currentUser = localStorage.getItem("user");
+    const parsedUser = JSON.parse(currentUser);
+    setUser(parsedUser);
+    console.log("P ID", player.id);
+    setChallenge({
+      ...challenge,
+      challenger_id: parsedUser.id,
+      user_id: player.id,
+      date: new Date().toLocaleDateString("en-CA"),
+    });
+  }, [player]);
   const handleChallenge = () => {
-    // Promise with local storage and request
-
-    // if (
-    //   !challenger_id ||
-    //   !user_id ||
-    //   !location_id ||
-    //   !date ||
-    //   !challenge_message ||
-    //   !requestStatus
-    // ) {
-    //   setError("Sorry, You must enter all data to continue");
-    //   return;
-    // }
-    console.log("CHALLENGE *********--", challenge);
-
+    const headers = { "Content-Type": "application/json" };
+    console.log("challenge form!!!!", challenge);
     axios
-      .post(`/api/users/player/${user.id}`, challenge)
+      .post(`/api/users/player/${user.id}`, challenge, { headers: headers })
       .then((result) => {
-        console.log("RESULTS DATA CHALLENGE FORM>>", result.data);
-        console.log("CHALLENGE FORM----->", challenge);
         setChallenge(result.data);
-        // localStorage.setItem("user", JSON.stringify(result.data));
-        // setRedirect("/profile");
       })
 
       .catch((err) => {
@@ -83,7 +72,7 @@ export default function ChallengeForm() {
             onChange={storeUserData}
           ></input>
         </div>
-        <div>
+        {/* <div>
           <input
             type="text"
             name="user_id"
@@ -93,12 +82,12 @@ export default function ChallengeForm() {
         </div>
         <div>
           <input
-            type="text"
+            type="hidden"
             name="challenger_id"
-            placeholder="Who tf are you"
-            onChange={storeUserData}
+            placeholder="Who are you"
+            value={user.id}
           ></input>
-        </div>
+        </div> */}
         <button type="submit" onClick={handleChallenge}>
           SEND CHALLENGE
         </button>

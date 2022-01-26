@@ -8,7 +8,8 @@ import Leaderboard from "../../components/Leaderboard";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
-  const [matches, setMatches] = useState([]);
+  const [matchesTeam, setMatchesTeam] = useState([]);
+  const [matchesPlayer, setMatchesPlayer] = useState([]);
   const [teams, setTeams] = useState([]);
   const [check, setCheck] = useState(false);
 
@@ -21,17 +22,25 @@ export default function Home() {
     axios.get("http://localhost:3000/api/home").then((res) => {
       setUsers(res.data.users);
       setTeams(res.data.teams);
-      setMatches(res.data.matches);
+      setMatchesTeam(res.data.matchesTeam);
+      setMatchesPlayer(res.data.matchesPlayer);
       console.log("HOME RES DATA----->", res.data);
     });
   });
 
   return (
     <>
-      <Navbar users={users} />
-      <Hero />
-      <Games matches={matches} teams={teams} />
-      <Leaderboard users={users} teams={teams} matches={matches} />
+      <div className="landing">
+        <Navbar users={users} />
+
+        <Leaderboard
+          users={users}
+          teams={teams}
+          matchesTeam={matchesTeam}
+          matchesPlayer={matchesPlayer}
+        />
+        <Games matchesTeam={matchesTeam} teams={teams} />
+      </div>
     </>
   );
 }

@@ -4,6 +4,11 @@ CHAT STYLES * {
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   letter-spacing: 0.5px;
 }
+.ce-chat-engine {
+  width: 100vw;
+  height: 90vh;
+  margin-top: 0px;
+}
 
 .ce-chat-list {
   background-color: rgb(240, 240, 240) !important;
@@ -14,18 +19,22 @@ CHAT STYLES * {
 }
 
 .ce-active-chat-card {
-  background-color: #cabcdc !important;
-  border: 4px solid #cabcdc !important;
+  background-color: #ffe1bc !important;
+  border: 4px solid #f59f00 !important;
   border-radius: 0px !important;
 }
 
+.ce-chat-title-text {
+  color: orange;
+}
+
 .ce-chat-subtitle-text {
-  color: #595959 !important;
+  color: #000000 !important;
 }
 
 .ce-chat-form-container {
   padding-bottom: 20px !important;
-  width: 70vw;
+  /* width: 70vw; */
 }
 
 .ce-text-input {
@@ -34,8 +43,8 @@ CHAT STYLES * {
 }
 
 .ce-primary-button {
-  border-radius: 6px !important;
-  background-color: #7554a0 !important;
+  border-radius: 6px;
+  background-color: #d3cec2 !important;
   position: relative;
   bottom: 1px;
 }
@@ -56,7 +65,7 @@ CHAT STYLES * {
 
 .ce-autocomplete-options {
   border-radius: 6px !important;
-  border: 1px solid #3b2a50 !important;
+  border: 1px solid #cdc7d4 !important;
   background-color: white !important;
 }
 

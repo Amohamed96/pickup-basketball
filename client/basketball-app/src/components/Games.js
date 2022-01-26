@@ -2,19 +2,19 @@ import React from "react";
 import "./Styles/Games.scss";
 
 export default function Games(props) {
-  const { matches, teams } = props;
+  const { matchesTeam, teams } = props;
 
-  const arrayMatches = Object.keys(matches).map((match) => {
-    const teamOneID = matches[match].team1_id;
-    const teamTwoID = matches[match].team2_id;
-    console.log("MATCHES.DATE------>", matches[0].date);
+  const arrayMatchesTeam = Object.keys(matchesTeam).map((match) => {
+    const teamOneID = matchesTeam[match].team1_id;
+    const teamTwoID = matchesTeam[match].team2_id;
+    console.log("MATCHES Team.DATE------>", matchesTeam[0].date);
     const winnerBanner = "--";
-    if (teams[teamOneID - 1].id === matches[0].winner_id) {
+    if (teams[teamOneID - 1].id === matchesTeam[0].winner_id) {
     } else {
     }
     return (
       <div class="slide">
-        {/* {matches[teamOneID].date} */}
+        {/* {matchesTeam[teamOneID].date} */}
         <img
           className="logo-team-bar"
           src={teams[teamOneID - 1].avatar}
@@ -22,7 +22,7 @@ export default function Games(props) {
         />
         <div class="slide">
           {teams[teamOneID - 1].team_name}--
-          {matches[match].team1_score}
+          {matchesTeam[match].team1_score}
         </div>
         <img
           className="logo-team-bar"
@@ -31,14 +31,14 @@ export default function Games(props) {
         />
         <div class="slide">
           {teams[teamTwoID - 1].team_name}--
-          {matches[match].team2_score}
+          {matchesTeam[match].team2_score}
         </div>
       </div>
     );
   });
   return (
     <div class="slider">
-      <div class="slide-track">{arrayMatches}</div>
+      <div class="slide-track">{arrayMatchesTeam}</div>
     </div>
   );
 }

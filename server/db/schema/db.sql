@@ -24,12 +24,12 @@ CREATE TABLE users (
   bio VARCHAR(255),
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  avatar VARCHAR(255)
-  /* chat-secret */
+  avatar VARCHAR(255),
+  secret VARCHAR(255)
 );
 
-DROP TABLE IF EXISTS matches CASCADE; 
-CREATE TABLE matches (
+DROP TABLE IF EXISTS team_matches CASCADE; 
+CREATE TABLE team_matches (
   id SERIAL PRIMARY KEY NOT NULL,
   date DATE NOT NULL,
   team1_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
@@ -37,6 +37,17 @@ CREATE TABLE matches (
   winner_id INTEGER REFERENCES teams(id) ON DELETE CASCADE,
   team1_score VARCHAR(255) NOT NULL,
   team2_score VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS player_matches CASCADE; 
+CREATE TABLE player_matches (
+  id SERIAL PRIMARY KEY NOT NULL,
+  date DATE NOT NULL,
+  player1_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  player2_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  winner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  player1_score VARCHAR(255) NOT NULL,
+  player2_score VARCHAR(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS match_stats CASCADE; 
@@ -54,10 +65,11 @@ CREATE TABLE challenge_request (
   challenger_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   location_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
+  date DATE,
   challenge_message VARCHAR(255),
-  request_status VARCHAR(255) NOT NULL 
-  /* accepted_at DATE declined_at DATE */
+  request_status VARCHAR(255),
+  accepted_at DATE,
+  declined_at DATE 
 );
 
 DROP TABLE IF EXISTS challenge_request_matches CASCADE;

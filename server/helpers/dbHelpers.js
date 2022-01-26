@@ -21,6 +21,32 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const CreateChatUser = () => {
+    getUsers()
+      .then((users) => {
+        console.log("CREATE CHAT USER WORKING>", users);
+        return users;
+      })
+      .then((users) => {
+        users.map((user) => {
+          axios
+            .put(
+              `https://api.chatengine.io/users/`,
+              {
+                username: user.name,
+                secret: user.secret,
+              },
+              { headers: { "Private-Key": process.env.C_SECRETKEY } }
+            )
+            .then((response) => {
+              console.log("RESPONSE FOR CHAT", response.data);
+            });
+        });
+      })
+
+      .catch((err) => console.log("error: >>>>***", err));
+  };
+
   const getUserByEmail = (email) => {
     const query = {
       text: `SELECT * FROM users WHERE email = $1`,
@@ -48,10 +74,18 @@ module.exports = (db) => {
   };
 
   //TODO: ADD OTHER VALUES
-  const addUser = async (name, email, password, bio, avatar, team_id) => {
+  const addUser = async (
+    name,
+    email,
+    password,
+    bio,
+    avatar,
+    team_id,
+    secret
+  ) => {
     const query = {
-      text: `INSERT INTO users (name, email, password, bio, avatar, team_id) VALUES ($1, $2, $3, $4, $5, $6) returning *`,
-      values: [name, email, password, bio, avatar, team_id],
+      text: `INSERT INTO users (name, email, password, bio, avatar, team_id, secret) VALUES ($1, $2, $3, $4, $5, $6, $7) returning *`,
+      values: [name, email, password, bio, avatar, team_id, secret],
     };
 
     return db
@@ -65,10 +99,10 @@ module.exports = (db) => {
               username: name,
               secret: generateRandomString(),
             },
-            { headers: { "Private-Key": process.env.CHATENGINE_SECRETKEY } }
+            { headers: { "Private-Key": process.env.C_SECRETKEY } }
           )
           .then((response) => {
-            console.log("RESPONSE FOR CHAT", response);
+            console.log("RESPONSE FOR CHAT", response.data);
           })
           .catch((err) => {
             console.log("CHAT ERROR>>", err);
@@ -121,9 +155,19 @@ module.exports = (db) => {
 
   //GET MATCHES
 
-  const getMatches = () => {
+  const getMatchesTeam = () => {
     const query = {
-      text: "SELECT * FROM matches",
+      text: "SELECT * FROM team_matches",
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+  const getMatchesPlayer = () => {
+    const query = {
+      text: "SELECT * FROM player_matches",
     };
 
     return db
@@ -148,8 +192,8 @@ module.exports = (db) => {
 
   // Add match to database.
 
-  const addMatch = (
-    match_date,
+  const addMatchTeam = (
+    date,
     team1_id,
     team2_id,
     winner_id,
@@ -157,14 +201,33 @@ module.exports = (db) => {
     team2_score
   ) => {
     const query = {
-      text: "INSERT INTO matches (match_date, team1_id, team2_id, winner_id, team1_score, team2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
+      text: "INSERT INTO team_matches (date, team1_id, team2_id, winner_id, team1_score, team2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
+      values: [date, team1_id, team2_id, winner_id, team1_score, team2_score],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
+
+  const addMatchPlayer = (
+    date,
+    player1_id,
+    player2_id,
+    winner_id,
+    player1_score,
+    player2_score
+  ) => {
+    const query = {
+      text: "INSERT INTO player_matches (date, player1_id, player2_id, winner_id, player1_score, player2_score) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *",
       values: [
-        match_date,
-        team1_id,
-        team2_id,
+        date,
+        player1_id,
+        player2_id,
         winner_id,
-        team1_score,
-        team2_score,
+        player1_score,
+        player2_score,
       ],
     };
 
@@ -185,23 +248,34 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
   };
+  const setChallengeById = (newStatus, user_id, challenge_request_id) => {
+    const query = {
+      text: "UPDATE challenge_request SET request_status=$1 WHERE user_id = $2 AND challenge_request.id = $3",
+      values: [newStatus, user_id, challenge_request_id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
   const addChallenge = (
     challenger_id,
     user_id,
     location_id,
     date,
     challenge_message,
-    requestStatus
+    request_status
   ) => {
     const query = {
-      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date, challenge_message, requestStatus) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      text: "INSERT INTO challenge_request (challenger_id, user_id, location_id, date, challenge_message, request_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       values: [
         challenger_id,
         user_id,
         location_id,
         date,
         challenge_message,
-        requestStatus,
+        request_status,
       ],
     };
 
@@ -222,10 +296,15 @@ module.exports = (db) => {
     getTeams,
     getTeamByName,
     addTeam,
-    getMatches,
+    getMatchesTeam,
+    getMatchesPlayer,
     getMatchById,
-    addMatch,
+    addMatchTeam,
+    addMatchPlayer,
     getChallengesById,
     addChallenge,
+    setChallengeById,
+    generateRandomString,
+    CreateChatUser,
   };
 };

@@ -7,6 +7,8 @@ import Profile from "./pages/Profile/Profile.js";
 import Navbar from "./components/Navbar";
 import Messages from "./pages/messages/Messages";
 import Player from "./components/Player";
+import MatchesTeam from "./pages/Matches/MatchesTeam";
+import MatchesPlayer from "./pages/Matches/MatchesPlayer";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/profile" exact render={() => <Profile />} />
           <Route path="/player/:id" render={() => <Player />} />
           <Route path="/messages" render={() => <Messages />} />
+          <Route path="/matches-player" render={() => <MatchesPlayer />} />
+          <Route path="/matches-team" render={() => <MatchesTeam />} />
         </Switch>
       </Router>
     </>

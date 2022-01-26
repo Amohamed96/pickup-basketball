@@ -1,57 +1,90 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 //TODO: Edit for matches
 const {
-    getPostsBymatches
-} = require('../helpers/dataHelpers');
+  getMatches,
+  addMatchPlayer,
+  addMatchTeam,
+} = require("../helpers/dbHelpers");
 ////
 
 module.exports = ({
-    getMatches,
-    getMatchById,
-    addMatch
+  getMatchesTeam,
+  getMatchesPlayer,
+  getMatchById,
+  addMatch,
+  addMatchPlayer,
+  addMatchTeam,
 }) => {
-    /* GET matches listing. */
-    router.get('/', (req, res) => {
-        getMatches()
-            .then((matches) => {
-              res.json(matches)
-            })
-            .catch((err) => res.json({
-                error: err.message
-            }));
-    });
+  /* GET matches listing. */
+  router.get("/team", (req, res) => {
+    getMatchesTeam()
+      .then((matches) => {
+        res.json(matches);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+  router.get("/player", (req, res) => {
+    getMatchesPlayer()
+      .then((matches) => {
+        res.json(matches);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
-    router.post('/', (req, res) => {
+  router.post("/team", (req, res) => {
+    const { team1_id, team2_id, winner_id, team1_score, team2_score } =
+      req.body;
+    const matchDateT = new Date();
+    addMatchTeam(
+      matchDateT,
+      team1_id,
+      team2_id,
+      winner_id,
+      team1_score,
+      team2_score
+    )
+      .then((newMatch) => {
+        console.log("NEW MATCH RESULT", newMatch);
+        res.json(newMatch);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
-        const {
-          ID,
-          match_date ,
-          team1_id,
-          team2_id,
-          winner_id,
-          team1_score,
-          team2_score
-        } = req.body;
+  router.post("/player", (req, res) => {
+    const { player1_id, player2_id, winner_id, player1_score, player2_score } =
+      req.body;
+    const matchDateP = new Date();
+    addMatchPlayer(
+      matchDateP,
+      player1_id,
+      player2_id,
+      winner_id,
+      player1_score,
+      player2_score
+    )
+      .then((newMatch) => {
+        console.log("NEW MATCH RESULT", newMatch);
+        res.json(newMatch);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
-        getMatchById(ID)
-            .then(Match => {
-
-                if (Match) {
-                    res.json({
-                        msg: 'Sorry, a Match  with this id already exists'
-                    });
-                } else {
-                    return addMatch(ID, match_date, team1_id, team2_id, winner_id, team1_score, team2_score)
-                }
-
-            })
-            .then(newMatch => res.json(newMatch))
-            .catch(err => res.json({
-                error: err.message
-            }));
-
-    })
-
-    return router;
+  return router;
 };
