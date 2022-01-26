@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Menu as SemanticMenu, Segment } from "semantic-ui-react";
+import { Menu as SemanticMenu, Button, Segment, Icon } from "semantic-ui-react";
 import axios from "axios";
 import Menu from "../../components/Menu/Menu";
+import ChallengesRecieved from "../../components/ChallengesRecieved";
+import { Link as Scroll } from "react-scroll";
+import { TransactionOutlined } from "@ant-design/icons";
+import Footer from "../../components/footer/Footer";
 
 export default function Profile() {
   const [user, setUser] = useState({});
-  console.log("USER>>>>", user);
   const currentUser = localStorage.getItem("user");
   const [challenges, setChallenges] = useState([]);
+  const [matchesTeam, setMatchesTeam] = useState([]);
+  const [matchesPlayer, setMatchesPlayer] = useState([]);
+  const [teams, setTeams] = useState([]);
+  const [check, setCheck] = useState(false);
 
   // const handleItemClick = (e, { name }) => {
   //   console.log("NAME", name);
   //   setActiveItem(name);
   // };
 
-  const logout = function () {
-    localStorage.clear();
-  };
   // Promise with local storage and request
   useEffect(() => {
     console.log("CURRENT USER from LOCAL", currentUser);
@@ -26,6 +30,49 @@ export default function Profile() {
   }, [currentUser]);
 
   useEffect(() => {
+    if (check) {
+      return;
+    }
+    setCheck(true);
+
+    axios.get("http://localhost:3000/api/home").then((res) => {
+      setMatchesTeam(res.data.matchesTeam);
+      setMatchesPlayer(res.data.matchesPlayer);
+      console.log("HOME RES DATA----->", res.data);
+    });
+  });
+
+  const totalUserWins = function (player) {
+    let userWins = 0;
+    matchesPlayer.map((match) => {
+      if (player.id === match.winner_id) {
+        userWins++;
+        console.log("player winner ID", player.id);
+        console.log("match winner ID", match.winner_id);
+        console.log("user wins", userWins);
+      }
+    });
+    return userWins;
+  };
+
+  const totalUserLosses = function (player) {
+    let userLosses = 0;
+    matchesPlayer.map((match) => {
+      if (
+        (player.id !== match.winner_id && player.id === match.player1_id) ||
+        player.id === match.player2_id
+      ) {
+        userLosses++;
+      }
+    });
+    return userLosses;
+  };
+
+  const logout = function () {
+    localStorage.clear();
+  };
+
+  useEffect(() => {
     setTimeout(() => {
       axios
         .get(`/api/users/player/${JSON.parse(currentUser).id}`)
@@ -33,7 +80,7 @@ export default function Profile() {
           console.log("PROFILE RES DATA", res.data);
           setChallenges(res.data.challenges);
         });
-    }, 100);
+    }, 500);
   }, []);
 
   // state = { activeItem: "home" };
@@ -41,12 +88,52 @@ export default function Profile() {
   // handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   return (
-    <div className="profile-container">
-      <Menu user={user} logout={logout} />
-      <Segment className="profile-segment">
-        <img className="profile-pic" src={user.avatar} />
-      </Segment>
-    </div>
+    <>
+      <div className="profile-container">
+        <Menu />
+        <Segment className="profile-segment">
+          <div className="avatar-container">
+            <img className="profile-pic" src={user.avatar} />
+            <h2 className="userName">{user.name}</h2>
+          </div>
+          <div className="middle-column">
+            <h1 className="description">
+              <em>"{user.bio}"</em>
+            </h1>
+            <div className="challenge-button">
+              <Scroll to="profile-challenges" smooth={true}>
+                <Button inverted color="orange">
+                  Challenges
+                </Button>
+              </Scroll>
+            </div>
+          </div>
+
+          <div className="record">
+            <strong>
+              <u>User Record:</u>
+            </strong>
+            <div className="player-record">
+              <p>
+                Wins: {totalUserWins(JSON.parse(currentUser))} <br />
+                Losses: {totalUserLosses(JSON.parse(currentUser))}
+              </p>
+            </div>
+          </div>
+        </Segment>
+        <div className="profile-challenges">
+          <ChallengesRecieved users={user} challenges={challenges} />
+        </div>
+        <Scroll to="profile-segment" smooth={true}>
+          <Button animated="vertical" className="back-to-top">
+            <Button.Content visible>Back to top</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow up" />
+            </Button.Content>
+          </Button>
+        </Scroll>
+      </div>
+    </>
   );
 }
 //   const [user, setUser] = useState({});

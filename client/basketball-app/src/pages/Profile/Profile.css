@@ -151,16 +151,87 @@ p {
 }
 
 .profile-container {
+  min-height: 100vh;
   width: 100vw;
-  background-color: blanchedalmond;
+  background-image: url("https://images.pexels.com/photos/1045534/pexels-photo-1045534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .ui.segment.profile-segment {
-  height: 1000px;
+  height: 400px;
   display: flex;
   align-items: center;
-  /* background-color: rgba(177, 199, 255, 0.9); */
-  background-image: url("https://images.pexels.com/photos/4562470/pexels-photo-4562470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  justify-content: space-between;
+  background-color: rgb(163 153 141 / 65%);
+  /* background-image: url("https://images.pexels.com/photos/4562470/pexels-photo-4562470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+}
+
+.userName {
+  margin: 40px;
+  font-size: 33px;
+  font-family: system-ui;
+}
+
+.description {
+  margin-bottom: 0;
+  font-family: system-ui;
+  padding-bottom: 90px;
+  font-size: 77px;
+}
+
+.record {
+  font-size: 45px;
+  font-family: monospace;
+  /* padding-top: 30px;
+  padding-bottom: 200px; */
+  padding-left: 230px;
+}
+.player-record {
+  font-size: 33px;
+}
+
+.middle-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge-button {
+  padding-left: 100px;
+}
+
+.profile-challenges {
+  margin-top: 40em;
+  margin-left: 15em;
+  display: flex;
+  flex-direction: column;
+  background-color: #d4cdc3cc;
+  width: 450px;
+  height: 500px;
+  align-items: center;
+  overflow: scroll;
+  position: relative;
+  bottom: 200px;
+}
+
+.ui.cards > .card > .content > .meta + .description {
+  font-size: 35px;
+}
+
+.ui.animated.button {
+  position: fixed;
+  overflow: hidden;
+  padding-right: 0 !important;
+  vertical-align: middle;
+  z-index: 1;
+  width: 350px;
+  bottom: 40px;
+  left: 110em;
 }
