@@ -12,9 +12,10 @@ import MatchesTeam from "./pages/Matches/MatchesTeam";
 import MatchesPlayer from "./pages/Matches/MatchesPlayer";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <>
-      <Navbar />
+      <Navbar user={user} />
       <Router>
         <Switch>
           <Route path="/" exact render={() => <Home />} />

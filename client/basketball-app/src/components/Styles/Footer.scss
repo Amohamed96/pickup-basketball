@@ -2,7 +2,6 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-top: 3%;
   padding-bottom: 3%;
   background-color: rgb(42 76 130 / 91%);
   color: white;
@@ -12,8 +11,9 @@ footer {
 .footer-links {
   text-decoration: none;
   color: white;
+  transition: 0.5s;
 }
 
 .footer-links:hover {
-  color: rgb(226, 226, 226);
+  color: orange;
 }

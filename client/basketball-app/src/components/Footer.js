@@ -33,14 +33,14 @@ export default function Foot() {
       </div>
 
       <div>
-        <h3>Contact Admin</h3>
-        <p>www.techtakeout.com</p>
+        <h3>Contact Support</h3>
+        <p>www.rankd.com</p>
         <p>Phone: +1 416-555-5555</p>
         <p>Email: info@Rankd.com</p>
       </div>
 
       <div>
-        <h3>links</h3>
+        <h3>LINKS</h3>
         <a class="footer-links" href="/Messages">
           Messages
         </a>
