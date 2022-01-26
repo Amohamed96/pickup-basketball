@@ -1,11 +1,4 @@
-.Home-text {
-  display: flex;
-  justify-content: center;
-  margin: 13px;
-  font-size: 30px;
-}
-
-.homepage {
+/* .homepage {
   color: #050505;
   background-color: rgba(203, 218, 255, 0.9);
   height: 700px;
@@ -1470,26 +1463,79 @@ a.text-white:focus {
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.7;
-  }
+  } */
+.landing {
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url(https://images.pexels.com/photos/1702624/pexels-photo-1702624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
 
-  @media (max-width: 768px) {
-    .btn {
-      margin-bottom: 10px;
-    }
+@media (max-width: 768px) {
+  .btn {
+    margin-bottom: 10px;
   }
 }
+
 .button-scroll {
   position: relative;
-  top: 35em;
+  top: 25em;
   margin: auto;
   width: fit-content;
+  border-radius: 50%;
+}
+.button-animated {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
 }
 
-.ui.secondary.button,
-.ui.secondary.buttons .button {
-  background-color: #2d518b;
-  color: #fff;
-  text-shadow: none;
-  background-image: none;
-  width: 110px;
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+.bounce {
+  animation-name: bounce;
+}
+
+.basketball-icon {
+  font-size: 80px;
+  color: #d86e14;
+  transition: 0.35s;
+  -webkit-animation: spin 0.5s infinite;
+  -moz-animation: spin 0.5s infinite;
+  animation: spin 0.5s infinite;
+}
+.basketball-icon:hover {
+  color: black;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

@@ -36,16 +36,28 @@ h1 {
   color: transparent;
 } */
 
-.Home-text {
+/* .Home-text {
   color: #263d5f;
-  /* font-size: 120px; */
+  font-size: 120px;
   font-family: monospace;
   position: relative;
-  top: 200px;
+} */
+
+.Home-text {
+  display: flex;
+  justify-content: center;
+  margin: 13px;
+  font-size: 130px;
 }
 
-.home-title {
-  font-size: 400px;
+.Home-text h1 {
+  font-size: 170px;
   font-family: monospace;
-  color: #2b3e68bd;
+  color: #f68c33b3;
+  position: relative;
+  top: 15rem;
+}
+
+.Home-text h1:hover {
+  color: black;
 }

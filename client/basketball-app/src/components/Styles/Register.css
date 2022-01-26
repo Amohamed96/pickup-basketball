@@ -20,13 +20,13 @@ a {
 .register-wrap {
   margin: auto;
   min-width: 805px;
-  min-height: 1000px;
+  min-height: 1100px;
   position: relative;
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg")
     no-repeat center;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
-  padding-bottom: 100px;
+  margin-bottom: 150px;
 }
 .login-html {
   width: 100%;

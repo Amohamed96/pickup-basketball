@@ -7,6 +7,7 @@ import Games from "../../components/Games";
 import Leaderboard from "../../components/Leaderboard";
 import { Button } from "semantic-ui-react";
 import { Link as Scroll } from "react-scroll";
+import { IoIosBasketball } from "react-icons/io";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -34,9 +35,9 @@ export default function Home() {
     <>
       <div className="landing">
         <Hero />
-        <div className="button-scroll">
+        <div className="button-scroll button-animated bounce">
           <Scroll to="slider" smooth={true}>
-            <Button secondary>Get Started</Button>
+            <IoIosBasketball className="basketball-icon" />
           </Scroll>
         </div>
 
