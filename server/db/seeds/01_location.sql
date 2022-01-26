@@ -1,11 +1,12 @@
 INSERT INTO location (
+  court,
   city,
-  province,
-  country
-)
+  province)
 VALUES  
-  ('Toronto', 'Ontario', 'Canada'),
-  ('San Fransisco', 'California', 'USA'),
-  ('Brooklyn', 'New York', 'USA'),
-  ('Los Angeles', 'California', 'USA');
+  ('Cage Court','Toronto', 'Ontario'),
+  ('AG Court', 'Toronto', 'Ontario'),
+  ('CNH Court', 'Toronto', 'Ontario'),
+  ('Parliament Court', 'Ottawa', 'Ontario'),
+  ('Vaughan Court', 'Vaughan', 'Ontario'),
+  ('Niagra Court', 'Niagra Falls', 'Ontario');
 

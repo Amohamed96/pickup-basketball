@@ -133,7 +133,7 @@ export default function Leaderboard(props) {
                       <td
                         class="text-left"
                         onClick={() => {
-                          goToPlayer(player);
+                          goToPlayer(player.id);
                         }}
                       >
                         <img src={player.avatar} alt="Profile Pic" />

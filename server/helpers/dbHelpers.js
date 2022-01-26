@@ -9,6 +9,16 @@ module.exports = (db) => {
     }
     return string;
   };
+  const getLocation = () => {
+    const query = {
+      text: "SELECT * FROM location",
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const getUsers = () => {
     const query = {
@@ -292,6 +302,7 @@ module.exports = (db) => {
     getUsers,
     getUserByEmail,
     getUserById,
+    getLocation,
     addUser,
     getTeams,
     getTeamByName,
