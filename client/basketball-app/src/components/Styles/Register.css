@@ -1,10 +1,3 @@
-body {
-  margin: 0;
-  color: #6a6f8c;
-  background: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg";
-  background-color: rgba(177, 199, 255, 0.9);
-  font: 600 16px/18px "Open Sans", sans-serif;
-}
 *,
 :after,
 :before {
@@ -25,22 +18,22 @@ a {
 }
 
 .register-wrap {
-  width: 100%;
   margin: auto;
   min-width: 805px;
-  min-height: 970px;
+  min-height: 1000px;
   position: relative;
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg")
     no-repeat center;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  padding-bottom: 100px;
 }
 .login-html {
   width: 100%;
   height: 100%;
   position: absolute;
   padding: 90px 70px 50px 70px;
-  background: rgba(214, 224, 248, 0.9);
+  background: rgba(190, 209, 255, 0.9);
 }
 .login-html .sign-in-htm,
 .login-html .sign-up-htm {
@@ -104,7 +97,7 @@ a {
   -webkit-text-security: circle;
 }
 .login-form .group .label {
-  color: #aaa;
+  color: rgba(0, 0, 0, 0.945);
   font-size: 14px;
 }
 .login-form .group .button {
@@ -166,7 +159,7 @@ a {
 .hr {
   height: 2px;
   margin: 60px 0 50px 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(211, 4, 4, 0.2);
 }
 .foot-lnk {
   text-align: center;

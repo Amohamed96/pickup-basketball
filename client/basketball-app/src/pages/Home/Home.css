@@ -73,7 +73,7 @@ section {
   display: block;
 }
 
-body {
+.home-body {
   font-family: Open Sans, sans-serif;
   font-size: 1rem;
   font-weight: 400;
@@ -82,6 +82,14 @@ body {
   text-align: left;
   color: #525f7f;
   background-color: #f8f9fe;
+}
+
+.landing {
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url(https://images.pexels.com/photos/1702624/pexels-photo-1702624.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 [tabindex="-1"]:focus {

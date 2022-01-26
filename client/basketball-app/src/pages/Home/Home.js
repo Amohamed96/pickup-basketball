@@ -30,15 +30,17 @@ export default function Home() {
 
   return (
     <>
-      <Navbar users={users} />
-      <Hero />
-      <Games matchesTeam={matchesTeam} teams={teams} />
-      <Leaderboard
-        users={users}
-        teams={teams}
-        matchesTeam={matchesTeam}
-        matchesPlayer={matchesPlayer}
-      />
+      <div className="landing">
+        <Navbar users={users} />
+
+        <Leaderboard
+          users={users}
+          teams={teams}
+          matchesTeam={matchesTeam}
+          matchesPlayer={matchesPlayer}
+        />
+        <Games matchesTeam={matchesTeam} teams={teams} />
+      </div>
     </>
   );
 }

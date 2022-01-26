@@ -96,7 +96,7 @@ export default function Leaderboard(props) {
       mapPD.rating = playerRating(player);
       mapPD.totalWins = totalUserWins(player);
       mapPD.totalLosses = totalUserLosses(player);
-      mapPD.avatar = getTeam(player.team_id).avatar;
+      mapPD.avatar = player.avatar;
 
       return mapPD;
     })
