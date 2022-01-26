@@ -1485,3 +1485,12 @@ a.text-white:focus {
   align-self: er;
   width: fit-content;
 }
+
+.ui.secondary.button,
+.ui.secondary.buttons .button {
+  background-color: #2d518b;
+  color: #fff;
+  text-shadow: none;
+  background-image: none;
+  width: 110px;
+}

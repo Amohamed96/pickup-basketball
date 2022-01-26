@@ -48,7 +48,7 @@ export default function Menu() {
             />
           </Link>
         </SemanticMenu>
-        <SemanticMenu>
+        <SemanticMenu className="Logout-button">
           <Link to="/login" position="right">
             <SemanticMenu.Item
               position="right"
