@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Styles/Leaderboard.css";
 import { Redirect } from "react-router-dom";
+import Leading from "./Leading";
 
 export default function Leaderboard(props) {
   const [redirect, setRedirect] = useState("");
@@ -18,9 +19,6 @@ export default function Leaderboard(props) {
     );
   };
   const currentUser = localStorage.getItem("user");
-  console.log(" USERS from LB", users);
-  console.log("TEAMS  from LB", teams);
-  console.log("MATCHES PLAYER from LB", matchesPlayer);
 
   useEffect(() => {
     setUser(JSON.parse(currentUser));
@@ -195,6 +193,14 @@ export default function Leaderboard(props) {
             </div>
           </div>
         </div>
+        <Leading
+          users={users}
+          matchesPlayer={matchesPlayer}
+          matchesTeam={matchesTeam}
+          teams={teams}
+          totalUserWins={totalUserWins}
+          totalUserLosses={totalUserLosses}
+        />
       </section>
     </div>
   );

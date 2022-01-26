@@ -89,7 +89,6 @@ export default function Profile() {
   return (
     <>
       <div className="profile-container">
-        {/* <Menu /> */}
         <Segment className="profile-segment">
           <div className="avatar-container">
             <img className="profile-pic" src={user.avatar} />

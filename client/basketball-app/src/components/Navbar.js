@@ -19,10 +19,6 @@ export default function Navbar() {
 
   return (
     <>
-      <a href="/" class="logo" target="_blank">
-        <div>FindMyCourt</div>
-      </a>
-
       <input
         class="menu-icon"
         type="checkbox"

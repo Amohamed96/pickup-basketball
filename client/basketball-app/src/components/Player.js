@@ -85,47 +85,47 @@ export default function Player() {
 
   return (
     <>
-      <Navbar />
-
-      <Segment className="profile-segment">
-        <div className="avatar-container">
-          <img className="profile-pic" src={player.avatar} />
-          <h2 className="userName">{player.name}</h2>
-        </div>
-        <div className="middle-column">
-          <h1 className="description">
-            <em>"{player.bio}"</em>
-          </h1>
-          <div className="challenge-button">
-            <Scroll to="profile-challenges" smooth={true}>
-              <Button inverted color="orange">
-                Challenges
-              </Button>
-            </Scroll>
+      <div class="player-container">
+        <Segment className="profile-segment">
+          <div className="avatar-container">
+            <img className="profile-pic" src={player.avatar} />
+            <h2 className="userName">{player.name}</h2>
           </div>
-        </div>
-
-        <div className="record">
-          <strong>
-            <u>User Record:</u>
-          </strong>
-          <div className="player-record">
-            <p>
-              Wins: {totalUserWins(player)} <br />
-              Losses: {totalUserLosses(player)}
-            </p>
+          <div className="middle-column">
+            <h1 className="description">
+              <em>"{player.bio}"</em>
+            </h1>
+            <div className="challenge-button">
+              <Scroll to="ch-vid" smooth={true}>
+                <Button inverted color="orange">
+                  Challenge
+                </Button>
+              </Scroll>
+            </div>
           </div>
-        </div>
-      </Segment>
-      <div class="ch-vid">
-        <ChallengeForm player={player} location={location} />
 
-        <div className="vid">
-          <iframe
-            width="550"
-            height="400"
-            src="https://www.youtube.com/embed/yuHbkUoT5oE?autoplay=1&mute=1"
-          ></iframe>
+          <div className="record">
+            <strong>
+              <u>User Record:</u>
+            </strong>
+            <div className="player-record">
+              <p>
+                Wins: {totalUserWins(player)} <br />
+                Losses: {totalUserLosses(player)}
+              </p>
+            </div>
+          </div>
+        </Segment>
+        <div class="ch-vid">
+          <ChallengeForm player={player} location={location} />
+
+          <div className="vid">
+            <iframe
+              width="550"
+              height="400"
+              src="https://www.youtube.com/embed/yuHbkUoT5oE?autoplay=1&mute=1"
+            ></iframe>
+          </div>
         </div>
       </div>
     </>

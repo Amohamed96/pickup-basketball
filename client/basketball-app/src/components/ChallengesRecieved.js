@@ -33,22 +33,13 @@ export default function ChallengesRecieved(props) {
   const [response, setResponse] = useState("pending");
   let response_message = "";
 
-  // useEffect(() => {
-  //   // setTimeout(() => {
-  //   axios.get("http://localhost:3000/api/home").then((res) => {
-  //     setUser(res.data);
-  //     console.log("HOME RES DATA----->", res.data);
-  //   });
-  //   // }, 100);
-  // });
   useEffect(() => {
     axios.get("http://localhost:3000/api/users").then((res) => {
       setUsers(res.data);
       console.log("RES DATA CH", res.data);
     });
   }, []);
-  console.log("ALL USERS *********--", users);
-  console.log("Challenges challenges *********--", challenges);
+
   const handleStatus = (challenge, newStatus = "pending") => {
     console.log("CHALLENGE *********--", challenge);
     const headers = { "Content-Type": "application/json" };
@@ -94,9 +85,6 @@ export default function ChallengesRecieved(props) {
                   CHALLENGE FROM:{users[challenge.challenger_id - 1].name}
                 </Card.Header>
                 <Card.Meta>Location goes here</Card.Meta>
-                <Card.Description>
-                  <strong>{challenge.challenge_message}</strong>
-                </Card.Description>
               </Card.Content>
               {challenge.request_status === null && (
                 <ButtonActions
