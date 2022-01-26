@@ -90,7 +90,6 @@ export default function Leaderboard(props) {
     );
     return rating;
   };
-
   const mappedUsers = users
     .map((player) => {
       const mapPD = { ...player };
@@ -134,7 +133,7 @@ export default function Leaderboard(props) {
                       <td
                         class="text-left"
                         onClick={() => {
-                          goToPlayer(player.id);
+                          goToPlayer(player);
                         }}
                       >
                         <img src={player.avatar} alt="Profile Pic" />
@@ -144,7 +143,7 @@ export default function Leaderboard(props) {
                       <td>{player.totalWins}</td>
                       <td>{player.totalLosses}</td>
                       <td>
-                        <img src={getTeam(player.team_id).avatar} />
+                        <img src={player.avatar} />
                       </td>
                     </tr>
                   ))}
