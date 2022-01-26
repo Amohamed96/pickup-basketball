@@ -5,7 +5,6 @@ import Menu from "../../components/Menu/Menu";
 import ChallengesRecieved from "../../components/ChallengesRecieved";
 import { Link as Scroll } from "react-scroll";
 import { TransactionOutlined } from "@ant-design/icons";
-import Footer from "../../components/footer/Footer";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -90,7 +89,7 @@ export default function Profile() {
   return (
     <>
       <div className="profile-container">
-        <Menu />
+        {/* <Menu /> */}
         <Segment className="profile-segment">
           <div className="avatar-container">
             <img className="profile-pic" src={user.avatar} />

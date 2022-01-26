@@ -1,9 +1,4 @@
-/* body {
-  background-color: rgba(177, 199, 255, 0.9);
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
-  background-size: 4%;
-}
-
+/*
 .padding {
   padding: 3rem !important;
   margin-left: 200px;
@@ -145,6 +140,9 @@ p {
   margin: 0 auto;
 } */
 
+.body {
+  height: fit-content;
+}
 .profile-pic {
   border-radius: 100%;
   padding-left: 20px;
@@ -159,6 +157,7 @@ p {
 }
 
 .ui.segment.profile-segment {
+  position: relative;
   height: 400px;
   display: flex;
   align-items: center;
@@ -208,7 +207,9 @@ p {
 }
 
 .profile-challenges {
-  margin-top: 40em;
+  position: relative;
+  bottom: 50em;
+  margin-top: 61em;
   margin-left: 15em;
   display: flex;
   flex-direction: column;
