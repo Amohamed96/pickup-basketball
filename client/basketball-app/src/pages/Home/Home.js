@@ -5,6 +5,8 @@ import Hero from "../../components/Hero";
 import Navbar from "../../components/Navbar";
 import Games from "../../components/Games";
 import Leaderboard from "../../components/Leaderboard";
+import { Button } from "semantic-ui-react";
+import { Link as Scroll } from "react-scroll";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -32,14 +34,19 @@ export default function Home() {
     <>
       <div className="landing">
         <Navbar users={users} />
+        <div className="button-scroll">
+          <Scroll to="slider" smooth={true}>
+            <Button secondary>Get Started</Button>
+          </Scroll>
+        </div>
 
+        <Games matchesTeam={matchesTeam} teams={teams} />
         <Leaderboard
           users={users}
           teams={teams}
           matchesTeam={matchesTeam}
           matchesPlayer={matchesPlayer}
         />
-        <Games matchesTeam={matchesTeam} teams={teams} />
       </div>
     </>
   );

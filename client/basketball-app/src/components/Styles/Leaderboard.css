@@ -8,8 +8,8 @@
 }
 .leaderboardContainer {
   display: flex;
-  justify-content: space-between;
-  padding-top: 70em;
+  justify-content: space-around;
+  padding-top: 90em;
 }
 table {
   width: 100%;

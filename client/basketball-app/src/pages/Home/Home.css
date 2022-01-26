@@ -1478,3 +1478,10 @@ a.text-white:focus {
     }
   }
 }
+.button-scroll {
+  position: relative;
+  top: 35em;
+  margin: auto;
+  align-self: er;
+  width: fit-content;
+}

@@ -124,7 +124,7 @@ export default function Profile() {
         <div className="profile-challenges">
           <ChallengesRecieved users={user} challenges={challenges} />
         </div>
-        <Scroll to="profile-segment" smooth={true}>
+        <Scroll to="profile-container" smooth={true}>
           <Button animated="vertical" className="back-to-top">
             <Button.Content visible>Back to top</Button.Content>
             <Button.Content hidden>

@@ -32,12 +32,13 @@ $animationSpeed: 30s;
 // Styling
 .slider {
   background: white;
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+  box-shadow: 0 10px 20px -5px rgb(0 0 0 / 13%);
   height: 115px;
   margin: auto;
   overflow: hidden;
   position: relative;
   width: 960px;
+  top: 70em;
 
   &::before,
   &::after {
