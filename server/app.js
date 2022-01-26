@@ -49,7 +49,7 @@ app.post("api/v1/users", (req, res) => {});
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);
-  return dbHelpers.CreateChatUser();
+  // return dbHelpers.CreateChatUser();
 });
 
 module.exports = app;

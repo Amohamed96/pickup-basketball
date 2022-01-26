@@ -90,14 +90,14 @@ module.exports = (db) => {
 
     return db
       .query(query)
-      .then((result) => {
+      .then(async (result) => {
         console.log("DB HELPERS RESULT >>>", result);
-        axios
+        await axios
           .put(
             `https://api.chatengine.io/users/`,
             {
               username: name,
-              secret: generateRandomString(),
+              secret,
             },
             { headers: { "Private-Key": process.env.C_SECRETKEY } }
           )

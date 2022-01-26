@@ -2,6 +2,8 @@
   height: 94px;
   margin-top: 0px;
   margin-bottom: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .ui.inverted.segment {
