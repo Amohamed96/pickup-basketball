@@ -1,4 +1,4 @@
-.hero-container {
+/* .hero-container {
   color: #ececee;
   background-color: rgba(177, 199, 255, 0.9);
   background-image: url("https://i.pinimg.com/originals/b0/5b/f5/b05bf50f6384f7321913f36da899d192.jpg");
@@ -34,12 +34,18 @@ h1 {
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
   color: transparent;
-}
+} */
 
 .Home-text {
-  width: 100%;
-  text-align: center;
-  padding-top: 100px;
-  font-size: 40px;
-  font-family: fantasy;
+  color: #263d5f;
+  font-size: 120px;
+  font-family: monospace;
+  position: relative;
+  top: 300px;
+}
+
+.home-title {
+  font-size: 110px;
+  font-family: monospace;
+  color: #2b3e68bd;
 }

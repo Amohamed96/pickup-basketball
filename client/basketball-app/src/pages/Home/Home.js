@@ -34,6 +34,7 @@ export default function Home() {
     <>
       <div className="landing">
         <Navbar users={users} />
+        <Hero />
         <div className="button-scroll">
           <Scroll to="slider" smooth={true}>
             <Button secondary>Get Started</Button>

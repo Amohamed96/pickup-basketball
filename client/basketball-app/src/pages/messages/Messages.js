@@ -6,8 +6,8 @@ import MenuExampleInvertedSegment from "../../components/Menu/Menu";
 export default function Messages() {
   const [message, setMessage] = useState([]);
   // const [user, setUser] = useState({});
+  
   const user = JSON.parse(localStorage.getItem("user"));
-
   console.log("CURRENT USER from LOCAL", user);
 
   return (
