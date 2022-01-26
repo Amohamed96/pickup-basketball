@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register.js";
 import Profile from "./pages/Profile/Profile.js";
 import Navbar from "./components/Navbar";
+import Foot from "./components/Footer";
 import Messages from "./pages/messages/Messages";
 import Player from "./components/Player";
 import MatchesTeam from "./pages/Matches/MatchesTeam";
@@ -13,6 +14,7 @@ import MatchesPlayer from "./pages/Matches/MatchesPlayer";
 function App() {
   return (
     <>
+      <Navbar />
       <Router>
         <Switch>
           <Route path="/" exact render={() => <Home />} />
@@ -25,6 +27,7 @@ function App() {
           <Route path="/matches-team" render={() => <MatchesTeam />} />
         </Switch>
       </Router>
+      <Foot />
     </>
   );
 }

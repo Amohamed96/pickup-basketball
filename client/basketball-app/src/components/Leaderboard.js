@@ -90,6 +90,7 @@ export default function Leaderboard(props) {
     );
     return rating;
   };
+
   const mappedUsers = users
     .map((player) => {
       const mapPD = { ...player };
