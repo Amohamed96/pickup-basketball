@@ -22,15 +22,41 @@ export default function MatchesPlayerForm(props) {
     console.log("EVENT TARGET +++ ", e.target.value);
     setMatches({ ...matches, [e.target.name]: e.target.value });
   };
+  const storeUserDataOne = (e) => {
+    console.log("EVENT TARGET +++ ", e.target.value);
+    const playerId = users.filter((player) => {
+      return player.name === e.target.value;
+    });
+    setMatches({ ...matches, player1_id: playerId[0].id });
+  };
+  const storeUserDataTwo = (e) => {
+    console.log("EVENT TARGET +++ ", e.target.value);
+    const playerIdTwo = users.filter((player) => {
+      return player.name === e.target.value;
+    });
+    setMatches({ ...matches, player2_id: playerIdTwo[0].id });
+  };
+  const storeUserDataThree = (e) => {
+    console.log("EVENT TARGET +++ ", e.target.value);
+    const playerIdThree = users.filter((player) => {
+      return player.name === e.target.value;
+    });
+    setMatches({ ...matches, winner_id: playerIdThree[0].id });
+  };
   const handleMatchesPlayer = () => {
     console.log("MATCHES PLAYER FORM *********--", matches);
     axios.post("/api/matches/player", matches).then((result) => {
-      console.log("RESULTS>>", result.data.matches);
       setMatches(result.data.matches);
-      setRedirect(`/profile`);
+      setRedirect(`/`);
     });
   };
 
+  console.log("PLAYERS>>", users);
+
+  const players = users.map((player) => {
+    return player.name;
+  });
+  const nameToId = function (name) {};
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
@@ -52,13 +78,14 @@ export default function MatchesPlayerForm(props) {
                 challenger_id:
               </label>
               <DropdownPlayers users={users} />
+
               <input
                 name="player1_id"
                 id="user"
                 type="challenger_id"
                 className="input"
                 placeholder="Challenger"
-                onChange={storeUserData}
+                onChange={storeUserDataOne}
               />
             </div>
             <div className="group">
@@ -73,7 +100,7 @@ export default function MatchesPlayerForm(props) {
                 className="input"
                 placeholder="Who are you challenging?"
                 data-type="user_id"
-                onChange={storeUserData}
+                onChange={storeUserDataTwo}
               />
               <input
                 name="player1_score"
@@ -100,7 +127,7 @@ export default function MatchesPlayerForm(props) {
                 className="input"
                 placeholder="Who Won?"
                 data-type="user_id"
-                onChange={storeUserData}
+                onChange={storeUserDataThree}
               />
             </div>
             <div className="group">

@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../../components/Navbar";
 import MatchesPlayerForm from "./MatchesPlayerForm";
 import "./Matches.css";
+import Scoreboard from "../../components/Scoreboard";
 
 export default function MatchesPlayer() {
   const [users, setUsers] = useState([]);
@@ -37,6 +38,7 @@ export default function MatchesPlayer() {
           matchesPlayer={matchesPlayer}
         />
       </div>
+      {/* <Scoreboard /> */}
     </div>
   );
 }
