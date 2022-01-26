@@ -7,6 +7,8 @@ import ChallengeForm from "../components/ChallengeForm";
 
 export default function Player() {
   const [player, setPlayer] = useState("");
+  const [location, setLocation] = useState("");
+  const [check, setCheck] = useState(false);
 
   const { id } = useParams();
   console.log("ID FROM PLAYER >>>", id);
@@ -26,6 +28,18 @@ export default function Player() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (check) {
+      return;
+    }
+    setCheck(true);
+
+    axios.get("http://localhost:3000/api/location").then((res) => {
+      setLocation(res.data);
+      console.log("PLAYER RES LOCATION----->", res.data);
+    });
+  });
 
   return (
     <>
@@ -63,7 +77,7 @@ export default function Player() {
                   <h3 class="m-b-0 font-light">23</h3>
                   <small> Losses</small>
                 </div>
-                <ChallengeForm player={player} />
+                <ChallengeForm player={player} location={location} />
 
                 <div className="vid">
                   <iframe

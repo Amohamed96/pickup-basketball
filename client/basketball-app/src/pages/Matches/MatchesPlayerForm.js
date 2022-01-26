@@ -51,8 +51,6 @@ export default function MatchesPlayerForm(props) {
     });
   };
 
-  console.log("PLAYERS>>", users);
-
   const players = users.map((player) => {
     return player.name;
   });
