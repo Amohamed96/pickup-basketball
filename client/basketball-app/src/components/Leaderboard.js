@@ -144,7 +144,7 @@ export default function Leaderboard(props) {
                       <td>{player.totalWins}</td>
                       <td>{player.totalLosses}</td>
                       <td>
-                        <img src={player.avatar} />
+                        <img src={getTeam(player.team_id).avatar} />
                       </td>
                     </tr>
                   ))}
