@@ -7,6 +7,7 @@ import "./Styles/Player.css";
 import ChallengeForm from "../components/ChallengeForm";
 import { Menu as SemanticMenu, Button, Segment, Icon } from "semantic-ui-react";
 import { Link as Scroll } from "react-scroll";
+import { IoIosBasketball } from "react-icons/io";
 
 export default function Player() {
   const [player, setPlayer] = useState("");
@@ -96,11 +97,16 @@ export default function Player() {
             <h1 className="description">
               <em>"{player.bio}"</em>
             </h1>
-            <div className="challenge-button">
+            {/* <div className="challenge-button">
               <Scroll to="ch-vid" smooth={true}>
                 <Button inverted color="orange">
                   Challenge
                 </Button>
+              </Scroll> */}
+            {/* </div> */}
+            <div className="challenge-button button-animated bounce">
+              <Scroll to="ch-vid" smooth={true}>
+                <IoIosBasketball className="basketball-icon" />
               </Scroll>
             </div>
           </div>
