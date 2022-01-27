@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Image } from "semantic-ui-react";
 import axios from "axios";
 import { CardGroup } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 const ButtonActions = (props) => {
   return (
@@ -31,6 +32,7 @@ export default function ChallengesRecieved(props) {
   const [error, setError] = useState("");
   const [users, setUsers] = useState("");
   const [response, setResponse] = useState("pending");
+
   let response_message = "";
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function ChallengesRecieved(props) {
           headers: headers,
         }
       )
-      .then((result) => {
+      .then(() => {
         // localStorage.setItem("user", JSON.stringify(result.data));
         // setRedirect("/profile");
       })
@@ -84,7 +86,7 @@ export default function ChallengesRecieved(props) {
                 <Card.Header>
                   CHALLENGE FROM:{users[challenge.challenger_id - 1].name}
                 </Card.Header>
-                <Card.Meta>Location goes here</Card.Meta>
+                <Card.Meta>Cage Court</Card.Meta>
               </Card.Content>
               {challenge.request_status === null && (
                 <ButtonActions
