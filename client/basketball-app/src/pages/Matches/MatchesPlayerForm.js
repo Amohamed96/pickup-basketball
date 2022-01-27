@@ -5,9 +5,15 @@ import "./Matches.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import DropdownPlayers from "../../components/DropdownPlayers";
+// import { Scoreboard } from "../../components/Scoreboard";
+import "./../../components/Styles/Scoreboard.scss";
+import Timer from "./../../components/Timer";
+import "./../../components/Styles/Timer.css";
 
 export default function MatchesPlayerForm(props) {
   const { users, matchesPlayer, matchesTeam, teams } = props;
+  const [countOne, setCountOne] = useState(0);
+  const [countTwo, setCountTwo] = useState(0);
   const [matches, setMatches] = useState({
     player1_id: null,
     player2_id: null,
@@ -18,10 +24,6 @@ export default function MatchesPlayerForm(props) {
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState("");
 
-  const storeUserData = (e) => {
-    console.log("EVENT TARGET +++ ", e.target.value);
-    setMatches({ ...matches, [e.target.name]: e.target.value });
-  };
   const storeUserDataOne = (e) => {
     console.log("EVENT TARGET +++ ", e.target.value);
     const playerId = users.filter((player) => {
@@ -54,10 +56,86 @@ export default function MatchesPlayerForm(props) {
   const players = users.map((player) => {
     return player.name;
   });
-  const nameToId = function (name) {};
+
+  const playerOneScore = function () {
+    setMatches({ ...matches, player1_score: countOne });
+  };
+  const playerTwoScore = function () {
+    setMatches({ ...matches, player2_score: countTwo });
+  };
+
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
+    <div className="scoreboard-container">
+      <div className="timer-container">
+        <Timer />
+      </div>
+      <div className="score-container">
+        <div className="team-container">
+          <div className="count-score">{countOne}</div>
+          <div className="button-wrapper">
+            <button onClick={() => setCountOne(countOne - 1)}>-</button>
+            <button onClick={() => setCountOne(countOne + 1)}>+</button>
+            <button onClick={() => setCountOne(countOne + 2)}>+2</button>
+          </div>
+          <input
+            name="player1_id"
+            placeholder="Player 1"
+            className="player-input"
+            onChange={storeUserDataOne}
+          ></input>
+          <button
+            name="player1_score"
+            type="submit"
+            className="player-input"
+            onClick={playerOneScore}
+          >
+            {" "}
+            Log Player 1 Final Score
+          </button>
+        </div>
+        <div className="team-container">
+          <div className="count-score">{countTwo}</div>
+          <div className="button-wrapper">
+            <button onClick={() => setCountTwo(countTwo - 1)}>-</button>
+            <button onClick={() => setCountTwo(countTwo + 1)}>+</button>
+            <button onClick={() => setCountTwo(countTwo + 2)}>+2</button>
+          </div>
+          <input
+            name="player2_id"
+            placeholder="Player 2"
+            className="player-input"
+            onChange={storeUserDataTwo}
+          ></input>
+          <button
+            name="player2_score"
+            type="submit"
+            className="player-input"
+            placeholder="Winner"
+            onClick={playerTwoScore}
+          >
+            Log Player 2 Final Score
+          </button>
+        </div>
+      </div>
+      <input
+        name="winner_id"
+        className="player-input"
+        placeholder="Winner"
+        onChange={storeUserDataThree}
+      ></input>
+      <input
+        type="submit"
+        className="button"
+        value="SUBMIT"
+        onClick={handleMatchesPlayer}
+      ></input>
+    </div>
+  );
+}
+/*
+
     <div className="login-wrap">
       <span>{error}</span>
       <div className="login-html">
@@ -138,7 +216,4 @@ export default function MatchesPlayerForm(props) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
+      </div>  */
