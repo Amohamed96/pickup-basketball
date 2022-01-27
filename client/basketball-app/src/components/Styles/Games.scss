@@ -13,12 +13,12 @@
 @mixin white-gradient {
   background: linear-gradient(
     to right,
-    rgba(255, 255, 255, 1) 0%,
+    #29487ae8 30%,
     rgba(255, 255, 255, 0) 100%
   );
 }
 
-$animationSpeed: 30s;
+$animationSpeed: 20s;
 
 @keyframes scroll {
   0% {
@@ -31,9 +31,10 @@ $animationSpeed: 30s;
 
 // Styling
 .slider {
+  border-radius: 10%;
   background: #fbfbfb69;
   box-shadow: 0 10px 20px -5px rgb(0 0 0 / 13%);
-  height: 132px;
+  height: 152px;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -44,10 +45,11 @@ $animationSpeed: 30s;
   &::after {
     @include white-gradient;
     content: "";
-    height: 100px;
+    height: 152px;
     position: absolute;
     width: 200px;
     z-index: 2;
+    border-radius: 10%;
   }
 
   &::after {
@@ -57,13 +59,14 @@ $animationSpeed: 30s;
   }
 
   &::before {
+    border-radius: 10%;
+
     left: 0;
     top: 0;
   }
 
   .logo-team-bar {
     display: inline-block;
-    object-fit: contain;
     border-radius: 50%;
     height: 40px;
     width: 40px;
@@ -75,9 +78,34 @@ $animationSpeed: 30s;
   }
 
   .slide {
-    height: 100px;
+    height: 152px;
     width: 250px;
     display: flex;
     flex-direction: column;
+    font-weight: 700;
+  }
+  // .slide-1 {
+  //   background-color: rgb(255, 0, 225);
+  //   height: 10px;
+  //   width: 25px;
+  //   display: flex;
+  //   flex-direction: row;
+  // }
+  // .slide-2 {
+  //   background-color: rgb(255, 51, 0);
+  //   height: 10px;
+  //   width: 25px;
+  //   display: flex;
+  //   flex-direction: row;
+  // }
+  .scores-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.606);
+  }
+  .date-games {
+    color: black;
   }
 }

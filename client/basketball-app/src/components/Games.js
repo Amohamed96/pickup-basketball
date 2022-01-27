@@ -12,28 +12,36 @@ export default function Games(props) {
     }
     return (
       <div class="slide">
-        {/* {matchesPlayer[teamOneID].date} */}
-        <img
-          className="logo-team-bar"
-          src={users[playerOneID - 1].avatar}
-          alt=""
-        />
-        <div class="slide">
-          {users[playerOneID - 1].name}--
-          {matchesPlayer[match].player1_score}
-        </div>
-        <img
-          className="logo-team-bar"
-          src={users[playerTwoID - 1].avatar}
-          alt=""
-        />
-        <div class="slide">
-          {users[playerTwoID - 1].name}--
-          {matchesPlayer[match].player2_score}
+        <div className="scores-game">
+          <div className="date-games">
+            {" "}
+            {matchesPlayer[match].date.substr(0, 10)}
+          </div>
+          <img
+            className="logo-team-bar"
+            src={users[playerOneID - 1].avatar}
+            alt=""
+          />
+          <div class="slide-1">
+            {users[playerOneID - 1].name}
+            <span> - </span>
+            {matchesPlayer[match].player1_score}
+          </div>
+          <img
+            className="logo-team-bar"
+            src={users[playerTwoID - 1].avatar}
+            alt=""
+          />
+          <div class="slide-1">
+            {users[playerTwoID - 1].name}
+            <span> - </span>
+            {matchesPlayer[match].player2_score}
+          </div>
         </div>
       </div>
     );
   });
+
   return (
     <div class="slider">
       <div class="slide-track">{arrayMatchesPlayer}</div>

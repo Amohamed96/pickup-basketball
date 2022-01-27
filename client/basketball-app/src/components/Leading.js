@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
-
+import "./Styles/Leading.css";
 export default function (props) {
   const [user, setUser] = useState("");
   const { users, matchesPlayer, matchesTeam, teams } = props;
   console.log("USERS FROM LEADING----->", users);
+
   return (
-    <div>
+    <div className="card-contain">
       <div class="ui card">
         <div class="image">
-          <img src={users.avatar} />
+          <img src="https://www.nicepng.com/png/detail/19-196711_lebron-james-png-transparent-image-lebron-james-cavs.png" />
         </div>
         <div class="content">
-          <a class="header">Abdi</a>
+          <a class="header">LeJron Bames</a>
           <div class="meta">
-            <span class="date">Joined in 2013</span>
+            <span class="date">All-time Leading Scorer </span>
           </div>
-          <div class="">Kristy is an art director living in New York.</div>
+          <div class="">
+            LeJron, who plays for the Scarborough Nets has passed Awab in the
+            All-time Leading Scorers list.
+          </div>
         </div>
         <div class="extra content">
           <a>
-            <i class="user icon"></i>
-            22 Friends
+            <i class="basketball ball icon"></i>
+            12,438 Total Points
           </a>
         </div>
       </div>

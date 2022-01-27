@@ -1,0 +1,11 @@
+.card-contain {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  padding-top: 5rem;
+}
+
+.ui-card {
+  display: flex;
+  flex-direction: row;
+}

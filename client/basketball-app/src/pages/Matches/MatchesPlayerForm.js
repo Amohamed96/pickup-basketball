@@ -48,6 +48,8 @@ export default function MatchesPlayerForm(props) {
   const handleMatchesPlayer = () => {
     console.log("MATCHES PLAYER FORM *********--", matches);
     axios.post("/api/matches/player", matches).then((result) => {
+      playerOneScore();
+      playerTwoScore();
       setMatches(result.data.matches);
       setRedirect(`/`);
     });
@@ -77,47 +79,106 @@ export default function MatchesPlayerForm(props) {
           <div className="button-wrapper">
             <button onClick={() => setCountOne(countOne - 1)}>-</button>
             <button onClick={() => setCountOne(countOne + 1)}>+</button>
-            <button onClick={() => setCountOne(countOne + 2)}>+2</button>
+            <button
+              className="button-2"
+              onClick={() => setCountOne(countOne + 2)}
+            >
+              +2
+            </button>
           </div>
+          <div class="form-1">
+            <div class="input-container ic1">
+              <div class="cut"></div>
+              <label for="firstname" class="placeholder">
+                Player 1
+              </label>
+            </div>
+            <div class="input-container ic2">
+              <input
+                type="text"
+                name="player1_id"
+                onChange={storeUserDataOne}
+                class="input"
+                placeholder=" "
+              />
+            </div>
+            <button type="text" class="submit" onClick={playerOneScore}>
+              Log Score
+            </button>
+          </div>
+        </div>
+        {/* <div className="score-form">
           <input
             name="player1_id"
             placeholder="Player 1"
             className="player-input"
             onChange={storeUserDataOne}
           ></input>
-          <button
-            name="player1_score"
-            type="submit"
-            className="player-input"
-            onClick={playerOneScore}
-          >
-            {" "}
-            Log Player 1 Final Score
-          </button>
         </div>
+        <span> .</span>
+        <span> .</span>
+        <span> .</span>
+        <button
+          name="player1_score"
+          type="button"
+          className="button-form"
+          onClick={playerOneScore}
+        >
+          Log Player 1 Final Score
+        </button> */}
         <div className="team-container">
           <div className="count-score">{countTwo}</div>
           <div className="button-wrapper">
             <button onClick={() => setCountTwo(countTwo - 1)}>-</button>
             <button onClick={() => setCountTwo(countTwo + 1)}>+</button>
-            <button onClick={() => setCountTwo(countTwo + 2)}>+2</button>
+            <button
+              className="button-2"
+              onClick={() => setCountTwo(countTwo + 2)}
+            >
+              +2
+            </button>
           </div>
+          <div class="form-1">
+            <div class="input-container ic1">
+              <div class="cut"></div>
+              <label for="firstname" class="placeholder">
+                Player 2
+              </label>
+            </div>
+            <div class="input-container ic2">
+              <input
+                type="text"
+                name="player2_id"
+                onChange={storeUserDataTwo}
+                class="input"
+                placeholder=" "
+              />
+            </div>
+            <button type="text" class="submit" onClick={playerTwoScore}>
+              Log Score
+            </button>
+          </div>
+        </div>
+        {/* <div className="score-form">
           <input
             name="player2_id"
             placeholder="Player 2"
-            className="player-input"
             onChange={storeUserDataTwo}
           ></input>
-          <button
-            name="player2_score"
-            type="submit"
-            className="player-input"
-            placeholder="Winner"
-            onClick={playerTwoScore}
-          >
-            Log Player 2 Final Score
-          </button>
         </div>
+        <span> .</span>
+        <span> .</span>
+        <span> .</span>
+
+        <button
+          name="player2_score"
+          type="button"
+          placeholder="Winner"
+          className="button-form"
+          onClick={playerTwoScore}
+        >
+          Log Player 2 Final Score
+        </button> */}
       </div>
       <input
         name="winner_id"
@@ -125,9 +186,11 @@ export default function MatchesPlayerForm(props) {
         placeholder="Winner"
         onChange={storeUserDataThree}
       ></input>
+      <span> .</span>
+      <span> .</span>
       <input
         type="submit"
-        className="button"
+        className="button-form"
         value="SUBMIT"
         onClick={handleMatchesPlayer}
       ></input>

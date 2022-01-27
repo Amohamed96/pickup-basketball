@@ -6,6 +6,7 @@ import Leading from "./Leading";
 export default function Leaderboard(props) {
   const [redirect, setRedirect] = useState("");
   const [user, setUser] = useState("");
+  const [totalPoints, setTotalPoints] = useState(0);
 
   const { users, matchesPlayer, matchesTeam, teams } = props;
 
@@ -195,6 +196,7 @@ export default function Leaderboard(props) {
             </div>
           </div>
         </div>
+        <span> . </span>
         <Leading
           users={users}
           matchesPlayer={matchesPlayer}

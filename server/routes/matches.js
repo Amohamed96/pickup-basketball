@@ -43,7 +43,7 @@ module.exports = ({
   router.post("/team", (req, res) => {
     const { team1_id, team2_id, winner_id, team1_score, team2_score } =
       req.body;
-    const matchDateT = new Date();
+    const matchDateT = new Date().toLocaleDateString("en-CA");
     addMatchTeam(
       matchDateT,
       team1_id,
@@ -66,7 +66,7 @@ module.exports = ({
   router.post("/player", (req, res) => {
     const { player1_id, player2_id, winner_id, player1_score, player2_score } =
       req.body;
-    const matchDateP = new Date();
+    const matchDateP = new Date().toLocaleDateString("en-CA");
     addMatchPlayer(
       matchDateP,
       player1_id,
