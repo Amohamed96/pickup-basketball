@@ -45,8 +45,8 @@ export default function Leaderboard(props) {
     let userLosses = 0;
     matchesPlayer.map((match) => {
       if (
-        (player.id !== match.winner_id && player.id === match.player1_id) ||
-        player.id === match.player2_id
+        player.id !== match.winner_id &&
+        (player.id === match.player1_id || player.id === match.player2_id)
       ) {
         userLosses++;
       }
@@ -82,11 +82,12 @@ export default function Leaderboard(props) {
       (team) =>
         (rating =
           50 +
-          (totalUserWins(player) / totalUserWins(player) +
-            totalUserLosses(player)) *
-            (totalTeamWins(team) / totalTeamWins(team) + totalTeamLosses(team)))
+          (totalUserWins(player) /
+            (totalUserWins(player) + totalUserLosses(player))) *
+            41)
     );
-    return rating;
+
+    return Math.floor(rating);
   };
 
   const mappedUsers = users
@@ -159,7 +160,7 @@ export default function Leaderboard(props) {
               <table class="table-striped table-responsive table-hover result-point">
                 <thead class="point-table-head">
                   <tr>
-                    <th class="text-left">??</th>
+                    <th class="text-left">Standings</th>
                     <th class="text-center">Team</th>
                     <th class="text-center">W</th>
                     <th class="text-center">L</th>
@@ -167,10 +168,11 @@ export default function Leaderboard(props) {
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  {teams.map((team) => (
+                  {teams.map((team, i) => (
                     <tr>
                       <td class="text-left number">
-                        1<i class="fa fa-caret-up" aria-hidden="true"></i>
+                        {i + 1}
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
                       </td>
                       <td
                       // class="text-left"
