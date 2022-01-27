@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../pages/Profile/Profile.css";
 import "./Styles/Player.css";
-import ChallengeForm from "../components/ChallengeForm";
+import ChallengeForm from "./ChallengeForm";
 import { Menu as SemanticMenu, Button, Segment, Icon } from "semantic-ui-react";
 import { Link as Scroll } from "react-scroll";
 import { IoIosBasketball } from "react-icons/io";
