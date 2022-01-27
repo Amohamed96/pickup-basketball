@@ -13,9 +13,8 @@ export default function Navbar() {
   useEffect(() => {
     console.log("CURRENT USER from LOCAL", currentUser);
     console.log(" USER from LOCAL", user);
-
     setUser(JSON.parse(currentUser));
-  }, [currentUser]);
+  }, []);
 
   return (
     <>

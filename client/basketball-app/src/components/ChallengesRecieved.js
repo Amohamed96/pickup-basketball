@@ -3,6 +3,7 @@ import { Button, Card, Image } from "semantic-ui-react";
 import axios from "axios";
 import { CardGroup } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import ChallengeCard from "./ChallengeCard";
 
 const ButtonActions = (props) => {
   return (
@@ -75,33 +76,7 @@ export default function ChallengesRecieved(props) {
     <>
       {challenges.map((challenge) => {
         return (
-          <Card.Group>
-            <Card>
-              <Card.Content>
-                <Image
-                  floated="right"
-                  size="mini"
-                  src={users[challenge.challenger_id - 1].avatar}
-                />
-                <Card.Header>
-                  CHALLENGE FROM:{users[challenge.challenger_id - 1].name}
-                </Card.Header>
-                <Card.Meta>Cage Court</Card.Meta>
-              </Card.Content>
-              {challenge.request_status === null && (
-                <ButtonActions
-                  challenge={challenge}
-                  handleStatus={handleStatus}
-                />
-              )}
-              {challenge.request_status === "true" && (
-                <span>You accepted this challenge</span>
-              )}
-              {challenge.request_status === "false" && (
-                <span>You declined this challenge</span>
-              )}
-            </Card>
-          </Card.Group>
+         <ChallengeCard handleStatusAPI={handleStatus} challenge={challenge} users={users} />
         );
       })}
 
