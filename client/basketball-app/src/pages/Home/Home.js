@@ -41,7 +41,12 @@ export default function Home() {
           </Scroll>
         </div>
 
-        <Games matchesTeam={matchesTeam} teams={teams} />
+        <Games
+          matchesPlayer={matchesPlayer}
+          matchesTeam={matchesTeam}
+          teams={teams}
+          users={users}
+        />
         <Leaderboard
           users={users}
           teams={teams}
