@@ -2,6 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 70rem;
+  position: relative;
+  bottom: 30rem;
+  left: 20rem;
+  padding-top: 10rem;
+}
+.vid {
+  position: fixed;
+  left: 12rem;
 }
 
 .body {
@@ -15,18 +24,19 @@
 .player-container {
   min-height: 100vh;
   width: 100vw;
-  background-image: url("https://images.pexels.com/photos/1045534/pexels-photo-1045534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-image: url("https://images.pexels.com/photos/3351270/pexels-photo-3351270.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
-.ui.segment.profile-segment {
+.ui.segment.player-segment {
   position: relative;
   height: 400px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(163 153 141 / 55%);
+  background-color: rgb(0 0 0 / 44%);
   /* background-image: url("https://images.pexels.com/photos/4562470/pexels-photo-4562470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-repeat: no-repeat;
   background-size: cover; */
@@ -52,10 +62,12 @@
 
 .record {
   font-size: 45px;
-  font-family: monospace;
+  font-family: system-ui;
   /* padding-top: 30px;
   padding-bottom: 200px; */
   padding-left: 230px;
+  position: relative;
+  right: 7rem;
 }
 .player-record {
   font-size: 33px;
@@ -64,10 +76,13 @@
 .middle-column {
   display: flex;
   flex-direction: column;
+  position: relative;
+  left: 5rem;
 }
 
 .challenge-button {
-  padding-left: 100px;
+  position: relative;
+  left: 8rem;
 }
 
 .profile-challenges {
@@ -99,4 +114,28 @@
   width: 350px;
   bottom: 40px;
   left: 110em;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+.bounce {
+  animation-name: bounce;
+}
+
+.middle-column {
+  display: flex;
+  justify-content: center;
 }

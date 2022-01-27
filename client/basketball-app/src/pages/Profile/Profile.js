@@ -5,6 +5,8 @@ import Menu from "../../components/Menu/Menu";
 import ChallengesRecieved from "../../components/ChallengesRecieved";
 import { Link as Scroll } from "react-scroll";
 import { TransactionOutlined } from "@ant-design/icons";
+import { IoIosBasketball } from "react-icons/io";
+import "./Profile.css";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -98,11 +100,9 @@ export default function Profile() {
             <h1 className="description">
               <em>"{user.bio}"</em>
             </h1>
-            <div className="challenge-button">
+            <div className="challenge-button button-animated bounce">
               <Scroll to="profile-challenges" smooth={true}>
-                <Button inverted color="orange">
-                  Challenges
-                </Button>
+                <IoIosBasketball className="basketball-icon " />
               </Scroll>
             </div>
           </div>
@@ -119,6 +119,14 @@ export default function Profile() {
             </div>
           </div>
         </Segment>
+        <div className="vid">
+          <iframe
+            width="550"
+            height="400"
+            src="https://www.youtube.com/embed/zpZRRaAbdzo?&autoplay=1&mute=1"
+            //https://www.youtube.com/embed/P652hhzyRYE?&t=89s&autoplay=1&mute=1
+          ></iframe>
+        </div>
         <div className="profile-challenges">
           <ChallengesRecieved users={user} challenges={challenges} />
         </div>

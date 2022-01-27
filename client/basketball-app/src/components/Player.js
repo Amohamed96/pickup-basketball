@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../pages/Profile/Profile.css";
+import "./Styles/Player.css";
 import ChallengeForm from "../components/ChallengeForm";
 import { Menu as SemanticMenu, Button, Segment, Icon } from "semantic-ui-react";
 import { Link as Scroll } from "react-scroll";
+import { IoIosBasketball } from "react-icons/io";
 
 export default function Player() {
   const [player, setPlayer] = useState("");
@@ -86,7 +88,7 @@ export default function Player() {
   return (
     <>
       <div class="player-container">
-        <Segment className="profile-segment">
+        <Segment className="player-segment">
           <div className="avatar-container">
             <img className="profile-pic" src={player.avatar} />
             <h2 className="userName">{player.name}</h2>
@@ -95,11 +97,16 @@ export default function Player() {
             <h1 className="description">
               <em>"{player.bio}"</em>
             </h1>
-            <div className="challenge-button">
+            {/* <div className="challenge-button">
               <Scroll to="ch-vid" smooth={true}>
                 <Button inverted color="orange">
                   Challenge
                 </Button>
+              </Scroll> */}
+            {/* </div> */}
+            <div className="challenge-button button-animated bounce">
+              <Scroll to="ch-vid" smooth={true}>
+                <IoIosBasketball className="basketball-icon" />
               </Scroll>
             </div>
           </div>
@@ -116,18 +123,18 @@ export default function Player() {
             </div>
           </div>
         </Segment>
+        <div className="vid">
+          <iframe
+            width="550"
+            height="400"
+            src="https://www.youtube.com/embed/P652hhzyRYE?&t=89s&autoplay=1&mute=1"
+          ></iframe>
+        </div>
         <div class="ch-vid">
           <ChallengeForm player={player} location={location} />
-
-          <div className="vid">
-            <iframe
-              width="550"
-              height="400"
-              src="https://www.youtube.com/embed/yuHbkUoT5oE?autoplay=1&mute=1"
-            ></iframe>
-          </div>
         </div>
       </div>
     </>
   );
+  //P652hhzyRYE   //"https://www.youtube.com/embed/yuHbkUoT5oE?autoplay=1&mute=1"
 }
