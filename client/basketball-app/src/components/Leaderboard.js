@@ -69,8 +69,8 @@ export default function Leaderboard(props) {
     let teamLosses = 0;
     matchesTeam.map((match) => {
       if (
-        (team.id !== match.winner_id && team.id === match.team1_id) ||
-        team.id === match.team2_id
+        team.id !== match.winner_id &&
+        (team.id === match.team1_id || team.id === match.team2_id)
       ) {
         teamLosses++;
       }
@@ -91,15 +91,23 @@ export default function Leaderboard(props) {
     return Math.floor(rating);
   };
 
-  const mappedUsers = users
-    .map((player) => {
-      const mapPD = { ...player };
-      mapPD.rating = playerRating(player);
-      mapPD.totalWins = totalUserWins(player);
-      mapPD.totalLosses = totalUserLosses(player);
-      mapPD.avatar = player.avatar;
+  const mappedUsers = users.map((player) => {
+    const mapPD = { ...player };
+    mapPD.rating = playerRating(player);
+    mapPD.totalWins = totalUserWins(player);
+    mapPD.totalLosses = totalUserLosses(player);
+    mapPD.avatar = player.avatar;
 
-      return mapPD;
+    return mapPD;
+  });
+  const mappedTeams = teams
+    .map((team) => {
+      const mapPDT = { ...team };
+      mapPDT.totalWins = totalTeamWins(team);
+      mapPDT.totalLosses = totalTeamLosses(team);
+      mapPDT.avatar = team.avatar;
+
+      return mapPDT;
     })
     .sort((prev, next) => {
       return next.rating - prev.rating;
@@ -165,11 +173,10 @@ export default function Leaderboard(props) {
                     <th class="text-center">Team</th>
                     <th class="text-center">W</th>
                     <th class="text-center">L</th>
-                    <th class="text-center">Team</th>
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  {teams.map((team, i) => (
+                  {mappedTeams.map((team, i) => (
                     <tr>
                       <td class="text-left number">
                         {i + 1}
@@ -184,11 +191,8 @@ export default function Leaderboard(props) {
                         <img src={team.avatar} alt="Profile Pic" />
                         <span>{team.team_name}</span>
                       </td>
-                      <td>{totalTeamWins(team)}</td>
-                      <td>{totalTeamLosses(team)}</td>
-                      <td>
-                        <img src={team.avatar} />
-                      </td>
+                      <td>{team.totalWins}</td>
+                      <td>{team.totalLosses}</td>
                     </tr>
                   ))}
                 </tbody>

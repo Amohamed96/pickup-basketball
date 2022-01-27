@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Matches.css";
+import "./Matches.scss";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import DropdownPlayers from "../../components/DropdownPlayers";
@@ -48,8 +48,6 @@ export default function MatchesPlayerForm(props) {
   const handleMatchesPlayer = () => {
     console.log("MATCHES PLAYER FORM *********--", matches);
     axios.post("/api/matches/player", matches).then((result) => {
-      playerOneScore();
-      playerTwoScore();
       setMatches(result.data.matches);
       setRedirect(`/`);
     });
@@ -180,20 +178,32 @@ export default function MatchesPlayerForm(props) {
           Log Player 2 Final Score
         </button> */}
       </div>
-      <input
+      {/* <input
         name="winner_id"
         className="player-input"
         placeholder="Winner"
         onChange={storeUserDataThree}
-      ></input>
-      <span> .</span>
-      <span> .</span>
-      <input
-        type="submit"
-        className="button-form"
-        value="SUBMIT"
-        onClick={handleMatchesPlayer}
-      ></input>
+      ></input> */}
+      <div class="form-1">
+        <div class="input-container ic2">
+          <input
+            type="text"
+            name="winner_id"
+            onChange={storeUserDataThree}
+            class="input"
+            placeholder="Winner"
+          />
+        </div>
+        <button type="text" class="submit" onClick={handleMatchesPlayer}>
+          Submit
+        </button>
+        {/* <input
+          type="submit"
+          className="button-form"
+          value="SUBMIT"
+          onClick={handleMatchesPlayer}
+        ></input> */}
+      </div>
     </div>
   );
 }

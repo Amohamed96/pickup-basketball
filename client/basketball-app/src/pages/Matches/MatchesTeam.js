@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
-import "./Matches.css";
+import "./Matches.scss";
 import MatchesTeamForm from "./MatchesTeamForm";
 
 export default function MatchesTeam() {

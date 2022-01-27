@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import MatchesPlayerForm from "./MatchesPlayerForm";
-import "./Matches.css";
+import "./Matches.scss";
 // import Scoreboard from "../../components/Scoreboard";
 
 export default function MatchesPlayer() {
@@ -28,9 +28,9 @@ export default function MatchesPlayer() {
   });
 
   return (
-    <div className="RegisterPage">
+    <div className="matches-page">
       <Navbar />
-      <div className="register">
+      <div className="matches-scorebard">
         <MatchesPlayerForm
           users={users}
           teams={teams}
