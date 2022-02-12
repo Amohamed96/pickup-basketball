@@ -49,7 +49,7 @@ export default function MatchesPlayerForm(props) {
     console.log("MATCHES PLAYER FORM *********--", matches);
     axios.post("/api/matches/player", matches).then((result) => {
       setMatches(result.data.matches);
-      setRedirect(`/`);
+      setRedirect(`/matches-player`);
     });
   };
 

@@ -5,9 +5,9 @@ import MatchesTeamForm from "./MatchesTeamForm";
 
 export default function MatchesTeam() {
   return (
-    <div className="RegisterPage">
+    <div className="matches-page">
       <Navbar />
-      <div className="register">
+      <div className="matches-scorebard">
         <MatchesTeamForm />
       </div>
     </div>

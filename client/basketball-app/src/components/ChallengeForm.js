@@ -55,6 +55,7 @@ export default function ChallengeForm(props) {
         console.log("errrrr", err);
         setError("ERROR");
       });
+    setRedirect("/");
   };
 
   return redirect ? (

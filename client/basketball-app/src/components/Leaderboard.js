@@ -91,15 +91,19 @@ export default function Leaderboard(props) {
     return Math.floor(rating);
   };
 
-  const mappedUsers = users.map((player) => {
-    const mapPD = { ...player };
-    mapPD.rating = playerRating(player);
-    mapPD.totalWins = totalUserWins(player);
-    mapPD.totalLosses = totalUserLosses(player);
-    mapPD.avatar = player.avatar;
+  const mappedUsers = users
+    .map((player) => {
+      const mapPD = { ...player };
+      mapPD.rating = playerRating(player);
+      mapPD.totalWins = totalUserWins(player);
+      mapPD.totalLosses = totalUserLosses(player);
+      mapPD.avatar = player.avatar;
 
-    return mapPD;
-  });
+      return mapPD;
+    })
+    .sort((prev, next) => {
+      return next.rating - prev.rating;
+    });
   const mappedTeams = teams
     .map((team) => {
       const mapPDT = { ...team };
