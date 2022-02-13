@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Home.css";
-import Hero from "../../components/Hero";
-import Navbar from "../../components/Navbar";
-import Games from "../../components/Games";
-import Leaderboard from "../../components/Leaderboard";
+import Hero from "../../components/Header/Hero";
+import Navbar from "../../components/Header/Navbar";
+import Games from "../../components/Leaderboards/Games";
+import Leaderboard from "../../components/Leaderboards/Leaderboard";
 import { Button } from "semantic-ui-react";
 import { Link as Scroll } from "react-scroll";
 import { IoIosBasketball } from "react-icons/io";

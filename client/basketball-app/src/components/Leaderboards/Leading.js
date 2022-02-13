@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Styles/Leading.css";
+import "../Styles/Leading.css";
 export default function (props) {
   const [user, setUser] = useState("");
   const { users, matchesPlayer, matchesTeam, teams } = props;

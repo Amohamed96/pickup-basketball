@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Menu as SemanticMenu, Button, Segment, Icon } from "semantic-ui-react";
 import axios from "axios";
-import Menu from "../../components/Menu/Menu";
-import ChallengesRecieved from "../../components/ChallengesRecieved";
+import ChallengesRecieved from "../../components/Challenges/ChallengesRecieved";
 import { Link as Scroll } from "react-scroll";
 import { TransactionOutlined } from "@ant-design/icons";
 import { IoIosBasketball } from "react-icons/io";

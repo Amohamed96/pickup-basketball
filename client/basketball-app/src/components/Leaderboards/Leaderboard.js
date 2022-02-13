@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Styles/Leaderboard.css";
+import "../Styles/Leaderboard.css";
 import { Redirect } from "react-router-dom";
 import Leading from "./Leading";
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Styles/Navbar.css";
+import "../Styles/Navbar.css";
 
 const logout = function () {
   localStorage.clear();

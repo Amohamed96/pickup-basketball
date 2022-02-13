@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/Header/Navbar";
 import MatchesPlayerForm from "./MatchesPlayerForm";
 import "./Matches.scss";
 // import Scoreboard from "../../components/Scoreboard";

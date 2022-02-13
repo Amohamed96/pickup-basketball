@@ -4,10 +4,9 @@ import Button from "react-bootstrap/Button";
 import "./Matches.scss";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import DropdownPlayers from "../../components/DropdownPlayers";
 // import { Scoreboard } from "../../components/Scoreboard";
 import "./../../components/Styles/Scoreboard.scss";
-import Timer from "./../../components/Timer";
+import Timer from "./Timer";
 import "./../../components/Styles/Timer.css";
 
 export default function MatchesPlayerForm(props) {

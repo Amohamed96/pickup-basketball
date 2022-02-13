@@ -1,5 +1,5 @@
 import React from "react";
-import "./Styles/Games.scss";
+import "../Styles/Games.scss";
 
 export default function Games(props) {
   const { matchesPlayer, users } = props;

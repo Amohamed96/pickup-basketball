@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChatEngine, ChatFeed } from "react-chat-engine";
 import "./Messages.css";
-import Chatfeed from "../../components/MessageComponents/Chatfeed";
-import MenuExampleInvertedSegment from "../../components/Menu/Menu";
 export default function Messages() {
   const [message, setMessage] = useState([]);
   // const [user, setUser] = useState({});

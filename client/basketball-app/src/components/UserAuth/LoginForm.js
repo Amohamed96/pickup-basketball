@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Styles/LoginForm.css";
+import "../Styles/LoginForm.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Styles/ChallengeForm.css";
+import "../Styles/ChallengeForm.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 

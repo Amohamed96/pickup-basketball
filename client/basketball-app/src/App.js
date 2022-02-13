@@ -5,12 +5,12 @@ import Home from "./pages/Home/Home.js";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register.js";
 import Profile from "./pages/Profile/Profile.js";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Header/Navbar";
 import Messages from "./pages/messages/Messages";
-import Player from "./components/Player";
+import Player from "./pages/Profile/Player";
 import MatchesTeam from "./pages/Matches/MatchesTeam";
 import MatchesPlayer from "./pages/Matches/MatchesPlayer";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/Helpers/ScrollToTop";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
